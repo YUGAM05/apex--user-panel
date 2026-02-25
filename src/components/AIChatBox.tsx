@@ -8,30 +8,35 @@ export default function AIChatBox() {
     useEffect(() => {
         const webhookUrl = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL;
 
-        if (webhookUrl) {
-            createChat({
-                webhookUrl,
-                showWelcomeScreen: true,
-                initialMessages: [
-                    'Hello! I\'m your Apex Care AI assistant. 👋',
-                    'How can I help you with your healthcare needs today?'
-                ],
-                i18n: {
-                    en: {
-                        title: 'Apex Care AI',
-                        subtitle: 'Expert Health & Platform Support',
-                        footer: 'Secure • Professional • Instant',
-                        getStarted: 'Start Consultation',
-                        inputPlaceholder: 'Search medicines, check blood...',
-                        closeButtonTooltip: 'Close Chat',
-                    },
-                },
-            });
+        // DEBUG: Check your browser console (F12) to see if this is printing correctly
+        if (!webhookUrl) {
+            console.error("AIChatBox Error: NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL is not defined in environment variables.");
+            return;
         }
+
+        createChat({
+            webhookUrl,
+            showWelcomeScreen: true,
+            initialMessages: [
+                'Hello! I\'m your Apex Care AI assistant. 👋',
+                'How can I help you with your healthcare needs today?'
+            ],
+            i18n: {
+                en: {
+                    title: 'Apex Care AI',
+                    subtitle: 'Expert Health & Platform Support',
+                    footer: 'Secure • Professional • Instant',
+                    getStarted: 'Start Consultation',
+                    inputPlaceholder: 'Search medicines, check blood...',
+                    closeButtonTooltip: 'Close Chat',
+                },
+            },
+        });
     }, []);
 
     return (
-        <div id="n8n-chat-container">
+        /* The container must be fixed and on top of other elements */
+        <div id="n8n-chat-container" className="fixed bottom-0 right-0 z-[9999]">
             <style jsx global>{`
                 :root {
                     /* Customizing n8n Chat to match Apex Care Premium Theme */
@@ -69,7 +74,10 @@ export default function AIChatBox() {
                     font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
                 }
 
-                /* Adding the "Online" Pulse Dot manually via CSS if possible or just rely on n8n UI */
+                /* Ensure the widget is forced to be visible */
+                .n8n-chat-widget {
+                    z-index: 9999 !important;
+                }
             `}</style>
         </div>
     );
