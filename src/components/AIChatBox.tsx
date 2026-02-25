@@ -8,9 +8,8 @@ export default function AIChatBox() {
     useEffect(() => {
         const webhookUrl = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL;
 
-        // DEBUG: Check your browser console (F12) to see if this is printing correctly
         if (!webhookUrl) {
-            console.error("AIChatBox Error: NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL is not defined in environment variables.");
+            console.error("AIChatBox Error: NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL is not defined.");
             return;
         }
 
@@ -35,18 +34,22 @@ export default function AIChatBox() {
     }, []);
 
     return (
-        /* The container must be fixed and on top of other elements */
         <div id="n8n-chat-container" className="fixed bottom-0 right-0 z-[9999]">
             <style jsx global>{`
                 :root {
-                    /* Customizing n8n Chat to match Apex Care Premium Theme */
-                    --chat--color--primary: #2563eb; /* Blue-600 */
+                    /* Existing Customization */
+                    --chat--color--primary: #2563eb;
                     --chat--color--primary-shade-50: #1d4ed8;
                     --chat--color--primary--shade-100: #1e40af;
-                    --chat--color--secondary: #4f46e5; /* Indigo-600 */
+                    --chat--color--secondary: #4f46e5;
                     
                     --chat--spacing: 1rem;
                     --chat--border-radius: 1.25rem;
+                    
+                    /* NEW: Input field visibility fixes */
+                    --chat--message-input--background: #ffffff;
+                    --chat--message-input--color: #111827; /* Dark Gray/Black text */
+                    --chat--message-input--placeholder--color: #6b7280;
                     
                     /* Header Customization */
                     --chat--header--background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
@@ -55,7 +58,9 @@ export default function AIChatBox() {
                     
                     /* Message Customization */
                     --chat--message--bot--background: #ffffff;
+                    --chat--message--bot--color: #111827;
                     --chat--message--user--background: #2563eb;
+                    --chat--message--user--color: #ffffff;
                     --chat--message--border-radius: 1rem;
                     
                     /* Window Customization */
@@ -74,7 +79,12 @@ export default function AIChatBox() {
                     font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
                 }
 
-                /* Ensure the widget is forced to be visible */
+                /* Fix for the blinking cursor (caret) and white text */
+                .n8n-chat-input {
+                    color: #111827 !important;
+                    caret-color: #2563eb !important;
+                }
+
                 .n8n-chat-widget {
                     z-index: 9999 !important;
                 }
