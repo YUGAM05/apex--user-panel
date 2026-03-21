@@ -66,49 +66,58 @@ export default function MyOrdersPage() {
                     <div className="space-y-6">
                         {orders.map((order) => (
                             <Link href={`/order-success/${order._id}`} key={order._id}>
-                                <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all group cursor-pointer">
-                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                <div className="bg-white rounded-3xl border border-gray-100 p-5 sm:p-8 hover:shadow-2xl hover:shadow-blue-100/50 transition-all duration-500 group cursor-pointer relative overflow-hidden">
+                                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
+
+                                        {/* Decorative Background Element */}
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/30 rounded-full -mr-16 -mt-16 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                         {/* Left: ID & Date */}
-                                        <div className="flex items-start gap-4">
-                                            <div className="p-3 bg-blue-50 rounded-xl group-hover:bg-blue-100 transition-colors">
-                                                <Package className="w-6 h-6 text-blue-600" />
+                                        <div className="flex items-start gap-4 sm:gap-6 relative z-10">
+                                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-500 shadow-sm">
+                                                <Package className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 group-hover:text-white transition-colors" />
                                             </div>
-                                            <div>
-                                                <p className="font-bold text-gray-900 text-lg">Order #{order._id.slice(-8).toUpperCase()}</p>
-                                                <p className="text-sm text-gray-500">
-                                                    Placed on {format(new Date(order.createdAt), "MMMM d, yyyy")}
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex flex-wrap items-center gap-2 mb-1">
+                                                    <p className="font-black text-gray-900 text-base sm:text-xl tracking-tight">Order #{order._id.slice(-8).toUpperCase()}</p>
+                                                    <div className="lg:hidden ml-auto">
+                                                        <p className="text-xl font-black text-blue-600 tracking-tighter">₹{order.totalAmount.toFixed(2)}</p>
+                                                    </div>
+                                                </div>
+                                                <p className="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 sm:mb-4">
+                                                    Manifested on {format(new Date(order.createdAt), "MMMM d, yyyy")}
                                                 </p>
-                                                <div className="mt-2 flex items-center gap-2">
-                                                    <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize
-                                                        ${order.status === 'delivered' ? 'bg-green-100 text-green-700' :
-                                                            order.status === 'processing' ? 'bg-blue-100 text-blue-700' :
-                                                                order.status === 'cancelled' ? 'bg-red-100 text-red-700' :
-                                                                    'bg-yellow-100 text-yellow-700'
+
+                                                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                                                    <span className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest
+                                                         ${order.status === 'delivered' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
+                                                            order.status === 'processing' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
+                                                                order.status === 'cancelled' ? 'bg-rose-50 text-rose-600 border border-rose-100' :
+                                                                    'bg-amber-50 text-amber-600 border border-amber-100'
                                                         }`}>
                                                         {order.status}
                                                     </span>
                                                     {['processing', 'out_for_pickup', 'picked_up', 'out_for_delivery'].includes(order.status) && (
                                                         <Link href={`/my-orders/track/${order._id}`} onClick={(e) => e.stopPropagation()}>
-                                                            <span className="px-3 py-1 bg-blue-600 text-white text-[10px] font-black rounded-full hover:bg-blue-700 transition tracking-widest uppercase">
-                                                                Track Live
+                                                            <span className="px-3 py-1.5 bg-slate-900 text-white text-[10px] font-black rounded-xl hover:bg-blue-600 transition-all tracking-widest uppercase shadow-lg shadow-slate-200 hover:shadow-blue-200">
+                                                                Live Tracker
                                                             </span>
                                                         </Link>
                                                     )}
-                                                    <span className="text-xs text-gray-400">•</span>
-                                                    <span className="text-xs text-gray-500">{order.items.length} Items</span>
+                                                    <span className="h-1 w-1 bg-gray-300 rounded-full hidden sm:block" />
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{order.items.length} Units</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        {/* Right: Amount & Arrow */}
-                                        <div className="flex items-center gap-6">
-                                            <div className="text-right">
-                                                <p className="text-sm text-gray-500 mb-1">Total Amount</p>
-                                                <p className="text-xl font-bold text-blue-600">₹{order.totalAmount.toFixed(2)}</p>
+                                        {/* Right: Amount & Arrow (Desktop only for amount, arrow stays) */}
+                                        <div className="flex items-center justify-between lg:justify-end gap-6 sm:gap-10 border-t lg:border-none pt-4 lg:pt-0 border-gray-50">
+                                            <div className="hidden lg:text-right lg:block">
+                                                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 leading-none">Net Total</p>
+                                                <p className="text-2xl font-black text-blue-600 tracking-tighter">₹{order.totalAmount.toFixed(2)}</p>
                                             </div>
-                                            <div className="p-2 rounded-full hover:bg-gray-100">
-                                                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-50 transition-colors ml-auto lg:ml-0">
+                                                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                                             </div>
                                         </div>
                                     </div>

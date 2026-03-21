@@ -83,10 +83,12 @@ export default function Home() {
                                 Your Health,<br />
                                 <span className="opacity-90">Delivered Daily.</span>
                             </h1>
-                            <p className="text-xl md:text-2xl font-medium text-blue-50/90 max-w-2xl leading-relaxed">
+                            <p className="text-xl md:text-2xl font-medium text-blue-50/90 max-w-2xl leading-relaxed mb-8">
                                 Search over certified medicines and health products. <br className="hidden md:block" />
                                 Get Generic Medicine On Our Platform <span className="text-white font-bold">Apex Care.</span>
                             </p>
+
+
                         </div>
                     </div>
                 </div>

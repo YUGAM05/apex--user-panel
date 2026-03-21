@@ -117,11 +117,11 @@ function CartItemCard({ item, onUpdate }: { item: CartItem; onUpdate: () => void
     const savings = item.originalPrice ? (item.originalPrice - item.price) * item.quantity : 0;
 
     return (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-md transition">
-            <div className="flex gap-4">
+        <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 hover:shadow-md transition">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                 {/* Product Image */}
-                <Link href={`/products/${item.productId}`} className="flex-shrink-0">
-                    <div className="w-24 h-24 bg-gray-50 rounded-xl overflow-hidden">
+                <Link href={`/products/${item.productId}`} className="flex-shrink-0 self-start">
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-50 rounded-xl overflow-hidden shadow-inner">
                         {item.image ? (
                             <img
                                 src={item.image}
@@ -129,7 +129,7 @@ function CartItemCard({ item, onUpdate }: { item: CartItem; onUpdate: () => void
                                 className="w-full h-full object-cover"
                             />
                         ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-300 text-4xl">
+                            <div className="w-full h-full flex items-center justify-center text-gray-300 text-3xl sm:text-4xl">
                                 📦
                             </div>
                         )}
@@ -138,72 +138,63 @@ function CartItemCard({ item, onUpdate }: { item: CartItem; onUpdate: () => void
 
                 {/* Product Info */}
                 <div className="flex-1 min-w-0">
-                    <Link href={`/products/${item.productId}`}>
-                        <h3 className="font-bold text-gray-900 text-lg mb-1 hover:text-blue-600 transition">
-                            {item.name}
-                        </h3>
-                    </Link>
-                    <p className="text-sm text-gray-500 mb-3">{item.category}</p>
-
-                    {/* Price Info */}
-                    <div className="flex items-baseline gap-2 mb-4">
-                        <span className="text-xl font-bold text-gray-900">₹{item.price}</span>
-                        {item.originalPrice && item.originalPrice > item.price && (
-                            <>
-                                <span className="text-sm text-gray-400 line-through">₹{item.originalPrice}</span>
-                                <span className="text-sm text-green-600 font-medium">
-                                    Save ₹{(item.originalPrice - item.price).toFixed(2)}
-                                </span>
-                            </>
-                        )}
+                    <div className="flex justify-between items-start gap-2 mb-1">
+                        <Link href={`/products/${item.productId}`} className="flex-1">
+                            <h3 className="font-bold text-gray-900 text-base sm:text-lg hover:text-blue-600 transition line-clamp-2">
+                                {item.name}
+                            </h3>
+                        </Link>
+                        {/* Subtotal on Desktop */}
+                        <div className="hidden sm:block text-right flex-shrink-0">
+                            <p className="text-xl font-black text-blue-600 tracking-tight">₹{subtotal.toFixed(2)}</p>
+                            {savings > 0 && (
+                                <p className="text-xs text-green-600 font-bold uppercase tracking-wider">Save ₹{savings.toFixed(2)}</p>
+                            )}
+                        </div>
                     </div>
+                    <p className="text-xs sm:text-sm text-gray-500 mb-4 font-medium">{item.category}</p>
 
-                    {/* Quantity Controls */}
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-1">
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                        {/* Quantity & Controls */}
+                        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                            <div className="flex items-center gap-1 border border-gray-100 bg-gray-50/50 rounded-xl p-1 shadow-sm">
+                                <button
+                                    onClick={() => handleQuantityChange(item.quantity - 1)}
+                                    disabled={item.quantity <= 1}
+                                    className="p-2 hover:bg-white text-gray-400 hover:text-blue-600 rounded-lg transition-all disabled:opacity-30 disabled:pointer-events-none"
+                                >
+                                    <Minus className="w-4 h-4" />
+                                </button>
+                                <span className="font-black text-gray-900 w-8 text-center text-sm">{item.quantity}</span>
+                                <button
+                                    onClick={() => handleQuantityChange(item.quantity + 1)}
+                                    disabled={item.quantity >= item.stock}
+                                    className="p-2 hover:bg-white text-gray-400 hover:text-blue-600 rounded-lg transition-all disabled:opacity-30 disabled:pointer-events-none"
+                                >
+                                    <Plus className="w-4 h-4" />
+                                </button>
+                            </div>
+
                             <button
-                                onClick={() => handleQuantityChange(item.quantity - 1)}
-                                disabled={item.quantity <= 1}
-                                className="p-2 hover:bg-gray-100 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                onClick={handleRemove}
+                                className="p-2 text-red-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all flex items-center gap-2 group"
                             >
-                                <Minus className="w-4 h-4" />
-                            </button>
-                            <span className="font-bold text-gray-900 w-8 text-center">{item.quantity}</span>
-                            <button
-                                onClick={() => handleQuantityChange(item.quantity + 1)}
-                                disabled={item.quantity >= item.stock}
-                                className="p-2 hover:bg-gray-100 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                <Plus className="w-4 h-4" />
+                                <Trash2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                <span className="text-xs font-black uppercase tracking-widest hidden sm:inline">Remove</span>
                             </button>
                         </div>
 
-                        <button
-                            onClick={handleRemove}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition flex items-center gap-2"
-                        >
-                            <Trash2 className="w-4 h-4" />
-                            <span className="text-sm font-medium">Remove</span>
-                        </button>
-
-                        <ShareButton
-                            title={item.name}
-                            text={`I'm buying ${item.name} from Apex Care. Check it out!`}
-                            url={`/products/${item.productId}`}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition flex items-center gap-2 border border-transparent hover:border-blue-100"
-                        />
+                        {/* Subtotal on Mobile */}
+                        <div className="sm:hidden text-right">
+                            <p className="text-lg font-black text-blue-600 tracking-tight">₹{subtotal.toFixed(2)}</p>
+                            {savings > 0 && (
+                                <p className="text-[10px] text-green-600 font-bold uppercase tracking-wider">Save ₹{savings.toFixed(2)}</p>
+                            )}
+                        </div>
                     </div>
 
                     {item.quantity >= item.stock && (
-                        <p className="text-xs text-red-600 mt-2 font-medium">Only {item.stock} left in stock</p>
-                    )}
-                </div>
-
-                {/* Subtotal */}
-                <div className="text-right">
-                    <p className="text-xl font-bold text-gray-900">₹{subtotal.toFixed(2)}</p>
-                    {savings > 0 && (
-                        <p className="text-sm text-green-600">Saved ₹{savings.toFixed(2)}</p>
+                        <p className="text-[10px] text-red-500 mt-3 font-black uppercase tracking-widest bg-red-50 w-fit px-2 py-1 rounded">Stock Limit Reached</p>
                     )}
                 </div>
             </div>

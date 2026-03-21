@@ -15,6 +15,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'content.jdmagicbox.com'
       }
     ],
     formats: ['image/avif', 'image/webp']

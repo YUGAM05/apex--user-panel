@@ -2,35 +2,73 @@
 
 import { useEffect } from "react";
 import "@n8n/chat/style.css";
-import { createChat } from "@n8n/chat";
 
 export default function AIChatBox() {
     useEffect(() => {
-        const webhookUrl = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL;
+        const initChat = async () => {
+            try {
+                const webhookUrl = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL;
 
-        if (!webhookUrl) {
-            console.error("AIChatBox Error: NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL is not defined.");
-            return;
+                if (!webhookUrl) {
+                    console.warn("AIChatBox: NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL is not defined. Chat disabled.");
+                    return;
+                }
+
+                // 1. Dynamic check for connectivity to prevent "Failed to fetch" unhandled errors
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+                    const response = await fetch(webhookUrl, {
+                        method: 'GET', // Try a simple GET first to see if it exists
+                        signal: controller.signal
+                    }).catch(() => null);
+
+                    clearTimeout(timeoutId);
+
+                    if (!response || response.status === 404) {
+                        console.warn(`AIChatBox: Webhook unreachable (Status: ${response?.status || 'Network Error'}). Disabling AI Chat.`);
+                        return;
+                    }
+                } catch (connectivityError) {
+                    console.warn("AIChatBox: Connectivity check failed. Skipping initialization.");
+                    return;
+                }
+
+                // 2. Dynamic import the library only if connectivity is confirmed
+                const { createChat } = await import("@n8n/chat");
+
+                // 3. Ensure container exists
+                const container = document.getElementById('n8n-chat-container');
+                if (!container) return;
+
+                createChat({
+                    webhookUrl,
+                    showWelcomeScreen: true,
+                    initialMessages: [
+                        'Hello! I\'m your Apex Care AI assistant. 👋',
+                        'How can I help you with your healthcare needs today?'
+                    ],
+                    i18n: {
+                        en: {
+                            title: 'Apex Care AI',
+                            subtitle: 'Expert Health & Platform Support',
+                            footer: 'Secure • Professional • Instant',
+                            getStarted: 'Start Consultation',
+                            inputPlaceholder: 'Search medicines, check blood...',
+                            closeButtonTooltip: 'Close Chat',
+                        },
+                    },
+                });
+            } catch (error) {
+                // Seal all errors from this component to prevent top-level crashes
+                console.warn("AIChatBox: Gracefully handled initialization failure to prevent UI crash.", error);
+            }
+        };
+
+        if (typeof window !== "undefined") {
+            initChat();
         }
-
-        createChat({
-            webhookUrl,
-            showWelcomeScreen: true,
-            initialMessages: [
-                'Hello! I\'m your Apex Care AI assistant. 👋',
-                'How can I help you with your healthcare needs today?'
-            ],
-            i18n: {
-                en: {
-                    title: 'Apex Care AI',
-                    subtitle: 'Expert Health & Platform Support',
-                    footer: 'Secure • Professional • Instant',
-                    getStarted: 'Start Consultation',
-                    inputPlaceholder: 'Search medicines, check blood...',
-                    closeButtonTooltip: 'Close Chat',
-                },
-            },
-        });
     }, []);
 
     return (

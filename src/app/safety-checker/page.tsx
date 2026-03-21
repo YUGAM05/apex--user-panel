@@ -22,6 +22,22 @@ const COMMON_MEDICATIONS = [
 
 export default function SafetyCheckerPage() {
     const [activeTab, setActiveTab] = useState<TabMode>('analysis');
+    const [medicationList, setMedicationList] = useState<string[]>([]);
+
+    useEffect(() => {
+        // Fetch real medication names from our own database
+        api.get("/products")
+            .then((res) => {
+                const names = res.data.map((p: any) => p.name);
+                // Combine with existing common meds and remove duplicates
+                const combined = Array.from(new Set([...names, ...COMMON_MEDICATIONS]));
+                setMedicationList(combined.sort());
+            })
+            .catch((err) => {
+                console.error("Failed to fetch medication list:", err);
+                setMedicationList(COMMON_MEDICATIONS);
+            });
+    }, []);
 
     return (
         <div className="min-h-screen bg-white text-slate-900 px-4 md:px-6 py-2 md:py-3 relative overflow-hidden">
@@ -51,7 +67,7 @@ export default function SafetyCheckerPage() {
                                 <Heart className="w-5 h-5 text-teal-400 fill-teal-400/20" />
                             </motion.div>
                             <span className="text-teal-700 font-bold tracking-wide text-sm">
-                                AI-Powered Medical Safety Analysis
+                                Apex Verified Medical Safety Analysis
                             </span>
                             <div className="h-4 w-px bg-teal-500/50" />
                             <span className="text-teal-600 text-xs font-medium">50+ Medications</span>
@@ -60,7 +76,7 @@ export default function SafetyCheckerPage() {
                         {/* Main Title */}
                         <h1 className="text-4xl md:text-6xl font-bold mb-2 relative">
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 via-blue-600 to-purple-600">
-                                AI Drug Safety Engine
+                                Apex Safety Drug Engine
                             </span>
                             <motion.div
                                 className="absolute -top-2 -right-2"
@@ -109,9 +125,9 @@ export default function SafetyCheckerPage() {
                 {/* Tab Content */}
                 <AnimatePresence mode="wait">
                     {activeTab === 'analysis' ? (
-                        <DrugAnalysisTab key="analysis" />
+                        <DrugAnalysisTab key="analysis" medicationList={medicationList} />
                     ) : (
-                        <InteractionCheckerTab key="interaction" />
+                        <InteractionCheckerTab key="interaction" medicationList={medicationList} />
                     )}
                 </AnimatePresence>
             </div>
@@ -168,20 +184,20 @@ function TabButton({ active, onClick, icon: Icon, label }: any) {
 }
 
 // Drug Safety Analysis Tab
-function DrugAnalysisTab() {
+function DrugAnalysisTab({ medicationList }: { medicationList: string[] }) {
     const [medicineName, setMedicineName] = useState("");
     const [symptoms, setSymptoms] = useState("");
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
-    // Autocomplete suggestions
+    // Autocomplete suggestions using the dynamic list
     const suggestions = useMemo(() => {
         if (!medicineName.trim() || medicineName.length < 2) return [];
-        return COMMON_MEDICATIONS.filter(med =>
+        return medicationList.filter(med =>
             med.toLowerCase().includes(medicineName.toLowerCase())
         ).slice(0, 5);
-    }, [medicineName]);
+    }, [medicineName, medicationList]);
 
     const analyzeSafety = async () => {
         if (!medicineName.trim() || !symptoms.trim()) {
@@ -503,7 +519,7 @@ function SafetyReport({ data }: { data: any }) {
 
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
-            doc.text('AI DRUG SAFETY ENGINE', margin, 28);
+            doc.text('APEX VERIFIED DRUG ENGINE', margin, 28);
             doc.text('CLINICAL ANALYSIS REPORT', margin, 34);
 
             doc.setFontSize(8);
@@ -981,18 +997,28 @@ function CollapsibleCard({ title, icon: Icon, color, children, expanded, onToggl
 }
 
 // Interaction Checker Tab (Enhanced version)
-function InteractionCheckerTab() {
+function InteractionCheckerTab({ medicationList }: { medicationList: string[] }) {
     const [cartItems, setCartItems] = useState<string[]>([]);
     const [conditions, setConditions] = useState<string[]>([]);
     const [newItem, setNewItem] = useState("");
     const [newCondition, setNewCondition] = useState("");
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
-    const addItem = () => {
-        if (newItem.trim() && !cartItems.includes(newItem.trim())) {
-            setCartItems([...cartItems, newItem.trim()]);
+    const suggestions = useMemo(() => {
+        if (!newItem.trim() || newItem.length < 2) return [];
+        return medicationList.filter(med =>
+            med.toLowerCase().includes(newItem.toLowerCase())
+        ).slice(0, 5);
+    }, [newItem, medicationList]);
+
+    const addItem = (itemToAdd: string = newItem) => {
+        const item = itemToAdd.trim();
+        if (item && !cartItems.includes(item)) {
+            setCartItems([...cartItems, item]);
             setNewItem("");
+            setShowSuggestions(false);
         }
     };
 
@@ -1038,20 +1064,47 @@ function InteractionCheckerTab() {
                         </div>
                         <h3 className="text-xl font-semibold">Medications</h3>
                     </div>
-                    <div className="flex gap-2 mb-4">
-                        <input
-                            type="text"
-                            value={newItem}
-                            onChange={(e) => setNewItem(e.target.value)}
-                            placeholder="e.g. Aspirin"
-                            className="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-2.5 
-                                     outline-none focus:border-blue-500 transition-all shadow-sm"
-                            onKeyDown={(e) => e.key === 'Enter' && addItem()}
-                        />
+                    <div className="flex gap-2 mb-4 relative">
+                        <div className="flex-1 relative">
+                            <input
+                                type="text"
+                                value={newItem}
+                                onChange={(e) => {
+                                    setNewItem(e.target.value);
+                                    setShowSuggestions(true);
+                                }}
+                                onFocus={() => setShowSuggestions(true)}
+                                placeholder="e.g. Aspirin"
+                                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 
+                                         outline-none focus:border-blue-500 transition-all shadow-sm"
+                                onKeyDown={(e) => e.key === 'Enter' && addItem()}
+                            />
+                            {/* Autocomplete Suggestions */}
+                            {showSuggestions && suggestions.length > 0 && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="absolute top-full left-0 right-0 mt-2 bg-white backdrop-blur-xl 
+                                             border border-slate-200 rounded-xl overflow-hidden z-50 shadow-xl"
+                                >
+                                    {suggestions.map((suggestion, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => addItem(suggestion)}
+                                            className="w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors
+                                                     border-b border-slate-100 last:border-0 flex items-center gap-2 text-slate-700 font-medium"
+                                        >
+                                            <Pill className="w-4 h-4 text-blue-600" />
+                                            <span>{suggestion}</span>
+                                        </button>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </div>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={addItem}
+                            onClick={() => addItem()}
                             className="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-xl 
                                      hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg shadow-blue-500/20"
                         >

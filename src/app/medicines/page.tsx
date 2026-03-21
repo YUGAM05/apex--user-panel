@@ -152,38 +152,38 @@ export default function MedicinesPage() {
                 </div>
 
                 {/* Search and Filter Bar */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
-                    <div className="flex flex-col md:flex-row gap-4">
+                <div className="bg-white rounded-3xl shadow-xl shadow-blue-50/50 border border-gray-100 p-4 sm:p-6 mb-8 sticky top-24 z-30 backdrop-blur-md bg-white/90">
+                    <div className="flex flex-col gap-5">
                         {/* Search Bar */}
-                        <div className="flex-1 relative">
-                            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <div className="w-full relative group">
+                            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-600 transition-colors" />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search for medicines, brands, or symptoms..."
-                                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                                placeholder="Search medicines, brands..."
+                                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all font-medium text-sm text-gray-900"
                             />
                             {searchQuery && (
                                 <button
                                     onClick={() => setSearchQuery("")}
-                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-500 transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
                             )}
                         </div>
 
-                        {/* Category Filter */}
-                        <div className="overflow-x-auto">
-                            <div className="flex gap-2 pb-2 min-w-max">
+                        {/* Category Filter - Horizontal Scrollable on mobile, flex-wrap on desktop */}
+                        <div className="w-full lg:w-auto overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                            <div className="flex lg:flex-wrap gap-2 min-w-max lg:min-w-0">
                                 {categories.map((cat) => (
                                     <button
                                         key={cat}
                                         onClick={() => setSelectedCategory(cat)}
-                                        className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap ${selectedCategory === cat
-                                            ? "bg-blue-600 text-white shadow-md"
-                                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                        className={`px-4 py-2.5 rounded-xl font-bold text-[11px] uppercase tracking-wider transition-all whitespace-nowrap border-2 ${selectedCategory === cat
+                                            ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-200"
+                                            : "bg-white border-gray-100 text-gray-500 hover:border-blue-200 hover:text-blue-600"
                                             }`}
                                     >
                                         {cat}
@@ -194,8 +194,10 @@ export default function MedicinesPage() {
                     </div>
 
                     {/* Results Count */}
-                    <div className="mt-4 text-sm text-gray-500">
-                        Showing <span className="font-bold text-gray-900">{filteredProducts.length}</span> product(s)
+                    <div className="mt-4 flex items-center justify-between">
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
+                            Inventory Results: <span className="text-blue-600">{filteredProducts.length} Items</span>
+                        </p>
                     </div>
                 </div>
 
