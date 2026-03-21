@@ -50,7 +50,7 @@ export default function UploadPrescriptionPage() {
         formData.append('prescription', file);
 
         try {
-            const response = await api.post('/api/prescriptions', formData, {
+            const response = await api.post('/prescriptions', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setRxId(response.data.rx_id || '');
