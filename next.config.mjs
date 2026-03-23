@@ -19,6 +19,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'content.jdmagicbox.com'
+      },
+      {
+        protocol: 'https',
+        hostname: '**',  // ✅ allows any external https image URL
       }
     ],
     formats: ['image/avif', 'image/webp']
