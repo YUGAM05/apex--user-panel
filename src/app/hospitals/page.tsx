@@ -5,6 +5,13 @@ import api from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
+interface Doctor {
+    name: string;
+    specialization?: string;
+    daysAvailable?: string[];
+    timing?: string;
+}
+
 interface Hospital {
     _id: string;
     name: string;
@@ -17,8 +24,11 @@ interface Hospital {
     governmentSchemes: string[];
     isOnlinePaymentAvailable: boolean;
     ambulanceContact: string;
+    contactNumber?: string;
+    phoneNumbers?: string[];
     description: string;
     rating: number;
+    doctors?: Doctor[];
 }
 
 export default function HospitalsPage() {
@@ -311,7 +321,14 @@ export default function HospitalsPage() {
 
                                     <div className="prose prose-blue max-w-none text-gray-600 leading-relaxed">
                                         <h3 className="text-lg font-bold text-gray-900 mb-2">About the Hospital</h3>
-                                        <p>{selectedHospital.description || "No detailed description available."}</p>
+                                        {selectedHospital.description ? (
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: selectedHospital.description }}
+                                                className="text-gray-600 text-sm leading-relaxed [&_b]:font-bold [&_strong]:font-bold [&_i]:italic [&_u]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-1"
+                                            />
+                                        ) : (
+                                            <p className="text-gray-400 italic">No detailed description available.</p>
+                                        )}
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
@@ -333,7 +350,86 @@ export default function HospitalsPage() {
                                                 <p className="font-bold text-gray-900">{selectedHospital.ambulanceContact}</p>
                                             </div>
                                         </div>
+                                        {/* Phone Numbers */}
+                                        {((selectedHospital.phoneNumbers && selectedHospital.phoneNumbers.length > 0) || selectedHospital.contactNumber) && (
+                                            <div className="md:col-span-2 flex items-start gap-3 p-3 bg-green-50/50 rounded-xl">
+                                                <div className="p-2 bg-green-100 rounded-lg text-green-600">
+                                                    <Phone size={20} />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <p className="text-xs font-bold text-gray-500 uppercase mb-1">Contact Numbers</p>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {(selectedHospital.phoneNumbers && selectedHospital.phoneNumbers.length > 0
+                                                            ? selectedHospital.phoneNumbers
+                                                            : [selectedHospital.contactNumber!]
+                                                        ).filter(Boolean).map((ph, i) => (
+                                                            <span key={i} className="font-semibold text-gray-900 flex items-center gap-1">
+                                                                {ph}
+                                                                {i === 0 && <span className="text-[10px] text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded-full">Primary</span>}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {/* Online Payment */}
+                                        <div className="md:col-span-2 flex items-center gap-3 p-3 bg-purple-50/50 rounded-xl">
+                                            <div className="p-2 bg-purple-100 rounded-lg text-purple-600">
+                                                <ShieldCheck size={20} />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs font-bold text-gray-500 uppercase">Online Payment</p>
+                                                <p className={`font-bold ${selectedHospital.isOnlinePaymentAvailable ? 'text-green-600' : 'text-red-500'}`}>
+                                                    {selectedHospital.isOnlinePaymentAvailable ? 'Available' : 'Not Available'}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    {/* Government Schemes */}
+                                    {selectedHospital.governmentSchemes && selectedHospital.governmentSchemes.length > 0 && (
+                                        <div className="pt-4 border-t border-gray-100">
+                                            <p className="text-xs font-bold text-gray-500 uppercase mb-2 flex items-center gap-1"><ShieldCheck className="w-4 h-4" /> Accepted Govt. Schemes</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {selectedHospital.governmentSchemes.map((s, i) => (
+                                                    <span key={i} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-100 font-medium">{s}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Doctors */}
+                                    {selectedHospital.doctors && selectedHospital.doctors.length > 0 && (
+                                        <div className="pt-4 border-t border-gray-100">
+                                            <p className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-1">
+                                                <Navigation className="w-4 h-4" /> Doctors Available
+                                            </p>
+                                            <div className="space-y-3">
+                                                {selectedHospital.doctors.map((doc, i) => (
+                                                    <div key={i} className="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                                                        <div className="flex items-start justify-between gap-2 mb-1">
+                                                            <p className="font-bold text-gray-900">{doc.name}</p>
+                                                            {doc.specialization && (
+                                                                <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full whitespace-nowrap">{doc.specialization}</span>
+                                                            )}
+                                                        </div>
+                                                        {doc.timing && (
+                                                            <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                                                                <Clock className="w-3.5 h-3.5" /> {doc.timing}
+                                                            </p>
+                                                        )}
+                                                        {doc.daysAvailable && doc.daysAvailable.length > 0 && (
+                                                            <div className="flex flex-wrap gap-1 mt-2">
+                                                                {doc.daysAvailable.map(d => (
+                                                                    <span key={d} className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">{d.slice(0,3)}</span>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </motion.div>
                         </motion.div>
