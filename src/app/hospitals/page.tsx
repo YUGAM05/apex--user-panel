@@ -308,6 +308,16 @@ export default function HospitalsPage() {
                                                     </a>
                                                 </div>
                                             )}
+                                            {hospital.doctors && hospital.doctors.length > 0 && (
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span className="text-gray-500 flex items-center gap-1">
+                                                        <User className="w-4 h-4" /> Doctors
+                                                    </span>
+                                                    <span className="font-semibold text-xs px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600">
+                                                        {hospital.doctors.length} Available
+                                                    </span>
+                                                </div>
+                                            )}
                                             <div className="flex items-center justify-between text-sm">
                                                 <span className="text-gray-500">Online Pay</span>
                                                 <span className={`font-semibold text-xs px-2 py-0.5 rounded-full ${hospital.isOnlinePaymentAvailable ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'}`}>
@@ -452,26 +462,61 @@ export default function HospitalsPage() {
                                             <div className="border-t pt-5">
                                                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
                                                     <User className="w-4 h-4" /> Doctors Available
+                                                    <span className="ml-auto text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-bold">
+                                                        {selectedHospital.doctors.length} Doctor{selectedHospital.doctors.length > 1 ? 's' : ''}
+                                                    </span>
                                                 </p>
-                                                <div className="space-y-3">
+                                                <div className="space-y-4">
                                                     {selectedHospital.doctors.map((doc, i) => (
-                                                        <div key={i} className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-4">
-                                                            <div className="flex items-start justify-between gap-2 mb-2">
-                                                                <p className="font-bold text-gray-900">{doc.name}</p>
-                                                                {doc.specialization && (
-                                                                    <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full whitespace-nowrap">{doc.specialization}</span>
-                                                                )}
+                                                        <div key={i} className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-4 space-y-3">
+                                                            {/* Doctor Name */}
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
+                                                                    <User className="w-4 h-4 text-indigo-600" />
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Doctor Name</p>
+                                                                    <p className="font-bold text-gray-900 text-sm">{doc.name}</p>
+                                                                </div>
                                                             </div>
-                                                            {doc.timing && (
-                                                                <p className="text-sm text-gray-600 flex items-center gap-1">
-                                                                    <Clock className="w-3.5 h-3.5 text-blue-500" /> {doc.timing}
-                                                                </p>
+                                                            {/* Degree */}
+                                                            {doc.specialization && (
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                                                                        <span className="text-purple-600 font-bold text-xs">Rx</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Degree / Specialization</p>
+                                                                        <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">{doc.specialization}</span>
+                                                                    </div>
+                                                                </div>
                                                             )}
+                                                            {/* Timing */}
+                                                            {doc.timing && (
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                                                                        <Clock className="w-4 h-4 text-blue-600" />
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Timing</p>
+                                                                        <p className="text-sm font-semibold text-gray-700">{doc.timing}</p>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                            {/* Days Available */}
                                                             {doc.daysAvailable && doc.daysAvailable.length > 0 && (
-                                                                <div className="flex flex-wrap gap-1 mt-2">
-                                                                    {doc.daysAvailable.map(d => (
-                                                                        <span key={d} className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">{d.slice(0, 3)}</span>
-                                                                    ))}
+                                                                <div className="flex items-start gap-2">
+                                                                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
+                                                                        <CheckCircle className="w-4 h-4 text-green-600" />
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Days Available</p>
+                                                                        <div className="flex flex-wrap gap-1">
+                                                                            {doc.daysAvailable.map(d => (
+                                                                                <span key={d} className="bg-green-100 text-green-700 border border-green-200 px-2 py-0.5 rounded text-xs font-semibold">{d}</span>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             )}
                                                         </div>
