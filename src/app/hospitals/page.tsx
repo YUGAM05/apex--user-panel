@@ -417,31 +417,46 @@ export default function HospitalsPage() {
                                         </div>
 
                                         {/* Description */}
-                                        {selectedHospital.description && (
-                                            <div className="border-t pt-5">
-                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
-                                                    <Building className="w-4 h-4" /> About the Hospital
-                                                </p>
-                                                <div
-                                                    dangerouslySetInnerHTML={{ __html: selectedHospital.description }}
-                                                    className="
-                                                        text-gray-700 text-sm
-                                                        leading-7
-                                                        [&_p]:mb-3
-                                                        [&_p:last-child]:mb-0
-                                                        [&_b]:font-bold [&_strong]:font-bold
-                                                        [&_i]:italic [&_u]:underline
-                                                        [&_h1]:text-lg [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2 [&_h1]:mt-3
-                                                        [&_h2]:text-base [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mb-2 [&_h2]:mt-3
-                                                        [&_h3]:text-sm [&_h3]:font-bold [&_h3]:text-gray-800 [&_h3]:mb-1 [&_h3]:mt-2
-                                                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3 [&_ul]:space-y-1
-                                                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3 [&_ol]:space-y-1
-                                                        [&_li]:text-gray-600
-                                                        [&_br]:block [&_br]:mb-2
-                                                    "
-                                                />
-                                            </div>
-                                        )}
+                                        {selectedHospital.description && (() => {
+                                            // Pre-process: after every </b> or </strong> that is followed by ":",
+                                            // inject a <br/> so each bold label starts on its own line.
+                                            const processed = selectedHospital.description
+                                                // Normalise <strong> → <b> for uniform styling
+                                                .replace(/<strong>/gi, '<b>')
+                                                .replace(/<\/strong>/gi, '</b>')
+                                                // After </b> followed by optional whitespace + ":", inject a line break before AND after
+                                                .replace(/<\/b>(\s*:)/gi, '</b>$1<br/>')
+                                                // If a <b> is at the very start or after a <br>, that's already a new line — good.
+                                                // Insert a <br/> BEFORE <b> tags that are NOT at the start and preceded by non-break content
+                                                .replace(/([^>])\s*<b>/gi, '$1<br/><b>');
+
+                                            return (
+                                                <div className="border-t pt-5">
+                                                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
+                                                        <Building className="w-4 h-4" /> About the Hospital
+                                                    </p>
+                                                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-0">
+                                                        <div
+                                                            dangerouslySetInnerHTML={{ __html: processed }}
+                                                            className="
+                                                                hospital-desc
+                                                                text-gray-700 text-[13.5px]
+                                                                leading-[1.85]
+                                                                [&_p]:mb-2 [&_p:last-child]:mb-0
+                                                                [&_b]:font-semibold [&_b]:text-blue-700
+                                                                [&_i]:italic [&_u]:underline
+                                                                [&_br]:block [&_br]:my-1
+                                                                [&_h1]:text-base [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2 [&_h1]:mt-3
+                                                                [&_h2]:text-sm [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mb-1 [&_h2]:mt-2
+                                                                [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ul]:space-y-1
+                                                                [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_ol]:space-y-1
+                                                                [&_li]:text-gray-600 [&_li]:text-[13px]
+                                                            "
+                                                        />
+                                                    </div>
+                                                </div>
+                                            );
+                                        })()}
 
                                         {/* Government Schemes */}
                                         {selectedHospital.governmentSchemes?.length > 0 && (
