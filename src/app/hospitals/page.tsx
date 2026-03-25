@@ -291,6 +291,23 @@ export default function HospitalsPage() {
                                                 </span>
                                                 <span className="font-bold text-gray-900">₹{hospital.consultationFee} <span className="text-xs font-normal text-gray-400">/ Visit</span></span>
                                             </div>
+                                            {phoneList(hospital).length > 0 && (
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span className="text-gray-500 flex items-center gap-1">
+                                                        <Phone className="w-4 h-4" /> Contact
+                                                    </span>
+                                                    <a
+                                                        href={`tel:${phoneList(hospital)[0]}`}
+                                                        onClick={e => e.stopPropagation()}
+                                                        className="font-semibold text-blue-600 hover:text-blue-800 transition-colors text-xs"
+                                                    >
+                                                        {phoneList(hospital)[0]}
+                                                        {phoneList(hospital).length > 1 && (
+                                                            <span className="ml-1 text-gray-400 font-normal">+{phoneList(hospital).length - 1} more</span>
+                                                        )}
+                                                    </a>
+                                                </div>
+                                            )}
                                             <div className="flex items-center justify-between text-sm">
                                                 <span className="text-gray-500">Online Pay</span>
                                                 <span className={`font-semibold text-xs px-2 py-0.5 rounded-full ${hospital.isOnlinePaymentAvailable ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'}`}>
@@ -392,12 +409,26 @@ export default function HospitalsPage() {
                                         {/* Description */}
                                         {selectedHospital.description && (
                                             <div className="border-t pt-5">
-                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
                                                     <Building className="w-4 h-4" /> About the Hospital
                                                 </p>
                                                 <div
                                                     dangerouslySetInnerHTML={{ __html: selectedHospital.description }}
-                                                    className="text-gray-700 text-sm leading-relaxed [&_b]:font-bold [&_strong]:font-bold [&_i]:italic [&_u]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-1"
+                                                    className="
+                                                        text-gray-700 text-sm
+                                                        leading-7
+                                                        [&_p]:mb-3
+                                                        [&_p:last-child]:mb-0
+                                                        [&_b]:font-bold [&_strong]:font-bold
+                                                        [&_i]:italic [&_u]:underline
+                                                        [&_h1]:text-lg [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2 [&_h1]:mt-3
+                                                        [&_h2]:text-base [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mb-2 [&_h2]:mt-3
+                                                        [&_h3]:text-sm [&_h3]:font-bold [&_h3]:text-gray-800 [&_h3]:mb-1 [&_h3]:mt-2
+                                                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3 [&_ul]:space-y-1
+                                                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3 [&_ol]:space-y-1
+                                                        [&_li]:text-gray-600
+                                                        [&_br]:block [&_br]:mb-2
+                                                    "
                                                 />
                                             </div>
                                         )}
