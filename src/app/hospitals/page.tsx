@@ -4,6 +4,7 @@ import { Search, MapPin, Phone, Clock, CreditCard, Ambulance, ShieldCheck, Star,
 import api from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface Doctor {
     name: string;
@@ -106,23 +107,12 @@ function ImageSlideshow({ images, alt, className = '' }: { images: string[]; alt
     );
 }
 
-// ─── Detail row helper ────────────────────────────────────────────────────────
-function DetailRow({ icon, label, value, valueClass = 'font-semibold text-gray-900' }: { icon: React.ReactNode; label: string; value: React.ReactNode; valueClass?: string }) {
-    return (
-        <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
-            <div className="p-2 bg-white rounded-lg shadow-sm text-blue-600 shrink-0">{icon}</div>
-            <div>
-                <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{label}</p>
-                <div className={`mt-0.5 text-sm ${valueClass}`}>{value}</div>
-            </div>
-        </div>
-    );
-}
+
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function HospitalsPage() {
+    const router = useRouter();
     const [hospitals, setHospitals] = useState<Hospital[]>([]);
-    const [selectedHospital, setSelectedHospital] = useState<Hospital | null>(null);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [suggestions, setSuggestions] = useState<Hospital[]>([]);
@@ -263,7 +253,7 @@ export default function HospitalsPage() {
                                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }}
                                     key={hospital._id}
                                     className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col cursor-pointer"
-                                    onClick={() => setSelectedHospital(hospital)}
+                                    onClick={() => router.push(`/hospitals/${hospital._id}`)}
                                 >
                                     {/* Image / slideshow */}
                                     <div className="h-48 relative">
@@ -332,219 +322,6 @@ export default function HospitalsPage() {
                     </div>
                 )}
 
-                {/* ─── Detail Modal ─── */}
-                <AnimatePresence>
-                    {selectedHospital && (() => {
-                        const imgs = getImages(selectedHospital);
-                        const phones = phoneList(selectedHospital);
-                        return (
-                            <motion.div
-                                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-                                onClick={() => setSelectedHospital(null)}
-                            >
-                                <motion.div
-                                    initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-                                    onClick={e => e.stopPropagation()}
-                                    className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] overflow-y-auto"
-                                >
-                                    {/* Slideshow hero */}
-                                    <div className="relative h-64 md:h-80 rounded-t-2xl overflow-hidden">
-                                        <ImageSlideshow images={imgs} alt={selectedHospital.name} className="h-full w-full" />
-                                        <button
-                                            onClick={() => setSelectedHospital(null)}
-                                            className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-colors z-20"
-                                        >
-                                            <X size={18} />
-                                        </button>
-                                        {/* Rating + 24/7 badge */}
-                                        <div className="absolute bottom-4 left-4 flex items-center gap-2 z-10">
-                                            <span className="bg-white/95 text-gray-900 px-3 py-1 rounded-full text-sm font-bold shadow-sm inline-flex items-center gap-1">
-                                                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />{selectedHospital.rating}
-                                            </span>
-                                            {selectedHospital.isOpen24Hours && (
-                                                <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-sm">
-                                                    <Clock className="w-3 h-3" /> Open 24/7
-                                                </span>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="p-6 md:p-8 space-y-6">
-                                        {/* Name + Address */}
-                                        <div>
-                                            <h2 className="text-2xl font-extrabold text-gray-900">{selectedHospital.name}</h2>
-                                            <div className="flex items-start gap-1 text-gray-500 mt-1 text-sm">
-                                                <MapPin className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
-                                                {selectedHospital.address}, {selectedHospital.city}
-                                            </div>
-                                        </div>
-
-                                        {/* Key details grid */}
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            <DetailRow icon={<CreditCard size={17} />} label="Consultation Fee" value={`₹${selectedHospital.consultationFee}`} />
-                                            <DetailRow icon={<Star size={17} />} label="Rating" value={
-                                                <span className="flex items-center gap-1">{selectedHospital.rating} <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" /></span>
-                                            } />
-                                            <DetailRow icon={<Ambulance size={17} />} label="Ambulance Contact" value={selectedHospital.ambulanceContact} valueClass="font-semibold text-red-600" />
-                                            <DetailRow
-                                                icon={<Clock size={17} />} label="Open 24/7"
-                                                value={selectedHospital.isOpen24Hours
-                                                    ? <span className="flex items-center gap-1 text-green-600"><CheckCircle className="w-4 h-4" /> Yes</span>
-                                                    : <span className="flex items-center gap-1 text-red-500"><XCircle className="w-4 h-4" /> No</span>}
-                                            />
-                                            <DetailRow
-                                                icon={<CreditCard size={17} />} label="Online Payment"
-                                                value={selectedHospital.isOnlinePaymentAvailable
-                                                    ? <span className="flex items-center gap-1 text-green-600"><CheckCircle className="w-4 h-4" /> Available</span>
-                                                    : <span className="flex items-center gap-1 text-red-500"><XCircle className="w-4 h-4" /> Not Available</span>}
-                                            />
-                                            {phones.length > 0 && (
-                                                <DetailRow
-                                                    icon={<Phone size={17} />} label="Contact Numbers"
-                                                    value={
-                                                        <div className="space-y-1">
-                                                            {phones.map((ph, i) => (
-                                                                <div key={i} className="flex items-center gap-2">
-                                                                    <span>{ph}</span>
-                                                                    {i === 0 && <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full">Primary</span>}
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    }
-                                                />
-                                            )}
-                                        </div>
-
-                                        {/* Description */}
-                                        {selectedHospital.description && (() => {
-                                            // Pre-process: after every </b> or </strong> that is followed by ":",
-                                            // inject a <br/> so each bold label starts on its own line.
-                                            const processed = selectedHospital.description
-                                                // Normalise <strong> → <b> for uniform styling
-                                                .replace(/<strong>/gi, '<b>')
-                                                .replace(/<\/strong>/gi, '</b>')
-                                                // After </b> followed by optional whitespace + ":", inject a line break before AND after
-                                                .replace(/<\/b>(\s*:)/gi, '</b>$1<br/>')
-                                                // If a <b> is at the very start or after a <br>, that's already a new line — good.
-                                                // Insert a <br/> BEFORE <b> tags that are NOT at the start and preceded by non-break content
-                                                .replace(/([^>])\s*<b>/gi, '$1<br/><b>');
-
-                                            return (
-                                                <div className="border-t pt-5">
-                                                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
-                                                        <Building className="w-4 h-4" /> About the Hospital
-                                                    </p>
-                                                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-0">
-                                                        <div
-                                                            dangerouslySetInnerHTML={{ __html: processed }}
-                                                            className="
-                                                                hospital-desc
-                                                                text-gray-700 text-[13.5px]
-                                                                leading-[1.85]
-                                                                [&_p]:mb-2 [&_p:last-child]:mb-0
-                                                                [&_b]:font-semibold [&_b]:text-blue-700
-                                                                [&_i]:italic [&_u]:underline
-                                                                [&_br]:block [&_br]:my-1
-                                                                [&_h1]:text-base [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2 [&_h1]:mt-3
-                                                                [&_h2]:text-sm [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mb-1 [&_h2]:mt-2
-                                                                [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ul]:space-y-1
-                                                                [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_ol]:space-y-1
-                                                                [&_li]:text-gray-600 [&_li]:text-[13px]
-                                                            "
-                                                        />
-                                                    </div>
-                                                </div>
-                                            );
-                                        })()}
-
-                                        {/* Government Schemes */}
-                                        {selectedHospital.governmentSchemes?.length > 0 && (
-                                            <div className="border-t pt-5">
-                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
-                                                    <ShieldCheck className="w-4 h-4" /> Accepted Govt. Schemes
-                                                </p>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {selectedHospital.governmentSchemes.map((s, i) => (
-                                                        <span key={i} className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100 font-medium">{s}</span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {/* Doctors */}
-                                        {selectedHospital.doctors && selectedHospital.doctors.length > 0 && (
-                                            <div className="border-t pt-5">
-                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1">
-                                                    <User className="w-4 h-4" /> Doctors Available
-                                                    <span className="ml-auto text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-bold">
-                                                        {selectedHospital.doctors.length} Doctor{selectedHospital.doctors.length > 1 ? 's' : ''}
-                                                    </span>
-                                                </p>
-                                                <div className="space-y-4">
-                                                    {selectedHospital.doctors.map((doc, i) => (
-                                                        <div key={i} className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-4 space-y-3">
-                                                            {/* Doctor Name */}
-                                                            <div className="flex items-center gap-2">
-                                                                <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
-                                                                    <User className="w-4 h-4 text-indigo-600" />
-                                                                </div>
-                                                                <div>
-                                                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Doctor Name</p>
-                                                                    <p className="font-bold text-gray-900 text-sm">{doc.name}</p>
-                                                                </div>
-                                                            </div>
-                                                            {/* Degree */}
-                                                            {doc.specialization && (
-                                                                <div className="flex items-center gap-2">
-                                                                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
-                                                                        <span className="text-purple-600 font-bold text-xs">Rx</span>
-                                                                    </div>
-                                                                    <div>
-                                                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Degree / Specialization</p>
-                                                                        <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">{doc.specialization}</span>
-                                                                    </div>
-                                                                </div>
-                                                            )}
-                                                            {/* Timing */}
-                                                            {doc.timing && (
-                                                                <div className="flex items-center gap-2">
-                                                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                                                                        <Clock className="w-4 h-4 text-blue-600" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Timing</p>
-                                                                        <p className="text-sm font-semibold text-gray-700">{doc.timing}</p>
-                                                                    </div>
-                                                                </div>
-                                                            )}
-                                                            {/* Days Available */}
-                                                            {doc.daysAvailable && doc.daysAvailable.length > 0 && (
-                                                                <div className="flex items-start gap-2">
-                                                                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
-                                                                        <CheckCircle className="w-4 h-4 text-green-600" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Days Available</p>
-                                                                        <div className="flex flex-wrap gap-1">
-                                                                            {doc.daysAvailable.map(d => (
-                                                                                <span key={d} className="bg-green-100 text-green-700 border border-green-200 px-2 py-0.5 rounded text-xs font-semibold">{d}</span>
-                                                                            ))}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </motion.div>
-                            </motion.div>
-                        );
-                    })()}
-                </AnimatePresence>
             </div>
         </div>
     );
