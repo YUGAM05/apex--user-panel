@@ -15,6 +15,7 @@ interface Doctor {
 
 interface Hospital {
     _id: string;
+    slug: string;
     name: string;
     address: string;
     city: string;
@@ -253,7 +254,7 @@ export default function HospitalsPage() {
                                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }}
                                     key={hospital._id}
                                     className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col cursor-pointer"
-                                    onClick={() => router.push(`/hospitals/${hospital._id}`)}
+                                    onClick={() => router.push(`/hospitals/${hospital.slug}`)}
                                 >
                                     {/* Image / slideshow */}
                                     <div className="h-48 relative">

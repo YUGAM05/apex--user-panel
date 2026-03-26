@@ -137,7 +137,7 @@ export default function HospitalDetailPage() {
     useEffect(() => {
         const fetchHospital = async () => {
             try {
-                const res = await api.get(`/hospitals/${params.id}`);
+                const res = await api.get(`/hospitals/${params.slug}`);
                 setHospital(res.data);
             } catch (err) {
                 console.error('Failed to fetch hospital', err);
@@ -145,10 +145,10 @@ export default function HospitalDetailPage() {
                 setLoading(false);
             }
         };
-        if (params.id) {
+        if (params.slug) {
             fetchHospital();
         }
-    }, [params.id]);
+    }, [params.slug]);
 
     if (loading) {
         return (
