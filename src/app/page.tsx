@@ -58,7 +58,7 @@ const slides = [
         subtext: "Enter your blood group and area — we match you with a verified donor nearby in minutes.",
         buttonText: "Request blood now",
         buttonLink: "/blood-bank",
-        icon: <MapPin className="w-10 h-10 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
+        icon: <MapPin className="w-6 h-6 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "15 min",
         sideSubText: "avg. match time",
         bgColor: "bg-blue-600", // Classic Pillora Blue
@@ -71,7 +71,7 @@ const slides = [
         subtext: "Check which government schemes cover your treatment — Ayushman Bharat, PMJAY & more.",
         buttonText: "Check eligibility",
         buttonLink: "/hospitals",
-        icon: <Briefcase className="w-10 h-10 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
+        icon: <Briefcase className="w-6 h-6 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "50+",
         sideSubText: "schemes listed",
         bgColor: "bg-sky-700", // Vibrant Sky Blue
@@ -84,7 +84,7 @@ const slides = [
         subtext: "Browse doctor profiles, specializations, visiting hours and consultation charges — all in one place.",
         buttonText: "Find a doctor",
         buttonLink: "/hospitals",
-        icon: <User className="w-10 h-10 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
+        icon: <User className="w-6 h-6 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "200+",
         sideSubText: "specialist doctors",
         bgColor: "bg-slate-800", // Premium Dark / Navy
@@ -97,7 +97,7 @@ const slides = [
         subtext: "Register as a verified donor on Pillora. Your one donation can save up to 3 lives.",
         buttonText: "Become a donor",
         buttonLink: "/blood-bank",
-        icon: <Heart className="w-10 h-10 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
+        icon: <Heart className="w-6 h-6 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "10,000+",
         sideSubText: "donors registered",
         bgColor: "bg-indigo-600", // Rich Indigo Blue
@@ -119,41 +119,41 @@ function RotatingBanner() {
 
     return (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 xl:px-8">
-            <div className={`rounded-[2rem] md:rounded-[3rem] px-5 py-8 md:p-16 pb-14 md:pb-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden transition-colors duration-700 shadow-xl md:shadow-2xl ${s.bgColor}`}>
+            <div className={`rounded-3xl md:rounded-[3rem] px-5 py-6 md:p-16 pb-12 md:pb-16 flex flex-row items-center justify-between relative overflow-hidden transition-colors duration-700 shadow-xl md:shadow-2xl ${s.bgColor}`}>
                 {/* Content */}
-                <div className="relative z-10 max-w-2xl w-full flex flex-col items-center md:items-start text-center md:text-left">
-                    <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 mb-3 md:mb-6 text-xs md:text-sm font-bold text-white bg-white/20 rounded-full backdrop-blur-sm">
+                <div className="relative z-10 w-2/3 md:max-w-2xl flex flex-col items-start text-left pr-2">
+                    <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 mb-2 md:mb-6 text-[10px] md:text-sm font-bold text-white bg-white/20 rounded-full backdrop-blur-sm">
                         {s.tag}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 md:mb-6 leading-[1.15]">
+                    <h2 className="text-xl sm:text-2xl md:text-5xl font-bold text-white mb-3 md:mb-6 leading-tight">
                         {s.title}
                     </h2>
-                    <p className="text-white/90 text-sm sm:text-base md:text-xl mb-6 md:mb-10 font-medium max-w-xl leading-relaxed">
+                    <p className="hidden md:block text-white/90 text-xl mb-10 font-medium max-w-xl leading-relaxed">
                         {s.subtext}
                     </p>
-                    <Link href={s.buttonLink} className="bg-white text-gray-900 px-6 py-3 md:px-8 md:py-3.5 rounded-xl font-bold text-sm md:text-base hover:bg-gray-50 transition-colors inline-block shadow-sm">
+                    <Link href={s.buttonLink} className="bg-white text-gray-900 px-4 py-2 md:px-8 md:py-3.5 rounded-lg md:rounded-xl font-bold text-xs md:text-base hover:bg-gray-50 transition-colors inline-block shadow-sm">
                         {s.buttonText}
                     </Link>
                 </div>
 
                 {/* Right Visual Side */}
-                <div className="relative z-10 mt-8 md:mt-0 flex flex-col items-center justify-center shrink-0 md:mr-10 mb-4 md:mb-0">
-                    <div className={`w-28 h-28 md:w-48 md:h-48 rounded-full ${s.circleBg} flex items-center justify-center mb-3 md:mb-6 transition-colors duration-700`}>
+                <div className="relative z-10 w-1/3 flex flex-col items-center justify-center shrink-0 md:mr-10">
+                    <div className={`w-14 h-14 md:w-48 md:h-48 rounded-full ${s.circleBg} flex items-center justify-center mb-2 md:mb-6 transition-colors duration-700`}>
                         {s.icon}
                     </div>
                     <div className="text-center">
-                        <div className="text-2xl md:text-4xl font-bold text-white mb-1 tracking-tight">{s.sideText}</div>
-                        <div className="text-white/80 text-xs md:text-base font-medium">{s.sideSubText}</div>
+                        <div className="text-lg md:text-4xl font-bold text-white mb-0 md:mb-1 tracking-tight">{s.sideText}</div>
+                        <div className="text-white/80 text-[9px] md:text-base font-medium leading-tight">{s.sideSubText}</div>
                     </div>
                 </div>
 
                 {/* Dots Navigation */}
-                <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-2.5 z-20">
+                <div className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2.5 z-20">
                     {slides.map((_, idx) => (
                         <button
                             key={idx}
                             onClick={() => setCurrentSlide(idx)}
-                            className={`h-2 md:h-2.5 rounded-full transition-all duration-300 ${idx === currentSlide ? 'w-6 md:w-8 bg-white' : 'w-2 md:w-2.5 bg-white/40 hover:bg-white/60'}`}
+                            className={`h-1.5 md:h-2.5 rounded-full transition-all duration-300 ${idx === currentSlide ? 'w-5 md:w-8 bg-white' : 'w-1.5 md:w-2.5 bg-white/40 hover:bg-white/60'}`}
                             aria-label={`Go to slide ${idx + 1}`}
                         />
                     ))}
