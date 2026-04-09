@@ -12,6 +12,13 @@ export default function BloodBankPage() {
     const [userRequests, setUserRequests] = useState<any[]>([]);
 
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('tab') === 'request') {
+                setActiveTab('request');
+            }
+        }
+        
         const fetchUserRequests = async () => {
             try {
                 const user = localStorage.getItem('user');

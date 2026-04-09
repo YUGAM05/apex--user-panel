@@ -57,7 +57,7 @@ const slides = [
         title: "Need blood urgently?",
         subtext: "Enter your blood group and area — we match you with a verified donor nearby in minutes.",
         buttonText: "Request blood now",
-        buttonLink: "/blood-bank",
+        buttonLink: "/blood-bank?tab=request",
         icon: <MapPin className="w-8 h-8 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "15 min",
         sideSubText: "avg. match time",
