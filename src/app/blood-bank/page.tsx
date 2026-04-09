@@ -38,7 +38,7 @@ export default function BloodBankPage() {
     const rejectedRequest = userRequests.find(r => r.aiVerificationStatus === 'Rejected');
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+        <div className="min-h-screen bg-gray-50 flex flex-col">
             {/* Rejection Alert Notification */}
             <AnimatePresence>
                 {rejectedRequest && (
