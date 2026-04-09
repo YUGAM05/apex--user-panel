@@ -74,7 +74,14 @@ export default function Navbar() {
                             className="w-9 h-9 xl:w-11 xl:h-11 object-contain mix-blend-multiply"
                             unoptimized
                         />
-                        <span className="font-bold text-lg xl:text-2xl text-gray-900 tracking-tight hidden min-[1150px]:block">Pillora</span>
+                        <Image
+                            src="/pillora-text.png"
+                            alt="Pillora text"
+                            width={120}
+                            height={40}
+                            className="h-7 w-auto object-contain mix-blend-multiply hidden min-[1150px]:block"
+                            unoptimized
+                        />
                     </Link>
 
 

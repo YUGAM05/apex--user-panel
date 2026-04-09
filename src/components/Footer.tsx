@@ -19,7 +19,14 @@ export default function Footer() {
                                 className="w-8 h-8 object-contain mix-blend-multiply"
                                 unoptimized
                             />
-                            <span className="font-bold text-xl text-gray-900">Pillora</span>
+                            <Image
+                                src="/pillora-text.png"
+                                alt="Pillora"
+                                width={100}
+                                height={32}
+                                className="h-6 w-auto object-contain mix-blend-multiply"
+                                unoptimized
+                            />
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed">
                             We&apos;re a healthcare coordination platform focused on emergency blood services and hospital data.
