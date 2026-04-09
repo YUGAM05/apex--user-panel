@@ -22,9 +22,9 @@ export default function Footer() {
                             <Image
                                 src="/pillora-text.png"
                                 alt="Pillora"
-                                width={100}
-                                height={32}
-                                className="h-6 w-auto object-contain mix-blend-multiply"
+                                width={160}
+                                height={48}
+                                className="h-10 w-auto object-contain mix-blend-multiply"
                                 unoptimized
                             />
                         </div>
