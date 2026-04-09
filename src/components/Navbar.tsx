@@ -79,7 +79,7 @@ export default function Navbar() {
                             alt="Pillora text"
                             width={120}
                             height={40}
-                            className="h-7 w-auto object-contain mix-blend-multiply hidden min-[1150px]:block"
+                            className="block h-5 sm:h-6 xl:h-7 w-auto object-contain mix-blend-multiply"
                             unoptimized
                         />
                     </Link>
