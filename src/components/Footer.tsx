@@ -16,7 +16,7 @@ export default function Footer() {
                                 alt="Pillora"
                                 width={32}
                                 height={32}
-                                className="w-8 h-8 object-contain"
+                                className="w-8 h-8 object-contain mix-blend-multiply"
                                 unoptimized
                             />
                             <span className="font-bold text-xl text-gray-900">Pillora</span>
