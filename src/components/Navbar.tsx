@@ -69,17 +69,17 @@ export default function Navbar() {
                         <Image
                             src="/pillora-logo-new.png"
                             alt="Pillora"
-                            width={64}
-                            height={64}
-                            className="w-12 h-12 xl:w-14 xl:h-14 object-contain mix-blend-multiply"
+                            width={72}
+                            height={72}
+                            className="w-14 h-14 xl:w-16 xl:h-16 object-contain mix-blend-multiply drop-shadow-sm"
                             unoptimized
                         />
                         <Image
                             src="/pillora-text.png"
                             alt="Pillora text"
-                            width={200}
-                            height={60}
-                            className="block h-8 sm:h-10 xl:h-12 w-auto object-contain mix-blend-multiply"
+                            width={240}
+                            height={80}
+                            className="block h-10 sm:h-12 xl:h-16 w-auto object-contain mix-blend-multiply drop-shadow-sm"
                             unoptimized
                         />
                     </Link>
