@@ -65,7 +65,7 @@ const Hero3DAnimation = () => {
                             <PlusSquare className="w-12 h-12 text-white" />
                         </div>
                         <div className="text-center">
-                            <span className="block font-bold text-gray-800 text-xl tracking-tight">APEX CARE+</span>
+                            <span className="block font-bold text-gray-800 text-xl tracking-tight">PILLORA+</span>
                             <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest">Premium Pharmacy</span>
                         </div>
                     </motion.div>

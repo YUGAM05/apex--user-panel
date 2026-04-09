@@ -36,7 +36,7 @@ export default function TermsAndConditionsPage() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4"
                     >
-                        Apex Care <span className="text-blue-600 italic">Terms & Conditions</span>
+                        Pillora <span className="text-blue-600 italic">Terms & Conditions</span>
                     </motion.h1>
                     <div className="flex items-center justify-center gap-4">
                         <span className="h-px w-8 bg-slate-200" />
@@ -64,7 +64,7 @@ export default function TermsAndConditionsPage() {
                                 01. Nature of the Platform
                             </h2>
                             <p className="text-slate-600 font-medium leading-relaxed mb-8">
-                                Apex Care is a digital intermediary platform. We do not practice medicine, provide medical advice, or operate as a licensed blood bank. We provide a technology interface to connect users with:
+                                Pillora is a digital intermediary platform. We do not practice medicine, provide medical advice, or operate as a licensed blood bank. We provide a technology interface to connect users with:
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 <PlatformFeature icon={<Pill />} text="Licensed third-party pharmacies" />
@@ -89,7 +89,7 @@ export default function TermsAndConditionsPage() {
                                     02. Medical Disclaimer
                                 </h2>
                                 <p className="text-red-800/80 font-bold leading-relaxed text-lg">
-                                    Apex Care is NOT for medical emergencies. If you are experiencing a life-threatening situation, please contact 108 or visit the nearest emergency room immediately.
+                                    Pillora is NOT for medical emergencies. If you are experiencing a life-threatening situation, please contact 108 or visit the nearest emergency room immediately.
                                 </p>
                                 <p className="text-red-700/60 text-sm font-medium italic leading-relaxed">
                                     The information provided by our AI Health Assistant or our blog is for educational purposes and is not a substitute for professional medical consultation.
@@ -133,7 +133,7 @@ export default function TermsAndConditionsPage() {
                                 <div className="space-y-4">
                                     <h3 className="text-white font-black uppercase tracking-widest text-xs tracking-[0.2em] opacity-80">Non-Commercialization</h3>
                                     <p className="text-red-50 text-sm font-medium leading-relaxed italic">
-                                        The sale or purchase of blood is a criminal offense in India. Apex Care is a voluntary, non-monetary platform. Any user found soliciting money for blood will be permanently banned and reported to the authorities.
+                                        The sale or purchase of blood is a criminal offense in India. Pillora is a voluntary, non-monetary platform. Any user found soliciting money for blood will be permanently banned and reported to the authorities.
                                     </p>
                                 </div>
                                 <div className="space-y-4">
@@ -165,7 +165,7 @@ export default function TermsAndConditionsPage() {
                             <h2 className="text-xl font-black text-slate-900 mb-6 flex items-center gap-3">
                                 <Scale className="w-5 h-5 text-blue-600" /> 06. Liability
                             </h2>
-                            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-4">Shah Yugam (Founder) & Apex Care</p>
+                            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-4">Shah Yugam (Founder) & Pillora</p>
                             <ul className="space-y-4">
                                 <li className="text-sm font-medium text-slate-500 italic flex items-start gap-3">
                                     <div className="w-1 h-1 rounded-full bg-slate-300 mt-2" />
@@ -189,7 +189,7 @@ export default function TermsAndConditionsPage() {
                         className="p-8 bg-slate-50 rounded-3xl border border-slate-200/50 text-center"
                     >
                         <p className="text-slate-500 font-bold text-sm italic">
-                            By using Apex Care, you acknowledge that you have read, understood, and agreed to these terms.
+                            By using Pillora, you acknowledge that you have read, understood, and agreed to these terms.
                         </p>
                     </motion.div>
                 </div>

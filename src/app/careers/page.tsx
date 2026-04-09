@@ -54,7 +54,7 @@ const roles = [
         title: "Regulatory & Compliance Specialist",
         icon: <ShieldAlert className="w-6 h-6" />,
         color: "bg-emerald-500",
-        description: "Ensures Apex Care complies with Indian healthcare laws (like the Pharmacy Act and Data Privacy rules). They handle the 'paperwork' that keeps the digital platform legal.",
+        description: "Ensures Pillora complies with Indian healthcare laws (like the Pharmacy Act and Data Privacy rules). They handle the 'paperwork' that keeps the digital platform legal.",
         tags: ["Legal", "Compliance", "Remote Optional"]
     },
     {
@@ -91,7 +91,7 @@ export default function CareersPage() {
                             <span className="text-blue-500">Digital Healthcare</span>
                         </h1>
                         <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                            Apex Care is more than just a platform; it&apos;s a movement to make healthcare accessible,
+                            Pillora is more than just a platform; it&apos;s a movement to make healthcare accessible,
                             transparent, and fast for everyone.
                         </p>
                     </motion.div>

@@ -32,7 +32,31 @@ export default function HealthHubSection() {
         fetchTips();
     }, []);
 
-    if (!loading && tips.length === 0) return null; // Don't show section if no tips
+    const defaultTips: HealthTip[] = [
+        {
+            _id: 'default-1',
+            title: '10 Essential Tips for a Healthy Heart',
+            description: 'Discover simple daily habits that can significantly improve your cardiovascular health and boost your energy levels.',
+            date: new Date().toISOString(),
+            imageUrl: 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=60'
+        },
+        {
+            _id: 'default-2',
+            title: 'Understanding Your Blood Test Results',
+            description: 'A comprehensive guide to decoding your lab reports and knowing when it is time to consult your doctor.',
+            date: new Date(Date.now() - 86400000).toISOString(),
+            imageUrl: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&auto=format&fit=crop&q=60'
+        },
+        {
+            _id: 'default-3',
+            title: 'Mental Wellness in the Modern Age',
+            description: 'Practical strategies for managing stress, improving sleep, and maintaining mental clarity in a busy world.',
+            date: new Date(Date.now() - 172800000).toISOString(),
+            imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop&q=60'
+        }
+    ];
+
+    const displayTips = tips.length > 0 ? tips : defaultTips;
 
     return (
         <section className="py-16 bg-white">
@@ -59,7 +83,7 @@ export default function HealthHubSection() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {tips.map((tip) => (
+                        {displayTips.map((tip) => (
                             <Link
                                 href="/health-hub"
                                 key={tip._id}

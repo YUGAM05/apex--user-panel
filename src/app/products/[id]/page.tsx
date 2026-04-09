@@ -103,23 +103,14 @@ export default function ProductPage() {
                         </p>
 
                         <div className="flex gap-4 mb-8">
-                            <button
-                                onClick={() => {
-                                    addToCart({
-                                        productId: product._id,
-                                        name: product.name,
-                                        price: product.sellingPrice,
-                                        originalPrice: product.actualPrice,
-                                        image: product.images?.[0] || product.imageUrl || '',
-                                        category: product.category,
-                                        stock: product.stock
-                                    });
-                                }}
-                                disabled={product.stock <= 0}
-                                className="flex-1 bg-primary text-primary-foreground py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                <ShoppingCart className="w-5 h-5" /> {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
-                            </button>
+                            {product.stock <= 0 && (
+                                <button
+                                    disabled
+                                    className="flex-1 bg-gray-200 text-gray-500 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 cursor-not-allowed"
+                                >
+                                    Out of Stock
+                                </button>
+                            )}
                             {product.stock > 0 && (
                                 <button
                                     onClick={() => {
@@ -144,7 +135,7 @@ export default function ProductPage() {
                             </button>
                             <ShareButton
                                 title={product.name}
-                                text={`Check out ${product.name} on Apex Care!`}
+                                text={`Check out ${product.name} on Pillora!`}
                                 url={`/products/${product._id}`}
                                 className="p-4 bg-gray-100 text-gray-600 rounded-xl hover:bg-gray-200 transition"
                             />

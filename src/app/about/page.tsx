@@ -69,7 +69,7 @@ export default function AboutPage() {
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Digital Healthcare</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-600 leading-relaxed mb-12 max-w-3xl mx-auto font-medium">
-                            Apex Care is not just a pharmacy; it&apos;s a fully integrated HealthTech ecosystem designed to provide seamless access to critical medical resources.
+                            Pillora is not just a pharmacy; it&apos;s a fully integrated HealthTech ecosystem designed to provide seamless access to critical medical resources.
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4">
@@ -111,7 +111,7 @@ export default function AboutPage() {
                                     Is Critical.
                                 </h2>
                                 <p className="text-xl text-slate-600 leading-relaxed italic font-medium">
-                                    &quot;In healthcare, a five-minute delay or misinformation can change everything. We built Apex Care to ensure that access to life-saving data is as fast as the blink of an eye.&quot;
+                                    &quot;In healthcare, a five-minute delay or misinformation can change everything. We built Pillora to ensure that access to life-saving data is as fast as the blink of an eye.&quot;
                                 </p>
                                 <div className="mt-8 flex items-center gap-4">
                                     <div className="h-0.5 w-12 bg-blue-600 rounded-full" />
@@ -260,7 +260,7 @@ export default function AboutPage() {
                                     <span className="text-blue-500">Future of Care</span>
                                 </h2>
                                 <p className="text-xl text-slate-400 leading-relaxed max-w-2xl font-light">
-                                    Apex Care is the culmination of a vision to digitize the foundational layers of healthcare.
+                                    Pillora is the culmination of a vision to digitize the foundational layers of healthcare.
                                     Led by Shah Yugam, a software engineer with deep roots in HealthTech systems, the project represents a merger of code and medical protocol.
                                 </p>
                             </div>

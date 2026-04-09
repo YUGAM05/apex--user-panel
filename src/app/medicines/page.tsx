@@ -242,7 +242,7 @@ function ProductCard({ product }: { product: Product }) {
                     )}
                     <ShareButton
                         title={product.name}
-                        text={`Check out ${product.name} on Apex Care!`}
+                        text={`Check out ${product.name} on Pillora!`}
                         url={`/products/${product._id}`}
                     />
                 </div>
@@ -296,23 +296,7 @@ function ProductCard({ product }: { product: Product }) {
                             )}
                         </div>
                         <div className="flex gap-2">
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    addToCart({
-                                        productId: product._id,
-                                        name: product.name,
-                                        price: product.sellingPrice,
-                                        originalPrice: product.actualPrice,
-                                        image: product.images?.[0] || product.imageUrl || '',
-                                        category: product.category,
-                                        stock: product.stock,
-                                    });
-                                }}
-                                className="flex-1 p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center gap-2 text-sm font-medium"
-                            >
-                                <ShoppingCart className="w-4 h-4" /> Add
-                            </button>
+                            {/* Add to Cart button removed */}
                             <button
                                 onClick={(e) => {
                                     e.preventDefault();

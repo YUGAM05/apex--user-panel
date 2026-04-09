@@ -49,7 +49,7 @@ export default function ReturnPolicyPage() {
                             Customer Protection
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-                            Apex Care <span className="text-blue-600">Return & Refund</span> Policy
+                            Pillora <span className="text-blue-600">Return & Refund</span> Policy
                         </h1>
                         <p className="text-xl text-gray-600 leading-relaxed font-medium">
                             Transparent guidelines to ensure your medical safety and satisfaction with every order.
@@ -77,7 +77,7 @@ export default function ReturnPolicyPage() {
                                 <div>
                                     <h2 className="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">1. The &quot;Safety First&quot; Rule</h2>
                                     <p className="text-gray-500 text-lg font-medium mb-8 leading-relaxed">
-                                        To maintain the highest medical standards, Apex Care only accepts returns for items that are:
+                                        To maintain the highest medical standards, Pillora only accepts returns for items that are:
                                     </p>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         {[

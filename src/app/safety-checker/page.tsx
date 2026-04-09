@@ -515,7 +515,7 @@ function SafetyReport({ data }: { data: any }) {
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(22);
             doc.setFont('helvetica', 'bold');
-            doc.text('APEX CARE', margin, 20);
+            doc.text('PILLORA', margin, 20);
 
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
@@ -681,7 +681,7 @@ function SafetyReport({ data }: { data: any }) {
             doc.text(discLines, pageWidth / 2, pageHeight - 25, { align: 'center' });
 
             doc.setTextColor(41, 128, 185);
-            doc.text('Apex Care Healthcare Systems • Digital Health Division', pageWidth / 2, pageHeight - 10, { align: 'center' });
+            doc.text('Pillora Healthcare Systems • Digital Health Division', pageWidth / 2, pageHeight - 10, { align: 'center' });
 
             const safeName = data.medicineName ? data.medicineName.replace(/[^a-z0-9]/gi, '_') : 'Report';
             doc.save(`${safeName}_Safety_Report.pdf`);

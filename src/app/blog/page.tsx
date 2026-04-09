@@ -109,7 +109,7 @@ export default function BlogPage() {
                             Knowledge is Power
                         </div>
                         <h1 className="text-4xl md:text-7xl font-black text-gray-900 mb-8 leading-[0.9] tracking-tighter">
-                            Apex Care <span className="text-blue-600">Insights.</span>
+                            Pillora <span className="text-blue-600">Insights.</span>
                         </h1>
                         <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">
                             Your guide to modern healthcare in 2026. From life-saving blood bank tips to the latest AI innovations in pharmaceutical tech.

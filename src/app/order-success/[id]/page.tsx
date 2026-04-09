@@ -104,8 +104,8 @@ export default function OrderSuccessPage() {
                     <div className="flex justify-between items-start border-b border-gray-100 pb-8 mb-8">
                         <div>
                             <div className="flex items-center gap-2 mb-2">
-                                <img src="/apex-care-logo.png" alt="Apex Care" className="w-10 h-10 object-contain" />
-                                <span className="text-2xl font-bold text-gray-900">Apex Care</span>
+                                <img src="/pillora-logo.png" alt="Pillora" className="w-10 h-10 object-contain" />
+                                <span className="text-2xl font-bold text-gray-900">Pillora</span>
                             </div>
                             <p className="text-gray-500 text-sm">Shri Mahavir Jain Vidhvalay, Paldi Cross Road</p>
                             <p className="text-gray-500 text-sm">Paldi, Ahmedabad, Gujarat, India</p>

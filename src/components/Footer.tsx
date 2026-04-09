@@ -12,14 +12,14 @@ export default function Footer() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2">
                             <Image
-                                src="/apex-care-logo.png"
-                                alt="Apex Care"
+                                src="/pillora-logo.png"
+                                alt="Pillora"
                                 width={32}
                                 height={32}
                                 className="w-8 h-8 object-contain"
                                 unoptimized
                             />
-                            <span className="font-bold text-xl text-gray-900">Apex Care</span>
+                            <span className="font-bold text-xl text-gray-900">Pillora</span>
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed">
                             Your trusted online pharmacy partner. We deliver genuine medicines, healthcare devices, and wellness products right to your doorstep.
@@ -46,8 +46,6 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold text-gray-900 mb-4">Services</h3>
                         <ul className="space-y-3 text-sm text-gray-500">
-                            <li><Link href="/medicines" className="hover:text-blue-600 transition-colors">Medicines</Link></li>
-                            <li><Link href="/lab-tests" className="hover:text-blue-600 transition-colors">Lab test page</Link></li>
                             <li><Link href="/my-prescriptions" className="hover:text-blue-600 transition-colors">My Prescription</Link></li>
                             <li><Link href="/blood-bank" className="hover:text-blue-600 transition-colors">Blood Bank</Link></li>
                             <li><Link href="/hospitals" className="hover:text-blue-600 transition-colors">Hospitals</Link></li>
@@ -70,7 +68,7 @@ export default function Footer() {
 
                 <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-xs text-gray-400">
-                        &copy; {new Date().getFullYear()} Apex Care Inc. All rights reserved.
+                        &copy; {new Date().getFullYear()} Pillora Inc. All rights reserved.
                     </p>
                     <div className="flex items-center gap-2">
                         <span className="w-8 h-5 bg-gray-100 rounded border border-gray-200" />

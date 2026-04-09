@@ -58,7 +58,7 @@ export default function LoginPage() {
             >
                 <div className="text-center mb-8">
                     <div className="flex justify-center mb-4">
-                        <img src="/apex-care-logo.png" alt="Apex Care" className="w-20 h-20 object-contain" />
+                        <img src="/pillora-logo.png" alt="Pillora" className="w-20 h-20 object-contain" />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800">
                         Welcome Back
@@ -151,7 +151,7 @@ export default function LoginPage() {
 
                 <div className="mt-8 text-center border-t border-gray-100 pt-6">
                     <p className="text-gray-500 text-sm">
-                        New to Apex Care?{" "}
+                        New to Pillora?{" "}
                         <Link href="/register" className="text-primary font-bold hover:underline transition-all">
                             Create Account
                         </Link>

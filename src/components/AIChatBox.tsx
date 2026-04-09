@@ -46,12 +46,12 @@ export default function AIChatBox() {
                     webhookUrl,
                     showWelcomeScreen: true,
                     initialMessages: [
-                        'Hello! I\'m your Apex Care AI assistant. 👋',
+                        'Hello! I\'m your Pillora AI assistant. 👋',
                         'How can I help you with your healthcare needs today?'
                     ],
                     i18n: {
                         en: {
-                            title: 'Apex Care AI',
+                            title: 'Pillora AI',
                             subtitle: 'Expert Health & Platform Support',
                             footer: 'Secure • Professional • Instant',
                             getStarted: 'Start Consultation',

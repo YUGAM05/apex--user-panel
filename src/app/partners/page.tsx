@@ -75,7 +75,7 @@ export default function PartnersPage() {
                         {...fadeIn}
                         className="inline-block px-4 py-1.5 mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 border border-blue-600/20 rounded-full bg-blue-50"
                     >
-                        Partner with Apex Care
+                        Partner with Pillora
                     </motion.span>
                     <motion.h1
                         {...fadeIn}
@@ -90,7 +90,7 @@ export default function PartnersPage() {
                         transition={{ delay: 0.2 }}
                         className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-3xl mx-auto"
                     >
-                        At Apex Care, we are on a mission to make healthcare accessible, transparent, and immediate. We don’t work alone—we build through collaboration.
+                        At Pillora, we are on a mission to make healthcare accessible, transparent, and immediate. We don’t work alone—we build through collaboration.
                     </motion.p>
                 </div>
             </section>
@@ -99,7 +99,7 @@ export default function PartnersPage() {
             <section className="py-20 px-6 border-y border-slate-100">
                 <div className="max-w-4xl mx-auto text-center">
                     <p className="text-xl md:text-2xl font-bold text-slate-800 italic leading-relaxed">
-                        &quot;Whether you are a local pharmacy, a multi-specialty hospital, or a corporate wellness provider, partnering with Apex Care means joining a tech-driven movement that prioritizes patient lives.&quot;
+                        &quot;Whether you are a local pharmacy, a multi-specialty hospital, or a corporate wellness provider, partnering with Pillora means joining a tech-driven movement that prioritizes patient lives.&quot;
                     </p>
                 </div>
             </section>

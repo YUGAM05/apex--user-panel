@@ -64,7 +64,7 @@ export default function HelpCenterPage() {
                         {...fadeIn}
                         className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 md:mb-8 tracking-tighter"
                     >
-                        The Apex Care <br className="hidden sm:block" />
+                        The Pillora <br className="hidden sm:block" />
                         <span className="text-blue-500 italic">Health Centre</span>
                     </motion.h1>
                     <motion.p
@@ -92,7 +92,7 @@ export default function HelpCenterPage() {
                             <span className="text-blue-600 underline decoration-blue-200 underline-offset-8">your primary point of contact.</span>
                         </h2>
                         <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed">
-                            The Apex Care Health Centre is a comprehensive digital wellness ecosystem designed to empower users with verified medical resources, emergency coordination, and proactive health management. Our platform serves as your primary point of contact for navigating the complexities of modern healthcare.
+                            The Pillora Health Centre is a comprehensive digital wellness ecosystem designed to empower users with verified medical resources, emergency coordination, and proactive health management. Our platform serves as your primary point of contact for navigating the complexities of modern healthcare.
                         </p>
 
                     </motion.div>

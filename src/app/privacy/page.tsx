@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4"
                     >
-                        Apex Care <span className="text-blue-600 italic">Privacy Policy</span>
+                        Pillora <span className="text-blue-600 italic">Privacy Policy</span>
                     </motion.h1>
                     <motion.p
                         {...fadeIn}
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
                             <h2 className="text-2xl font-black text-slate-900">Overview</h2>
                         </div>
                         <p className="text-slate-600 font-medium leading-relaxed">
-                            At Apex Care, we recognize the sensitivity of your health information. Our privacy framework is built to ensure that your medical journey remains confidential, secure, and under your control. We only process data that is essential for delivering clinical excellence and emergency support.
+                            At Pillora, we recognize the sensitivity of your health information. Our privacy framework is built to ensure that your medical journey remains confidential, secure, and under your control. We only process data that is essential for delivering clinical excellence and emergency support.
                         </p>
                     </motion.section>
 

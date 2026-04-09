@@ -128,7 +128,7 @@ export default function HealthTipDetailPage() {
 
                         <div className="mt-12 pt-8 border-t border-gray-100 flex items-center justify-between">
                             <div className="text-sm text-gray-400 font-medium">
-                                Published by Apex Care Medical Team
+                                Published by Pillora Medical Team
                             </div>
                             <button className="flex items-center gap-2 px-6 py-3 bg-blue-50 text-blue-600 rounded-xl font-bold hover:bg-blue-100 transition-colors">
                                 <Share2 className="w-4 h-4" />
