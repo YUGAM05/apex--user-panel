@@ -87,7 +87,7 @@ const slides = [
         icon: <User className="w-8 h-8 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "200+",
         sideSubText: "specialist doctors",
-        bgColor: "bg-slate-800", // Premium Dark / Navy
+        bgColor: "bg-blue-900", // Premium Deep Blue
         circleBg: "bg-white/20"
     },
     {
