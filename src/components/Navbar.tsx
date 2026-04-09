@@ -60,7 +60,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="bg-white shadow-sm sticky top-0 z-50">
+        <nav className="border-b border-gray-100 bg-white sticky top-0 z-50 transition-all duration-300">
             <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-4 xl:px-8">
                 <div className="flex items-center justify-between h-20 gap-2 lg:gap-1 xl:gap-8">
 
@@ -71,7 +71,7 @@ export default function Navbar() {
                             alt="Pillora"
                             width={72}
                             height={72}
-                            className="w-14 h-14 xl:w-16 xl:h-16 object-contain mix-blend-multiply drop-shadow-sm"
+                            className="w-14 h-14 xl:w-16 xl:h-16 object-contain object-right"
                             unoptimized
                         />
                         <Image
@@ -79,7 +79,7 @@ export default function Navbar() {
                             alt="Pillora text"
                             width={240}
                             height={80}
-                            className="block h-10 sm:h-12 xl:h-16 w-auto object-contain mix-blend-multiply drop-shadow-sm"
+                            className="block h-10 sm:h-12 xl:h-[3.5rem] w-auto object-contain object-left mt-0.5 xl:mt-1"
                             unoptimized
                         />
                     </Link>

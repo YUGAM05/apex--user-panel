@@ -58,7 +58,7 @@ export default function LoginPage() {
             >
                 <div className="text-center mb-8">
                     <div className="mb-8 flex justify-center">
-                        <img src="/pillora-logo-new.png" alt="Pillora" className="w-20 h-20 object-contain mix-blend-multiply" />
+                        <img src="/pillora-logo-new.png" alt="Pillora" className="w-20 h-20 object-contain" />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800">
                         Welcome Back

@@ -87,7 +87,7 @@ export default function RegisterPage() {
             >
                 <div className="text-center mb-8">
                     <div className="flex justify-center mb-6">
-                        <img src="/pillora-logo-new.png" alt="Pillora" className="w-20 h-20 object-contain mix-blend-multiply" />
+                        <img src="/pillora-logo-new.png" alt="Pillora" className="w-20 h-20 object-contain" />
                     </div>
                     <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-rose-500">
                         Create Account

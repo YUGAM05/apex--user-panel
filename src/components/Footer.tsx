@@ -16,7 +16,7 @@ export default function Footer() {
                                 alt="Pillora"
                                 width={32}
                                 height={32}
-                                className="w-8 h-8 object-contain mix-blend-multiply"
+                                className="w-8 h-8 object-contain"
                                 unoptimized
                             />
                             <Image
@@ -24,7 +24,7 @@ export default function Footer() {
                                 alt="Pillora"
                                 width={160}
                                 height={48}
-                                className="h-10 w-auto object-contain mix-blend-multiply"
+                                className="h-10 w-auto object-contain"
                                 unoptimized
                             />
                         </div>

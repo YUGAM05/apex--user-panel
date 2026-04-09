@@ -104,8 +104,8 @@ export default function OrderSuccessPage() {
                     <div className="flex justify-between items-start border-b border-gray-100 pb-8 mb-8">
                         <div>
                             <div className="flex items-center gap-2 mb-2">
-                                <img src="/pillora-logo-new.png" alt="Pillora" className="w-12 h-12 object-contain mix-blend-multiply" />
-                                <img src="/pillora-text.png" alt="Pillora" className="h-10 w-auto object-contain mix-blend-multiply" />
+                                <img src="/pillora-logo-new.png" alt="Pillora" className="w-12 h-12 object-contain" />
+                                <img src="/pillora-text.png" alt="Pillora" className="h-10 w-auto object-contain" />
                             </div>
                             <p className="text-gray-500 text-sm">Shri Mahavir Jain Vidhvalay, Paldi Cross Road</p>
                             <p className="text-gray-500 text-sm">Paldi, Ahmedabad, Gujarat, India</p>
