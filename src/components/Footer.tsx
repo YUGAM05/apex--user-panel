@@ -22,7 +22,7 @@ export default function Footer() {
                             <span className="font-bold text-xl text-gray-900">Pillora</span>
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed">
-                            We're a healthcare coordination platform focused on emergency blood services and hospital data.
+                            We&apos;re a healthcare coordination platform focused on emergency blood services and hospital data.
                         </p>
                         <div className="flex gap-4 pt-2">
                             <SocialIcon icon={<Facebook className="w-4 h-4" />} />
