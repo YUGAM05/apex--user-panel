@@ -56,9 +56,9 @@ export default function LoginPage() {
             localStorage.setItem("user", JSON.stringify(res.data));
 
             // Redirect based on role
-            if (res.data.role === 'admin') window.location.href = 'http://localhost:3001';
-            else if (res.data.role === 'seller') window.location.href = 'http://localhost:3003';
-            else if (res.data.role === 'delivery') window.location.href = 'http://localhost:3002';
+            if (res.data.role === 'admin') window.location.href = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
+            else if (res.data.role === 'seller') window.location.href = process.env.NEXT_PUBLIC_SELLER_URL || 'http://localhost:3003';
+            else if (res.data.role === 'delivery') window.location.href = process.env.NEXT_PUBLIC_DELIVERY_URL || 'http://localhost:3002';
             else router.push("/");
 
         } catch (err: any) {
