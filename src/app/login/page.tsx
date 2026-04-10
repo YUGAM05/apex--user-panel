@@ -55,10 +55,10 @@ export default function LoginPage() {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data));
 
-            // Redirect based on role
-            if (res.data.role === 'admin') window.location.href = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
-            else if (res.data.role === 'seller') window.location.href = process.env.NEXT_PUBLIC_SELLER_URL || 'http://localhost:3003';
-            else if (res.data.role === 'delivery') window.location.href = process.env.NEXT_PUBLIC_DELIVERY_URL || 'http://localhost:3002';
+            // Redirect based on role, falling back to homepage if Admin/Seller panels aren't deployed
+            if (res.data.role === 'admin' && process.env.NEXT_PUBLIC_ADMIN_URL) window.location.href = process.env.NEXT_PUBLIC_ADMIN_URL;
+            else if (res.data.role === 'seller' && process.env.NEXT_PUBLIC_SELLER_URL) window.location.href = process.env.NEXT_PUBLIC_SELLER_URL;
+            else if (res.data.role === 'delivery' && process.env.NEXT_PUBLIC_DELIVERY_URL) window.location.href = process.env.NEXT_PUBLIC_DELIVERY_URL;
             else router.push("/");
 
         } catch (err: any) {
