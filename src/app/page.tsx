@@ -28,9 +28,45 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* 3. Health Hub */}
+            {/* 3. Health Tips */}
+            <HealthTipsSection />
+
+            {/* 4. Health Hub */}
             <HealthHubSection />
         </main>
+    );
+}
+
+function HealthTipsSection() {
+    return (
+        <section className="max-w-7xl mx-auto px-6 pb-16">
+            <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Health Tips of the Day</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col md:flex-row group transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div className="w-full md:w-2/5 h-48 md:h-auto relative overflow-hidden">
+                        <img src="/tip1.png" alt="Stay Hydrated" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    </div>
+                    <div className="p-6 md:p-8 flex flex-col justify-center flex-1">
+                        <div className="bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full self-start mb-4">Wellness</div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Hydration is Key</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">Starting your day with a glass of warm water helps kickstart your metabolism and flushes out toxins from your body.</p>
+                    </div>
+                </div>
+
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col md:flex-row group transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div className="w-full md:w-2/5 h-48 md:h-auto relative overflow-hidden">
+                        <img src="/tip2.png" alt="Balanced Diet" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    </div>
+                    <div className="p-6 md:p-8 flex flex-col justify-center flex-1">
+                        <div className="bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full self-start mb-4">Nutrition</div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Eat the Rainbow</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">Incorporate a variety of colorful fruits and vegetables into your meals to ensure you get a wide spectrum of essential vitamins.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 }
 

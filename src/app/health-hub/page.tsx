@@ -49,51 +49,80 @@ export default function HealthHubPage() {
                     </p>
                 </div>
 
-                {tips.length === 0 ? (
-                    <div className="text-center py-12 bg-white rounded-2xl shadow-sm border border-gray-100">
-                        <p className="text-gray-500 text-lg">No health updates available at the moment.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Featured Static Health Tips */}
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col h-full cursor-pointer hover:border-blue-200">
+                        <div className="relative h-48 w-full bg-gray-100">
+                            <img src="/tip1.png" alt="Hydration is Key" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="p-6 flex flex-col flex-1">
+                            <div className="flex items-center gap-2 text-sm text-blue-600 font-medium mb-3">
+                                <Calendar className="w-4 h-4" /> Today
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">Hydration is Key</h3>
+                            <p className="text-gray-600 line-clamp-3 mb-4 flex-1">
+                                Starting your day with a glass of warm water helps kickstart your metabolism and flushes out toxins from your body.
+                            </p>
+                            <div className="mt-auto pt-4 border-t border-gray-50 flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
+                                Read Full Article &rarr;
+                            </div>
+                        </div>
                     </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {tips.map((tip) => (
-                            <Link href={`/health-hub/${tip._id}`} key={tip._id} className="block h-full">
-                                <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col h-full cursor-pointer hover:border-blue-200">
-                                    {tip.imageUrl && (
-                                        <div className="relative h-48 w-full bg-gray-100">
-                                            <img
-                                                src={tip.imageUrl}
-                                                alt={tip.title}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                    )}
-                                    <div className="p-6 flex flex-col flex-1">
-                                        <div className="flex items-center gap-2 text-sm text-blue-600 font-medium mb-3">
-                                            <Calendar className="w-4 h-4" />
-                                            {new Date(tip.date).toLocaleDateString(undefined, {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric'
-                                            })}
-                                        </div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                                            {tip.title}
-                                        </h3>
-                                        <p className="text-gray-600 line-clamp-3 mb-4 flex-1">
-                                            {tip.description}
-                                        </p>
-                                        <div className="mt-auto pt-4 border-t border-gray-50 flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
-                                            Read Full Article
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
+
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col h-full cursor-pointer hover:border-blue-200">
+                        <div className="relative h-48 w-full bg-gray-100">
+                            <img src="/tip2.png" alt="Eat the Rainbow" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="p-6 flex flex-col flex-1">
+                            <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium mb-3">
+                                <Calendar className="w-4 h-4" /> Yesterday
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">Eat the Rainbow</h3>
+                            <p className="text-gray-600 line-clamp-3 mb-4 flex-1">
+                                Incorporate a variety of colorful fruits and vegetables into your meals to ensure you get a wide spectrum of essential vitamins.
+                            </p>
+                            <div className="mt-auto pt-4 border-t border-gray-50 flex items-center text-emerald-600 font-semibold group-hover:text-emerald-700">
+                                Read Full Article &rarr;
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Dynamic Tips from DB */}
+                    {tips.map((tip) => (
+                        <Link href={`/health-hub/${tip._id}`} key={tip._id} className="block h-full">
+                            <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col h-full cursor-pointer hover:border-blue-200">
+                                {tip.imageUrl && (
+                                    <div className="relative h-48 w-full bg-gray-100">
+                                        <img
+                                            src={tip.imageUrl}
+                                            alt={tip.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                )}
+                                <div className="p-6 flex flex-col flex-1">
+                                    <div className="flex items-center gap-2 text-sm text-blue-600 font-medium mb-3">
+                                        <Calendar className="w-4 h-4" />
+                                        {new Date(tip.date).toLocaleDateString(undefined, {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                                        {tip.title}
+                                    </h3>
+                                    <p className="text-gray-600 line-clamp-3 mb-4 flex-1">
+                                        {tip.description}
+                                    </p>
+                                    <div className="mt-auto pt-4 border-t border-gray-50 flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
+                                        Read Full Article &rarr;
                                     </div>
                                 </div>
-                            </Link>
-                        ))}
-                    </div>
-                )}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
             </div>
         </div>
     );
