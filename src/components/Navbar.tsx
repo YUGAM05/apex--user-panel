@@ -125,14 +125,7 @@ export default function Navbar() {
                                                 <p className="text-xs text-gray-400 truncate">{user.email}</p>
                                             </div>
 
-                                            <Link href="/my-orders" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><rect x="6" y="2" width="12" height="20" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="22"></line><line x1="8" y1="2" x2="8" y2="22"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg>
-                                                My Orders
-                                            </Link>
-                                            <Link href="/my-prescriptions" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M16 13H8" /><path d="M16 17H8" /><path d="M10 9H8" /></svg>
-                                                My Prescriptions
-                                            </Link>
+
                                             <Link href="/my-blood-requests" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
                                                 My Blood Requests
@@ -206,14 +199,7 @@ export default function Navbar() {
                                         </div>
                                     </div>
                                     <div className="px-2">
-                                        <Link href="/my-orders" onClick={() => setIsOpen(false)} className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl text-sm font-medium transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="6" y="2" width="12" height="20" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="22"></line><line x1="8" y1="2" x2="8" y2="22"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg>
-                                            My Orders
-                                        </Link>
-                                        <Link href="/my-prescriptions" onClick={() => setIsOpen(false)} className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl text-sm font-medium transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M16 13H8" /><path d="M16 17H8" /><path d="M10 9H8" /></svg>
-                                            My Prescriptions
-                                        </Link>
+
                                         <Link href="/my-blood-requests" onClick={() => setIsOpen(false)} className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl text-sm font-medium transition-colors">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
                                             My Blood Requests
