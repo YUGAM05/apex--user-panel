@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { CheckCircle, ShieldCheck, Upload, FileHeart, MapPin, Activity, UserCheck, CreditCard, Landmark, Stethoscope, Briefcase, User, Heart } from "lucide-react";
+import { CheckCircle, ShieldCheck, Upload, FileHeart, MapPin, Activity, UserCheck, CreditCard, Landmark, Stethoscope, Briefcase, User, Heart, Bell } from "lucide-react";
 import HealthHubSection from "@/components/HealthHubSection";
 
 interface FeatureItemProps {
@@ -94,7 +94,7 @@ const slides = [
         subtext: "Enter your blood group and area — we match you with a verified donor nearby in minutes.",
         buttonText: "Request blood now",
         buttonLink: "/blood-bank?tab=request",
-        icon: <MapPin className="w-8 h-8 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
+        icon: <Bell className="w-8 h-8 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
         sideText: "2 min",
         sideSubText: "avg. notification time",
         bgColor: "bg-blue-600", // Classic Pillora Blue
