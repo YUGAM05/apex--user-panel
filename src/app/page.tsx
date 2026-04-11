@@ -95,8 +95,8 @@ const slides = [
         buttonText: "Request blood now",
         buttonLink: "/blood-bank?tab=request",
         icon: <MapPin className="w-8 h-8 md:w-16 md:h-16 text-white" strokeWidth={1.5} />,
-        sideText: "15 min",
-        sideSubText: "avg. match time",
+        sideText: "2 min",
+        sideSubText: "avg. notification time",
         bgColor: "bg-blue-600", // Classic Pillora Blue
         circleBg: "bg-white/20"
     },
