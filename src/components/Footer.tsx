@@ -14,17 +14,17 @@ export default function Footer() {
                             <Image
                                 src="/pillora-logo-new.png"
                                 alt="Pillora"
-                                width={32}
-                                height={32}
-                                className="w-8 h-8 object-contain"
+                                width={72}
+                                height={72}
+                                className="w-14 h-14 xl:w-16 xl:h-16 object-contain object-right"
                                 unoptimized
                             />
                             <Image
                                 src="/pillora-text.png"
                                 alt="Pillora"
-                                width={160}
-                                height={48}
-                                className="h-10 w-auto object-contain"
+                                width={240}
+                                height={80}
+                                className="block h-10 sm:h-12 xl:h-[3.5rem] w-auto object-contain object-left mt-0.5 xl:mt-1"
                                 unoptimized
                             />
                         </div>
