@@ -431,11 +431,11 @@ function DonateForm() {
                             </svg>
                         </div>
                         {/* Logo top-left — real brand images */}
-                        <div style={{ position:'absolute', top:'18px', left:'24px', display:'flex', alignItems:'center', gap:'8px', zIndex:10 }}>
+                        <div style={{ position:'absolute', top:'14px', left:'24px', display:'flex', alignItems:'center', gap:'10px', zIndex:10 }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'64px', height:'64px', objectFit:'contain' }} crossOrigin="anonymous" />
+                            <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'80px', height:'80px', objectFit:'contain', flexShrink:0 }} crossOrigin="anonymous" />
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/pillora-text.png" alt="Pillora" style={{ height:'44px', width:'auto', objectFit:'contain', objectPosition:'left' }} crossOrigin="anonymous" />
+                            <img src="/pillora-text.png" alt="Pillora" style={{ height:'56px', width:'auto', objectFit:'contain', objectPosition:'left center', display:'block' }} crossOrigin="anonymous" />
                         </div>
                         {/* Certificate heading */}
                         <div style={{ position:'absolute', top:'110px', left:0, right:0, textAlign:'center', zIndex:10 }}>
