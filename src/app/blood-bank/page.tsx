@@ -321,15 +321,16 @@ function BloodBankInfoSidebar() {
         </div>
     );
 }
-
 function DonateForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [registrationDate, setRegistrationDate] = useState('');
     const [formData, setFormData] = useState({
         name: '', age: '', gender: 'Male', bloodGroup: 'A+',
         phone: '', city: '', area: '', address: ''
     });
+    const certRef = React.useRef<HTMLDivElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -353,6 +354,12 @@ function DonateForm() {
                 location: [0, 0] // Placeholder location
             });
             console.log('Registration successful:', response.data);
+            // Format date: "April, 11th 2026"
+            const now = new Date();
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const day = now.getDate();
+            const suffix = day === 1 || day === 21 || day === 31 ? 'st' : day === 2 || day === 22 ? 'nd' : day === 3 || day === 23 ? 'rd' : 'th';
+            setRegistrationDate(`${months[now.getMonth()]}, ${day}${suffix} ${now.getFullYear()}`);
             setSuccess(true);
         } catch (error: any) {
             console.error('Registration error:', error);
@@ -364,24 +371,148 @@ function DonateForm() {
         }
     };
 
+    const handleDownload = async () => {
+        if (!certRef.current) return;
+        try {
+            const { default: html2canvas } = await import('html2canvas');
+            const { default: jsPDF } = await import('jspdf');
+            const canvas = await html2canvas(certRef.current, { scale: 3, useCORS: true, backgroundColor: '#ffffff' });
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 3, canvas.height / 3] });
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
+            pdf.save(`Pillora_Donor_Certificate_${formData.name.replace(/\s+/g, '_')}.pdf`);
+        } catch (err) {
+            console.error('PDF generation failed:', err);
+            alert('Failed to generate PDF. Please try again.');
+        }
+    };
+
     if (success) {
         return (
-            <div className="text-center py-12">
-                <motion.div
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6"
-                >
-                    <CheckCircle className="w-12 h-12" />
-                </motion.div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">You&apos;re a Hero!</h2>
-                <p className="text-gray-600 max-w-md mx-auto mb-8">
-                    Your registration helps us contact you when someone nearby needs help. Thank you for your kindness.
-                </p>
-                <button onClick={() => window.location.reload()} className="text-red-600 font-bold hover:bg-red-50 px-6 py-2 rounded-lg transition-colors">
-                    Register another donor
-                </button>
-            </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center gap-6">
+                {/* Success Banner */}
+                <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-2xl px-6 py-4 w-full">
+                    <CheckCircle className="w-7 h-7 text-green-600 shrink-0" />
+                    <div>
+                        <p className="font-bold text-green-900">You&apos;re registered as a Donor!</p>
+                        <p className="text-xs text-green-700">Your certificate is ready. Download it below.</p>
+                    </div>
+                </div>
+
+                {/* Certificate preview wrapper — scaled for display, full-size for capture */}
+                <div className="w-full overflow-hidden flex justify-center" style={{ height: '390px' }}>
+                    <div
+                        ref={certRef}
+                        style={{
+                            width: '860px', height: '600px',
+                            background: '#ffffff', position: 'relative', overflow: 'hidden',
+                            fontFamily: 'Georgia, serif',
+                            boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
+                            flexShrink: 0, transformOrigin: 'top center',
+                            transform: 'scale(0.62)',
+                        }}
+                    >
+                        {/* Top-right red diagonals */}
+                        <div style={{ position:'absolute', top:0, right:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
+                            <div style={{ position:'absolute', top:'-10px', right:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
+                            <div style={{ position:'absolute', top:'-10px', right:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
+                            <div style={{ position:'absolute', top:'-10px', right:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
+                        </div>
+                        {/* Bottom-left red diagonals */}
+                        <div style={{ position:'absolute', bottom:0, left:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
+                            <div style={{ position:'absolute', bottom:'-10px', left:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
+                            <div style={{ position:'absolute', bottom:'-10px', left:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
+                            <div style={{ position:'absolute', bottom:'-10px', left:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
+                        </div>
+                        {/* Blood drop watermark */}
+                        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
+                            <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
+                                <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
+                            </svg>
+                        </div>
+                        {/* Logo top-left */}
+                        <div style={{ position:'absolute', top:'22px', left:'30px', display:'flex', alignItems:'center', gap:'10px', zIndex:10 }}>
+                            <div style={{ width:'52px', height:'52px', borderRadius:'50%', border:'3px solid #1a6fc4', display:'flex', alignItems:'center', justifyContent:'center', background:'#fff' }}>
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="#1a6fc4" strokeWidth="2"/>
+                                    <rect x="10.5" y="6" width="3" height="12" rx="1" fill="#e74c3c"/>
+                                    <rect x="6" y="10.5" width="12" height="3" rx="1" fill="#e74c3c"/>
+                                    <circle cx="17" cy="17" r="4" fill="#1a6fc4"/>
+                                    <circle cx="17" cy="17" r="2.5" fill="#fff"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style={{ fontFamily:'Arial Black,sans-serif', fontWeight:900, fontSize:'22px', color:'#1a6fc4', letterSpacing:'2px', lineHeight:'1' }}>PILLORA</div>
+                                <div style={{ fontFamily:'Arial,sans-serif', fontSize:'9px', color:'#333', marginTop:'2px', fontStyle:'italic' }}>Your Health, Delivered Fast</div>
+                            </div>
+                        </div>
+                        {/* Certificate heading */}
+                        <div style={{ position:'absolute', top:'110px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'52px', color:'#111', letterSpacing:'6px', textTransform:'uppercase', lineHeight:'1' }}>CERTIFICATE</div>
+                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'13px', color:'#444', letterSpacing:'5px', marginTop:'6px', textTransform:'uppercase' }}>Of Blood Donor Registration</div>
+                        </div>
+                        {/* Presented to */}
+                        <div style={{ position:'absolute', top:'225px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontSize:'18px', color:'#c0392b', fontStyle:'italic' }}>This Certificate is Presented to</div>
+                        </div>
+                        {/* Donor name */}
+                        <div style={{ position:'absolute', top:'256px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'40px', color:'#c0392b', lineHeight:'1.1' }}>{formData.name}</div>
+                            <div style={{ width:'200px', height:'2px', background:'#555', margin:'8px auto 0' }} />
+                        </div>
+                        {/* Sub text */}
+                        <div style={{ position:'absolute', top:'348px', left:'120px', right:'120px', textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontSize:'14px', color:'#333', lineHeight:'1.7' }}>
+                                for registering as a blood donor and showing commitment to saving lives.<br/>
+                                Thank you — We really appreciate your actions.
+                            </div>
+                        </div>
+                        {/* Gold seal + ribbon */}
+                        <div style={{ position:'absolute', bottom:'48px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
+                            <svg width="72" height="80" viewBox="0 0 72 80">
+                                <circle cx="36" cy="32" r="28" fill="#D4AF37"/>
+                                <circle cx="36" cy="32" r="22" fill="#F5D76E"/>
+                                <circle cx="36" cy="32" r="16" fill="#D4AF37"/>
+                                <polygon points="20,56 28,48 36,68 28,76" fill="#c0392b"/>
+                                <polygon points="52,56 44,48 36,68 44,76" fill="#c0392b"/>
+                                <polygon points="20,56 28,48 28,76 20,76" fill="#922b21"/>
+                                <polygon points="52,56 44,48 44,76 52,76" fill="#922b21"/>
+                            </svg>
+                        </div>
+                        {/* Date bottom-left */}
+                        <div style={{ position:'absolute', bottom:'54px', left:'58px', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontSize:'13px', color:'#222' }}>{registrationDate}</div>
+                            <div style={{ width:'140px', height:'1px', background:'#555', marginTop:'4px' }} />
+                        </div>
+                        {/* Signature bottom-right */}
+                        <div style={{ position:'absolute', bottom:'38px', right:'68px', zIndex:10, textAlign:'center' }}>
+                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#333', marginBottom:'2px' }}>Founder &amp; CEO of Pillora</div>
+                            <svg width="100" height="36" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
+                                <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.2" strokeLinecap="round"/>
+                            </svg>
+                            <div style={{ width:'140px', height:'1px', background:'#555', margin:'0 auto 4px' }} />
+                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#222' }}>Shah Yugam V</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm">
+                    <button
+                        onClick={handleDownload}
+                        className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 w-full"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download Certificate
+                    </button>
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="flex-1 text-gray-600 font-semibold hover:bg-gray-100 py-3.5 px-6 rounded-xl transition-colors border border-gray-200 w-full"
+                    >
+                        Register Another
+                    </button>
+                </div>
+            </motion.div>
         );
     }
 
