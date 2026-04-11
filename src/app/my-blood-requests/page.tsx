@@ -50,13 +50,13 @@ export default function MyBloodRequestsPage() {
     return (
         <div className="min-h-screen bg-gray-50 pt-24 pb-12">
             <div className="max-w-4xl mx-auto px-4">
-                <div className="flex items-center gap-4 mb-8">
-                    <Link href="/" className="p-2 hover:bg-white rounded-full transition-colors">
-                        <ArrowLeft className="w-6 h-6 text-gray-600" />
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                    <Link href="/" className="p-2 hover:bg-white rounded-full transition-colors shrink-0">
+                        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
                     </Link>
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">My Blood Requests</h1>
-                        <p className="text-gray-500">History of blood requests you&apos;ve broadcasted</p>
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">My Blood Requests</h1>
+                        <p className="text-sm text-gray-500">History of blood requests you&apos;ve broadcasted</p>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@ export default function MyBloodRequestsPage() {
                                     </div>
                                 )}
 
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
                                     <div className="flex items-start gap-4">
                                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${request.isUrgent ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
                                             <Droplet className="w-7 h-7" />

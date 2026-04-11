@@ -40,16 +40,16 @@ export default function HealthHubPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Health Hub</h1>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-2xl sm:text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Health Hub</h1>
+                    <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
                         Stay informed with the latest medical news, health tips, and wellness advice from our experts.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                     {/* Featured Static Health Tips */}
                     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col h-full cursor-pointer hover:border-blue-200">
                         <div className="relative h-48 w-full bg-gray-100">

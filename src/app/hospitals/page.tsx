@@ -185,18 +185,18 @@ export default function HospitalsPage() {
         (h.phoneNumbers && h.phoneNumbers.length > 0 ? h.phoneNumbers : h.contactNumber ? [h.contactNumber] : []).filter(Boolean);
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Find Trusted Hospitals Near You</h1>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4">Find Trusted Hospitals Near You</h1>
+                    <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
                         Access detailed information about healthcare facilities, including emergency services, accepted schemes, and consultation costs.
                     </p>
                 </div>
 
                 {/* Search */}
-                <div className="max-w-xl mx-auto mb-16 relative" ref={searchRef}>
+                <div className="max-w-xl mx-auto mb-8 sm:mb-12 relative" ref={searchRef}>
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <Search className="h-5 w-5 text-gray-400" />
                     </div>

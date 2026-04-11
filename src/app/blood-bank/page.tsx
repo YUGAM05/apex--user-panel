@@ -399,19 +399,22 @@ function DonateForm() {
                     </div>
                 </div>
 
-                {/* Certificate preview wrapper — scaled for display, full-size for capture */}
-                <div className="w-full overflow-hidden flex justify-center" style={{ height: '390px' }}>
-                    <div
-                        ref={certRef}
-                        style={{
-                            width: '860px', height: '600px',
-                            background: '#ffffff', position: 'relative', overflow: 'hidden',
-                            fontFamily: 'Georgia, serif',
-                            boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
-                            flexShrink: 0, transformOrigin: 'top center',
-                            transform: 'scale(0.62)',
-                        }}
-                    >
+                {/* Certificate preview wrapper — responsive scale */}
+                <div className="w-full overflow-x-auto">
+                    <div className="flex justify-center">
+                        <div style={{ transform: 'scale(0.38)', transformOrigin: 'top center', width: '860px', marginBottom: '-372px' }}
+                            className="sm:[transform:scale(0.50)] sm:[margin-bottom:-300px] md:[transform:scale(0.60)] md:[margin-bottom:-240px] lg:[transform:scale(0.68)] lg:[margin-bottom:-192px]"
+                        >
+                        <div
+                            ref={certRef}
+                            style={{
+                                width: '860px', height: '600px',
+                                background: '#ffffff', position: 'relative', overflow: 'hidden',
+                                fontFamily: 'Georgia, serif',
+                                boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
+                                flexShrink: 0,
+                            }}
+                        >
                         {/* Top-right red diagonals */}
                         <div style={{ position:'absolute', top:0, right:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
                             <div style={{ position:'absolute', top:'-10px', right:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
@@ -483,6 +486,9 @@ function DonateForm() {
                             </svg>
                             <div style={{ width:'140px', height:'1px', background:'#555', margin:'0 auto 4px' }} />
                             <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#222' }}>Shah Yugam V</div>
+                        </div>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>

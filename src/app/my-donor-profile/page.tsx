@@ -48,13 +48,13 @@ export default function MyDonorProfilePage() {
         <div className="min-h-screen bg-gray-50 pt-24 pb-12">
             <div className="max-w-3xl mx-auto px-4">
                 {/* Header */}
-                <div className="flex items-center gap-4 mb-8">
-                    <Link href="/" className="p-2 hover:bg-white rounded-full transition-colors">
-                        <ArrowLeft className="w-6 h-6 text-gray-600" />
+                <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                    <Link href="/" className="p-2 hover:bg-white rounded-full transition-colors shrink-0">
+                        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
                     </Link>
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">Donor Profile</h1>
-                        <p className="text-gray-500">Your registration as a life-saver</p>
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Donor Profile</h1>
+                        <p className="text-sm text-gray-500">Your registration as a life-saver</p>
                     </div>
                 </div>
 
