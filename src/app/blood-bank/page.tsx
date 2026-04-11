@@ -430,21 +430,12 @@ function DonateForm() {
                                 <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
                             </svg>
                         </div>
-                        {/* Logo top-left */}
-                        <div style={{ position:'absolute', top:'22px', left:'30px', display:'flex', alignItems:'center', gap:'10px', zIndex:10 }}>
-                            <div style={{ width:'52px', height:'52px', borderRadius:'50%', border:'3px solid #1a6fc4', display:'flex', alignItems:'center', justifyContent:'center', background:'#fff' }}>
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                                    <circle cx="12" cy="12" r="10" stroke="#1a6fc4" strokeWidth="2"/>
-                                    <rect x="10.5" y="6" width="3" height="12" rx="1" fill="#e74c3c"/>
-                                    <rect x="6" y="10.5" width="12" height="3" rx="1" fill="#e74c3c"/>
-                                    <circle cx="17" cy="17" r="4" fill="#1a6fc4"/>
-                                    <circle cx="17" cy="17" r="2.5" fill="#fff"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div style={{ fontFamily:'Arial Black,sans-serif', fontWeight:900, fontSize:'22px', color:'#1a6fc4', letterSpacing:'2px', lineHeight:'1' }}>PILLORA</div>
-                                <div style={{ fontFamily:'Arial,sans-serif', fontSize:'9px', color:'#333', marginTop:'2px', fontStyle:'italic' }}>Your Health, Delivered Fast</div>
-                            </div>
+                        {/* Logo top-left — real brand images */}
+                        <div style={{ position:'absolute', top:'18px', left:'24px', display:'flex', alignItems:'center', gap:'8px', zIndex:10 }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'64px', height:'64px', objectFit:'contain' }} crossOrigin="anonymous" />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/pillora-text.png" alt="Pillora" style={{ height:'44px', width:'auto', objectFit:'contain', objectPosition:'left' }} crossOrigin="anonymous" />
                         </div>
                         {/* Certificate heading */}
                         <div style={{ position:'absolute', top:'110px', left:0, right:0, textAlign:'center', zIndex:10 }}>
