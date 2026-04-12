@@ -381,11 +381,7 @@ function CertificateView({
                             boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
                         }}
                     >
-                        {/* Top-right red diagonal pattern */}
-                        <div style={{ position:'absolute', top:0, right:0, width:'180px', height:'180px', pointerEvents:'none', zIndex:2 }}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/cert-corner-top-right.png" alt="Pattern" style={{ width:'100%', height:'100%', objectFit:'contain' }} crossOrigin="anonymous" />
-                        </div>
+                        {/* Clean Corner (Design Removed) */}
                         {/* Blood drop watermark */}
                         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
                             <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
