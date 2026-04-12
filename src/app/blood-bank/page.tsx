@@ -398,27 +398,45 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Certificate heading - Atomic Word Strategy for guaranteed gaps */}
+                        {/* Certificate heading - Flex-Gap Architecture */}
                         <div style={{ position:'absolute', top:'115px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.1' }}>
-                                <span style={{ display:'inline-block', marginRight:'15px' }}>CERTIFICATE</span>
+                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.1', display:'flex', justifyContent:'center' }}>
+                                <span>CERTIFICATE</span>
                             </div>
-                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#444', marginTop:'20px', textTransform:'uppercase', fontWeight:600 }}>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>Of</span>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>Blood</span>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>Donor</span>
-                                <span style={{ display:'inline-block' }}>Registration</span>
+                            <div style={{ 
+                                fontFamily:'Arial, Helvetica, sans-serif', 
+                                fontSize:'14px', 
+                                color:'#444', 
+                                marginTop:'20px', 
+                                textTransform:'uppercase', 
+                                fontWeight:600,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '8px'
+                            }}>
+                                <span>Of</span>
+                                <span>Blood</span>
+                                <span>Donor</span>
+                                <span>Registration</span>
                             </div>
                         </div>
 
-                        {/* Presented to - Atomic words */}
+                        {/* Presented to - Flex-Gap */}
                         <div style={{ position:'absolute', top:'235px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'22px', color:'#c0392b', fontStyle:'italic' }}>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>This</span>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>Certificate</span>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>is</span>
-                                <span style={{ display:'inline-block', marginRight:'6px' }}>Presented</span>
-                                <span style={{ display:'inline-block' }}>to</span>
+                            <div style={{ 
+                                fontFamily:'"Times New Roman", Times, serif', 
+                                fontSize:'22px', 
+                                color:'#c0392b', 
+                                fontStyle:'italic',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '6px'
+                            }}>
+                                <span>This</span>
+                                <span>Certificate</span>
+                                <span>is</span>
+                                <span>Presented</span>
+                                <span>to</span>
                             </div>
                         </div>
 
@@ -430,30 +448,51 @@ function CertificateView({
                                 paddingBottom: '5px',
                                 minWidth: '400px'
                             }}>
-                                <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'46px', color:'#c0392b', lineHeight:'1' }}>
+                                <div style={{ 
+                                    fontFamily:'"Times New Roman", Times, serif', 
+                                    fontWeight:900, 
+                                    fontSize:'46px', 
+                                    color:'#c0392b', 
+                                    lineHeight:'1',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    gap: '12px'
+                                }}>
                                     {name.split(' ').map((word, i) => (
-                                        <span key={i} style={{ display:'inline-block', marginRight: i === name.split(' ').length - 1 ? 0 : '12px' }}>
-                                            {word}
-                                        </span>
+                                        <span key={i}>{word}</span>
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        {/* Sub text - Atomic words */}
-                        <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
+                        {/* Sub text - Flex-Gap */}
+                        <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10, display:'flex', flexDirection:'column', gap:'8px', alignItems:'center' }}>
                             <div style={{ 
                                 fontFamily:'"Times New Roman", Times, serif', 
                                 fontSize:'16px', 
                                 color:'#333', 
-                                lineHeight:'1.8'
+                                lineHeight:'1.2',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '6px',
+                                flexWrap: 'wrap'
                             }}>
                                 {["for", "registering", "as", "a", "blood", "donor", "and", "showing", "commitment", "to", "saving", "lives."].map((word, i) => (
-                                    <span key={i} style={{ display:'inline-block', marginRight:'5px' }}>{word}</span>
+                                    <span key={i}>{word}</span>
                                 ))}
-                                <br/>
+                            </div>
+                            <div style={{ 
+                                fontFamily:'"Times New Roman", Times, serif', 
+                                fontSize:'16px', 
+                                color:'#333', 
+                                lineHeight:'1.2',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '6px',
+                                flexWrap: 'wrap'
+                            }}>
                                 {["Thank", "you", "—", "We", "really", "appreciate", "your", "actions."].map((word, i) => (
-                                    <span key={i} style={{ display:'inline-block', marginRight:'5px' }}>{word}</span>
+                                    <span key={i}>{word}</span>
                                 ))}
                             </div>
                         </div>
@@ -471,9 +510,15 @@ function CertificateView({
                                 paddingBottom: '3px',
                                 minWidth: '170px'
                             }}>
-                                <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'15px', color:'#222' }}>
+                                <div style={{ 
+                                    fontFamily:'"Times New Roman", Times, serif', 
+                                    fontSize:'15px', 
+                                    color:'#222',
+                                    display: 'flex',
+                                    gap: '5px'
+                                }}>
                                     {registrationDate.split(' ').map((word, i) => (
-                                        <span key={i} style={{ display:'inline-block', marginRight:'4px' }}>{word}</span>
+                                        <span key={i}>{word}</span>
                                     ))}
                                 </div>
                             </div>
@@ -481,21 +526,38 @@ function CertificateView({
 
                         {/* Signature bottom-right */}
                         <div style={{ position:'absolute', bottom:'40px', right:'75px', zIndex:10, textAlign:'center' }}>
-                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'13px', color:'#333', marginBottom:'4px', fontWeight:600 }}>
-                                <span style={{ display:'inline-block', marginRight:'4px' }}>Founder</span>
-                                <span style={{ display:'inline-block', marginRight:'4px' }}>&</span>
-                                <span style={{ display:'inline-block', marginRight:'4px' }}>CEO</span>
-                                <span style={{ display:'inline-block', marginRight:'4px' }}>of</span>
-                                <span style={{ display:'inline-block' }}>Pillora</span>
+                            <div style={{ 
+                                fontFamily:'Arial, Helvetica, sans-serif', 
+                                fontSize:'13px', 
+                                color:'#333', 
+                                marginBottom:'4px', 
+                                fontWeight:600,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '5px'
+                            }}>
+                                <span>Founder</span>
+                                <span>&</span>
+                                <span>CEO</span>
+                                <span>of</span>
+                                <span>Pillora</span>
                             </div>
                             <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
                                 <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
                             </svg>
                             <div style={{ width:'160px', height:'2px', background:'#555', margin:'2px auto 6px' }} />
-                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#222', fontWeight:700 }}>
-                                <span style={{ display:'inline-block', marginRight:'5px' }}>Shah</span>
-                                <span style={{ display:'inline-block', marginRight:'5px' }}>Yugam</span>
-                                <span style={{ display:'inline-block' }}>V</span>
+                            <div style={{ 
+                                fontFamily:'Arial, Helvetica, sans-serif', 
+                                fontSize:'14px', 
+                                color:'#222', 
+                                fontWeight:700,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '6px'
+                            }}>
+                                <span>Shah</span>
+                                <span>Yugam</span>
+                                <span>V</span>
                             </div>
                         </div>
                     </div>
@@ -573,15 +635,13 @@ function DonateForm() {
             const { default: html2canvas } = await import('html2canvas');
             const { default: jsPDF } = await import('jspdf');
             const canvas = await html2canvas(certRef.current, { 
-                scale: 3, 
+                scale: 2, 
                 useCORS: true, 
-                backgroundColor: '#ffffff',
-                // @ts-ignore - letterRendering helps with word-spacing issues in some environments
-                letterRendering: true 
+                backgroundColor: '#ffffff'
             });
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 3, canvas.height / 3] });
-            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
+            const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
             pdf.save(`Pillora_Donor_Certificate_${formData.name.replace(/\s+/g, '_')}.pdf`);
         } catch (err) {
             console.error('PDF generation failed:', err);
