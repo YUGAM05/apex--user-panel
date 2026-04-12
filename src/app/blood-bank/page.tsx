@@ -382,16 +382,9 @@ function CertificateView({
                             <p className="text-[10px] text-gray-600 font-semibold">{registrationDate}</p>
                             <div className="w-20 h-px bg-gray-400 mt-1" />
                         </div>
-                        {/* Gold seal */}
-                        <svg width="44" height="50" viewBox="0 0 72 80" className="-mb-1">
-                            <circle cx="36" cy="32" r="28" fill="#D4AF37"/>
-                            <circle cx="36" cy="32" r="22" fill="#F5D76E"/>
-                            <circle cx="36" cy="32" r="16" fill="#D4AF37"/>
-                            <polygon points="20,56 28,48 36,68 28,76" fill="#c0392b"/>
-                            <polygon points="52,56 44,48 36,68 44,76" fill="#c0392b"/>
-                            <polygon points="20,56 28,48 28,76 20,76" fill="#922b21"/>
-                            <polygon points="52,56 44,48 44,76 52,76" fill="#922b21"/>
-                        </svg>
+                        {/* Gold medal image */}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/gold-medal.png" alt="Award Medal" className="w-14 h-auto object-contain -mb-1" />
                         <div className="text-right">
                             <p className="text-[9px] text-gray-400 mb-1">Founder &amp; CEO of Pillora</p>
                             <svg width="60" height="22" viewBox="0 0 120 40" className="ml-auto">
@@ -468,16 +461,9 @@ function CertificateView({
                             Thank you — We really appreciate your actions.
                         </div>
                     </div>
-                    <div style={{ position:'absolute', bottom:'48px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
-                        <svg width="72" height="80" viewBox="0 0 72 80">
-                            <circle cx="36" cy="32" r="28" fill="#D4AF37"/>
-                            <circle cx="36" cy="32" r="22" fill="#F5D76E"/>
-                            <circle cx="36" cy="32" r="16" fill="#D4AF37"/>
-                            <polygon points="20,56 28,48 36,68 28,76" fill="#c0392b"/>
-                            <polygon points="52,56 44,48 36,68 44,76" fill="#c0392b"/>
-                            <polygon points="20,56 28,48 28,76 20,76" fill="#922b21"/>
-                            <polygon points="52,56 44,48 44,76 52,76" fill="#922b21"/>
-                        </svg>
+                    <div style={{ position:'absolute', bottom:'30px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/gold-medal.png" alt="Award Medal" style={{ width:'90px', height:'auto', objectFit:'contain', display:'block' }} crossOrigin="anonymous" />
                     </div>
                     <div style={{ position:'absolute', bottom:'54px', left:'58px', zIndex:10 }}>
                         <div style={{ fontFamily:'Georgia,serif', fontSize:'13px', color:'#222' }}>{registrationDate}</div>
