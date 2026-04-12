@@ -365,14 +365,12 @@ function CertificateView({
             </div>
 
             {/* ── Certificate Preview (Scales to fit screen) ── */}
-            <div ref={wrapperRef} className="w-full relative" style={{ height: `${visibleHeight}px`, overflow: 'hidden' }}>
+            <div ref={wrapperRef} className="w-full flex justify-center overflow-hidden" style={{ height: `${visibleHeight}px` }}>
                 <div style={{ 
                     transform: `scale(${scale})`, 
-                    transformOrigin: 'top left', 
+                    transformOrigin: 'top center', 
                     width: '860px',
-                    position: 'absolute',
-                    left: '50%',
-                    marginLeft: `-${(860 * scale) / 2 / scale}px` 
+                    flexShrink: 0
                 }}>
                     <div
                         ref={certRef}
@@ -381,7 +379,6 @@ function CertificateView({
                             background: '#ffffff', position: 'relative', overflow: 'hidden',
                             fontFamily: 'Georgia, serif',
                             boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
-                            flexShrink: 0
                         }}
                     >
                         {/* Top-right red diagonals */}
