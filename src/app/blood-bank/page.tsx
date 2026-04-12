@@ -400,31 +400,31 @@ function CertificateView({
 
                         {/* Certificate heading */}
                         <div style={{ position:'absolute', top:'115px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.2' }}>CERTIFICATE</div>
-                            <div style={{ fontFamily:'sans-serif', fontSize:'14px', color:'#444', marginTop:'8px', textTransform:'uppercase', fontWeight:600 }}>Of Blood Donor Registration</div>
+                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.2', wordSpacing:'10px', whiteSpace:'pre-wrap' }}>CERTIFICATE</div>
+                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#444', marginTop:'8px', textTransform:'uppercase', fontWeight:600, wordSpacing:'5px', whiteSpace:'pre-wrap' }}>Of Blood Donor Registration</div>
                         </div>
 
                         {/* Presented to */}
                         <div style={{ position:'absolute', top:'235px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'serif', fontSize:'20px', color:'#c0392b', fontStyle:'italic' }}>This Certificate is Presented to</div>
+                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'22px', color:'#c0392b', fontStyle:'italic', wordSpacing:'4px', whiteSpace:'pre-wrap' }}>This Certificate is Presented to</div>
                         </div>
 
                         {/* Donor name with underline */}
                         <div style={{ position:'absolute', top:'275px', left:0, right:0, textAlign:'center', zIndex:10 }}>
                             <div style={{ 
                                 display: 'inline-block',
-                                borderBottom: '2px solid #555',
-                                paddingBottom: '4px',
-                                minWidth: '350px'
+                                borderBottom: '2.5px solid #555',
+                                paddingBottom: '5px',
+                                minWidth: '400px'
                             }}>
-                                <div style={{ fontFamily:'serif', fontWeight:900, fontSize:'44px', color:'#c0392b', lineHeight:'1' }}>{name}</div>
+                                <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'46px', color:'#c0392b', lineHeight:'1', wordSpacing:'8px', whiteSpace:'pre-wrap' }}>{name}</div>
                             </div>
                         </div>
 
                         {/* Sub text */}
                         <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'serif', fontSize:'15px', color:'#333', lineHeight:'1.8' }}>
-                                for registering as a blood donor and showing commitment to saving lives.<br/>
+                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'16px', color:'#333', lineHeight:'1.8', wordSpacing:'3px', whiteSpace:'pre-wrap' }}>
+                                for registering as a blood donor and showing commitment to saving lives.{"\n"}
                                 Thank you — We really appreciate your actions.
                             </div>
                         </div>
@@ -439,21 +439,21 @@ function CertificateView({
                         <div style={{ position:'absolute', bottom:'55px', left:'65px', zIndex:10, textAlign:'left' }}>
                             <div style={{ 
                                 borderBottom: '1.5px solid #555',
-                                paddingBottom: '2px',
-                                minWidth: '160px'
+                                paddingBottom: '3px',
+                                minWidth: '170px'
                             }}>
-                                <div style={{ fontFamily:'serif', fontSize:'14px', color:'#222' }}>{registrationDate}</div>
+                                <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'15px', color:'#222', wordSpacing:'2px', whiteSpace:'pre-wrap' }}>{registrationDate}</div>
                             </div>
                         </div>
 
                         {/* Signature bottom-right */}
                         <div style={{ position:'absolute', bottom:'40px', right:'75px', zIndex:10, textAlign:'center' }}>
-                            <div style={{ fontFamily:'sans-serif', fontSize:'12px', color:'#333', marginBottom:'4px', fontWeight:600 }}>Founder &amp; CEO of Pillora</div>
+                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'13px', color:'#333', marginBottom:'4px', fontWeight:600, wordSpacing:'2px', whiteSpace:'pre-wrap' }}>Founder & CEO of Pillora</div>
                             <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
                                 <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
                             </svg>
-                            <div style={{ width:'150px', height:'1.5px', background:'#555', margin:'2px auto 6px' }} />
-                            <div style={{ fontFamily:'sans-serif', fontSize:'13px', color:'#222', fontWeight:700 }}>Shah Yugam V</div>
+                            <div style={{ width:'160px', height:'2px', background:'#555', margin:'2px auto 6px' }} />
+                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#222', fontWeight:700, wordSpacing:'2px', whiteSpace:'pre-wrap' }}>Shah Yugam V</div>
                         </div>
                     </div>
                 </div>
