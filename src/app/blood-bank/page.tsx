@@ -332,8 +332,28 @@ function CertificateView({
     onDownload: () => void;
     onReset: () => void;
 }) {
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const [scale, setScale] = React.useState(1);
+
+    React.useEffect(() => {
+        const CERT_W = 860;
+        const update = () => {
+            if (wrapperRef.current) {
+                const w = wrapperRef.current.offsetWidth;
+                setScale(Math.min(1, w / CERT_W));
+            }
+        };
+        update();
+        const ro = new ResizeObserver(update);
+        if (wrapperRef.current) ro.observe(wrapperRef.current);
+        return () => ro.disconnect();
+    }, []);
+
+    const CERT_H = 600;
+    const visibleHeight = Math.round(CERT_H * scale);
+
     return (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center gap-5 w-full">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center gap-6 w-full">
 
             {/* ── Success Banner ── */}
             <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-2xl px-4 py-3 w-full">
@@ -344,61 +364,97 @@ function CertificateView({
                 </div>
             </div>
 
-            {/* ── Mobile-friendly Certificate Card (visible preview) ── */}
-            <div className="w-full rounded-2xl overflow-hidden border-2 border-gray-100 shadow-xl">
-                {/* Red header bar */}
-                <div className="bg-gradient-to-r from-red-700 to-red-600 px-4 py-3 flex items-center gap-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/pillora-logo-new.png" alt="Pillora" className="w-10 h-10 object-contain shrink-0" />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/pillora-text.png" alt="Pillora" className="h-7 w-auto object-contain brightness-0 invert" />
-                </div>
-
-                {/* Certificate body */}
-                <div className="bg-white px-5 py-6 text-center relative overflow-hidden">
-                    {/* Faint watermark */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.04]">
-                        <svg width="200" height="230" viewBox="0 0 100 120" fill="#c0392b">
-                            <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
-                        </svg>
-                    </div>
-
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-bold mb-1">Certificate</p>
-                    <p className="text-xs font-semibold text-gray-500 mb-4 tracking-widest uppercase">of Blood Donor Registration</p>
-
-                    <div className="w-12 h-0.5 bg-gray-200 mx-auto mb-4" />
-
-                    <p className="text-xs text-red-500 italic mb-1 font-medium">This Certificate is Presented to</p>
-                    <h2 className="text-2xl font-black text-red-700 mb-1" style={{ fontFamily: 'Georgia, serif' }}>{name}</h2>
-                    <div className="w-32 h-0.5 bg-gray-400 mx-auto mb-4" />
-
-                    <p className="text-xs text-gray-500 leading-relaxed max-w-xs mx-auto mb-6">
-                        for registering as a blood donor and showing commitment to saving lives. Thank you — We really appreciate your actions.
-                    </p>
-
-                    {/* Bottom row */}
-                    <div className="flex items-end justify-between pt-4 border-t border-gray-100">
-                        <div className="text-left">
-                            <p className="text-[10px] text-gray-600 font-semibold">{registrationDate}</p>
-                            <div className="w-20 h-px bg-gray-400 mt-1" />
+            {/* ── Certificate Preview (Scales to fit screen) ── */}
+            <div ref={wrapperRef} className="w-full relative" style={{ height: `${visibleHeight}px`, overflow: 'hidden' }}>
+                <div style={{ 
+                    transform: `scale(${scale})`, 
+                    transformOrigin: 'top left', 
+                    width: '860px',
+                    position: 'absolute',
+                    left: '50%',
+                    marginLeft: `-${(860 * scale) / 2 / scale}px` 
+                }}>
+                    <div
+                        ref={certRef}
+                        style={{
+                            width: '860px', height: '600px',
+                            background: '#ffffff', position: 'relative', overflow: 'hidden',
+                            fontFamily: 'Georgia, serif',
+                            boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
+                            flexShrink: 0
+                        }}
+                    >
+                        {/* Top-right red diagonals */}
+                        <div style={{ position:'absolute', top:0, right:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
+                            <div style={{ position:'absolute', top:'-10px', right:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
+                            <div style={{ position:'absolute', top:'-10px', right:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
+                            <div style={{ position:'absolute', top:'-10px', right:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
+                        </div>
+                        {/* Bottom-left red diagonals */}
+                        <div style={{ position:'absolute', bottom:0, left:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
+                            <div style={{ position:'absolute', bottom:'-10px', left:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
+                            <div style={{ position:'absolute', bottom:'-10px', left:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
+                            <div style={{ position:'absolute', bottom:'-10px', left:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
+                        </div>
+                        {/* Blood drop watermark */}
+                        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
+                            <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
+                                <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
+                            </svg>
+                        </div>
+                        {/* Logo top-left — real brand images */}
+                        <div style={{ position:'absolute', top:'14px', left:'24px', display:'flex', alignItems:'center', gap:'10px', zIndex:10 }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'80px', height:'80px', objectFit:'contain', flexShrink:0 }} crossOrigin="anonymous" />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/pillora-text.png" alt="Pillora" style={{ height:'56px', width:'auto', objectFit:'contain', objectPosition:'left center', display:'block' }} crossOrigin="anonymous" />
+                        </div>
+                        {/* Certificate heading */}
+                        <div style={{ position:'absolute', top:'110px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'52px', color:'#111', letterSpacing:'6px', textTransform:'uppercase', lineHeight:'1' }}>CERTIFICATE</div>
+                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'13px', color:'#444', letterSpacing:'5px', marginTop:'6px', textTransform:'uppercase' }}>Of Blood Donor Registration</div>
+                        </div>
+                        {/* Presented to */}
+                        <div style={{ position:'absolute', top:'225px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontSize:'18px', color:'#c0392b', fontStyle:'italic' }}>This Certificate is Presented to</div>
+                        </div>
+                        {/* Donor name */}
+                        <div style={{ position:'absolute', top:'256px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'40px', color:'#c0392b', lineHeight:'1.1' }}>{name}</div>
+                            <div style={{ width:'200px', height:'2px', background:'#555', margin:'8px auto 0' }} />
+                        </div>
+                        {/* Sub text */}
+                        <div style={{ position:'absolute', top:'348px', left:'120px', right:'120px', textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontSize:'14px', color:'#333', lineHeight:'1.7' }}>
+                                for registering as a blood donor and showing commitment to saving lives.<br/>
+                                Thank you — We really appreciate your actions.
+                            </div>
                         </div>
                         {/* Gold medal image */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/gold-medal.png" alt="Award Medal" className="w-14 h-auto object-contain -mb-1" />
-                        <div className="text-right">
-                            <p className="text-[9px] text-gray-400 mb-1">Founder &amp; CEO of Pillora</p>
-                            <svg width="60" height="22" viewBox="0 0 120 40" className="ml-auto">
+                        <div style={{ position:'absolute', bottom:'30px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/gold-medal.png" alt="Award Medal" style={{ width:'90px', height:'auto', objectFit:'contain', display:'block' }} crossOrigin="anonymous" />
+                        </div>
+                        {/* Date bottom-left */}
+                        <div style={{ position:'absolute', bottom:'54px', left:'58px', zIndex:10 }}>
+                            <div style={{ fontFamily:'Georgia,serif', fontSize:'13px', color:'#222' }}>{registrationDate}</div>
+                            <div style={{ width:'140px', height:'1px', background:'#555', marginTop:'4px' }} />
+                        </div>
+                        {/* Signature bottom-right */}
+                        <div style={{ position:'absolute', bottom:'38px', right:'68px', zIndex:10, textAlign:'center' }}>
+                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#333', marginBottom:'2px' }}>Founder &amp; CEO of Pillora</div>
+                            <svg width="100" height="36" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
                                 <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.2" strokeLinecap="round"/>
                             </svg>
-                            <div className="w-16 h-px bg-gray-400 mb-0.5 ml-auto" />
-                            <p className="text-[10px] text-gray-700 font-semibold">Shah Yugam V</p>
+                            <div style={{ width:'140px', height:'1px', background:'#555', margin:'0 auto 4px' }} />
+                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#222' }}>Shah Yugam V</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* ── Action Buttons ── */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm mt-4">
                 <button onClick={onDownload} className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Download Certificate
@@ -406,78 +462,6 @@ function CertificateView({
                 <button onClick={onReset} className="flex-1 text-gray-600 font-semibold hover:bg-gray-100 py-3.5 px-6 rounded-xl transition-colors border border-gray-200 w-full">
                     Register Another
                 </button>
-            </div>
-
-            {/* ── Hidden full-size cert for PDF capture (off-screen) ── */}
-            <div style={{ position: 'fixed', left: '-9999px', top: 0, pointerEvents: 'none', zIndex: -1 }}>
-                <div
-                    ref={certRef}
-                    style={{
-                        width: '860px', height: '600px',
-                        background: '#ffffff', position: 'relative', overflow: 'hidden',
-                        fontFamily: 'Georgia, serif',
-                    }}
-                >
-                    {/* Top-right red diagonals */}
-                    <div style={{ position:'absolute', top:0, right:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
-                        <div style={{ position:'absolute', top:'-10px', right:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
-                        <div style={{ position:'absolute', top:'-10px', right:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
-                        <div style={{ position:'absolute', top:'-10px', right:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
-                    </div>
-                    {/* Bottom-left red diagonals */}
-                    <div style={{ position:'absolute', bottom:0, left:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
-                        <div style={{ position:'absolute', bottom:'-10px', left:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
-                        <div style={{ position:'absolute', bottom:'-10px', left:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
-                        <div style={{ position:'absolute', bottom:'-10px', left:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
-                    </div>
-                    {/* Blood drop watermark */}
-                    <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
-                        <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
-                            <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
-                        </svg>
-                    </div>
-                    {/* Logo */}
-                    <div style={{ position:'absolute', top:'14px', left:'24px', display:'flex', alignItems:'center', gap:'10px', zIndex:10 }}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'80px', height:'80px', objectFit:'contain', flexShrink:0 }} crossOrigin="anonymous" />
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/pillora-text.png" alt="Pillora" style={{ height:'56px', width:'auto', objectFit:'contain', objectPosition:'left center', display:'block' }} crossOrigin="anonymous" />
-                    </div>
-                    {/* Heading */}
-                    <div style={{ position:'absolute', top:'110px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                        <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'52px', color:'#111', letterSpacing:'6px', textTransform:'uppercase', lineHeight:'1' }}>CERTIFICATE</div>
-                        <div style={{ fontFamily:'Arial,sans-serif', fontSize:'13px', color:'#444', letterSpacing:'5px', marginTop:'6px', textTransform:'uppercase' }}>Of Blood Donor Registration</div>
-                    </div>
-                    <div style={{ position:'absolute', top:'225px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                        <div style={{ fontFamily:'Georgia,serif', fontSize:'18px', color:'#c0392b', fontStyle:'italic' }}>This Certificate is Presented to</div>
-                    </div>
-                    <div style={{ position:'absolute', top:'256px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                        <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'40px', color:'#c0392b', lineHeight:'1.1' }}>{name}</div>
-                        <div style={{ width:'200px', height:'2px', background:'#555', margin:'8px auto 0' }} />
-                    </div>
-                    <div style={{ position:'absolute', top:'348px', left:'120px', right:'120px', textAlign:'center', zIndex:10 }}>
-                        <div style={{ fontFamily:'Georgia,serif', fontSize:'14px', color:'#333', lineHeight:'1.7' }}>
-                            for registering as a blood donor and showing commitment to saving lives.<br/>
-                            Thank you — We really appreciate your actions.
-                        </div>
-                    </div>
-                    <div style={{ position:'absolute', bottom:'30px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/gold-medal.png" alt="Award Medal" style={{ width:'90px', height:'auto', objectFit:'contain', display:'block' }} crossOrigin="anonymous" />
-                    </div>
-                    <div style={{ position:'absolute', bottom:'54px', left:'58px', zIndex:10 }}>
-                        <div style={{ fontFamily:'Georgia,serif', fontSize:'13px', color:'#222' }}>{registrationDate}</div>
-                        <div style={{ width:'140px', height:'1px', background:'#555', marginTop:'4px' }} />
-                    </div>
-                    <div style={{ position:'absolute', bottom:'38px', right:'68px', zIndex:10, textAlign:'center' }}>
-                        <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#333', marginBottom:'2px' }}>Founder &amp; CEO of Pillora</div>
-                        <svg width="100" height="36" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
-                            <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.2" strokeLinecap="round"/>
-                        </svg>
-                        <div style={{ width:'140px', height:'1px', background:'#555', margin:'0 auto 4px' }} />
-                        <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#222' }}>Shah Yugam V</div>
-                    </div>
-                </div>
             </div>
 
         </motion.div>
