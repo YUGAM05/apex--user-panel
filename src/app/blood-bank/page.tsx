@@ -398,15 +398,17 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Certificate heading */}
+                        {/* Certificate heading - Improved spacing and non-breaking spaces */}
                         <div style={{ position:'absolute', top:'115px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.2', wordSpacing:'10px', whiteSpace:'pre-wrap' }}>CERTIFICATE</div>
-                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#444', marginTop:'8px', textTransform:'uppercase', fontWeight:600, wordSpacing:'5px', whiteSpace:'pre-wrap' }}>Of Blood Donor Registration</div>
+                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.1', wordSpacing:'10px', whiteSpace:'pre-wrap' }}>CERTIFICATE</div>
+                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#444', marginTop:'15px', textTransform:'uppercase', fontWeight:600, wordSpacing:'5px', whiteSpace:'pre-wrap' }}>
+                                Of{"\u00A0"}Blood{"\u00A0"}Donor{"\u00A0"}Registration
+                            </div>
                         </div>
 
                         {/* Presented to */}
                         <div style={{ position:'absolute', top:'235px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'22px', color:'#c0392b', fontStyle:'italic', wordSpacing:'4px', whiteSpace:'pre-wrap' }}>This Certificate is Presented to</div>
+                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'22px', color:'#c0392b', fontStyle:'italic', wordSpacing:'4px', whiteSpace:'pre-wrap' }}>This{"\u00A0"}Certificate{"\u00A0"}is{"\u00A0"}Presented{"\u00A0"}to</div>
                         </div>
 
                         {/* Donor name with underline */}
@@ -421,7 +423,7 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Sub text - Using non-breaking spaces for guaranteed gaps */}
+                        {/* Sub text - Precision gaps with non-breaking spaces */}
                         <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
                             <div style={{ 
                                 fontFamily:'"Times New Roman", Times, serif', 
