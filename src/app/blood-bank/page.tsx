@@ -443,39 +443,25 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Donor name with underline */}
+                        {/* Donor name with requested underline structure */}
                         <div style={{ position:'absolute', top:'275px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ 
-                                display: 'inline-block',
-                                borderBottom: '2.5px solid #555',
-                                paddingBottom: '5px',
-                                minWidth: '450px'
-                            }}>
-                                <div style={{ 
-                                    fontFamily:'"Times New Roman", Times, serif', 
-                                    fontWeight:900, 
-                                    fontSize:'46px', 
-                                    color:'#c0392b', 
-                                    lineHeight:'1',
-                                    letterSpacing: '1px',
-                                    wordSpacing: '10px',
-                                    whiteSpace: 'pre-wrap'
-                                }}>
+                            <div style={{ textAlign: 'center' }}>
+                                <span style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'46px', color:'#c0392b', lineHeight:'1', letterSpacing: '1px', wordSpacing: '10px' }}>
                                     {name}
-                                </div>
+                                </span>
+                                <div style={{ borderBottom: '1.5px solid #333', marginTop: '4px', width: '380px', margin: '4px auto 0' }} />
                             </div>
                         </div>
 
                         {/* Sub text */}
-                        <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
+                        <div style={{ position:'absolute', top:'375px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
                             <div style={{ 
                                 fontFamily:'"Times New Roman", Times, serif', 
                                 fontSize:'16px', 
                                 color:'#333', 
                                 lineHeight:'1.7',
                                 letterSpacing: '0.3px',
-                                wordSpacing: '5px',
-                                whiteSpace: 'pre-wrap'
+                                wordSpacing: '5px'
                             }}>
                                 for registering as a blood donor and showing commitment to saving lives.{"\n"}
                                 Thank you — We really appreciate your actions.
@@ -488,53 +474,26 @@ function CertificateView({
                             <img src="/gold-medal.png" alt="Award Medal" style={{ width:'95px', height:'auto', display:'block' }} crossOrigin="anonymous" />
                         </div>
 
-                        {/* Date bottom-left with underline */}
-                        <div style={{ position:'absolute', bottom:'55px', left:'65px', zIndex:10, textAlign:'left' }}>
-                            <div style={{ 
-                                borderBottom: '1.5px solid #555',
-                                paddingBottom: '3px',
-                                minWidth: '180px'
-                            }}>
-                                <div style={{ 
-                                    fontFamily:'"Times New Roman", Times, serif', 
-                                    fontSize:'15px', 
-                                    color:'#222',
-                                    letterSpacing: '0.5px',
-                                    wordSpacing: '4px',
-                                    whiteSpace: 'pre-wrap'
-                                }}>
+                        {/* Date bottom-left with separate underline div */}
+                        <div style={{ position:'absolute', bottom:'55px', left:'65px', zIndex:10 }}>
+                            <div style={{ textAlign: 'left' }}>
+                                <span style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'15px', color:'#222', letterSpacing: '0.5px', wordSpacing: '4px' }}>
                                     {registrationDate}
-                                </div>
+                                </span>
+                                <div style={{ borderBottom: '1.5px solid #333', marginTop: '4px', width: '150px' }} />
                             </div>
                         </div>
 
-                        {/* Signature bottom-right */}
+                        {/* Signature bottom-right with separate underline div */}
                         <div style={{ position:'absolute', bottom:'40px', right:'75px', zIndex:10, textAlign:'center' }}>
-                            <div style={{ 
-                                fontFamily:'Arial, Helvetica, sans-serif', 
-                                fontSize:'13px', 
-                                color:'#333', 
-                                marginBottom:'4px', 
-                                fontWeight:600,
-                                letterSpacing: '0.5px',
-                                wordSpacing: '4px',
-                                whiteSpace: 'pre-wrap'
-                            }}>
+                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'13px', color:'#333', fontWeight:600, letterSpacing: '0.5px', wordSpacing: '4px' }}>
                                 Founder & CEO of Pillora
                             </div>
                             <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
                                 <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
                             </svg>
-                            <div style={{ width:'160px', height:'2px', background:'#555', margin:'2px auto 6px' }} />
-                            <div style={{ 
-                                fontFamily:'Arial, Helvetica, sans-serif', 
-                                fontSize:'14px', 
-                                color:'#222', 
-                                fontWeight:700,
-                                letterSpacing: '1px',
-                                wordSpacing: '5px',
-                                whiteSpace: 'pre-wrap'
-                            }}>
+                            <div style={{ borderBottom: '1.5px solid #333', margin: '2px auto 6px', width: '150px' }} />
+                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#222', fontWeight:700, letterSpacing: '1px', wordSpacing: '5px' }}>
                                 Shah Yugam V
                             </div>
                         </div>
