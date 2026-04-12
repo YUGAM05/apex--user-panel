@@ -398,10 +398,20 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Certificate heading - Flex-Gap Architecture */}
-                        <div style={{ position:'absolute', top:'115px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.1', display:'flex', justifyContent:'center' }}>
-                                <span>CERTIFICATE</span>
+                        {/* Certificate heading */}
+                        <div style={{ position:'absolute', top:'105px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ 
+                                fontFamily:'"Times New Roman", Times, serif', 
+                                fontWeight:900, 
+                                fontSize:'54px', 
+                                color:'#111', 
+                                textTransform:'uppercase', 
+                                lineHeight:'1.1',
+                                letterSpacing: '2px', 
+                                wordSpacing: '12px',
+                                whiteSpace: 'pre-wrap'
+                            }}>
+                                CERTIFICATE
                             </div>
                             <div style={{ 
                                 fontFamily:'Arial, Helvetica, sans-serif', 
@@ -410,33 +420,26 @@ function CertificateView({
                                 marginTop:'20px', 
                                 textTransform:'uppercase', 
                                 fontWeight:600,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '8px'
+                                letterSpacing: '1px',
+                                wordSpacing: '8px',
+                                whiteSpace: 'pre-wrap'
                             }}>
-                                <span>Of</span>
-                                <span>Blood</span>
-                                <span>Donor</span>
-                                <span>Registration</span>
+                                OF BLOOD DONOR REGISTRATION
                             </div>
                         </div>
 
-                        {/* Presented to - Flex-Gap */}
+                        {/* Presented to */}
                         <div style={{ position:'absolute', top:'235px', left:0, right:0, textAlign:'center', zIndex:10 }}>
                             <div style={{ 
                                 fontFamily:'"Times New Roman", Times, serif', 
                                 fontSize:'22px', 
                                 color:'#c0392b', 
                                 fontStyle:'italic',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '6px'
+                                letterSpacing: '0.5px',
+                                wordSpacing: '6px',
+                                whiteSpace: 'pre-wrap'
                             }}>
-                                <span>This</span>
-                                <span>Certificate</span>
-                                <span>is</span>
-                                <span>Presented</span>
-                                <span>to</span>
+                                This Certificate is Presented to
                             </div>
                         </div>
 
@@ -446,7 +449,7 @@ function CertificateView({
                                 display: 'inline-block',
                                 borderBottom: '2.5px solid #555',
                                 paddingBottom: '5px',
-                                minWidth: '400px'
+                                minWidth: '450px'
                             }}>
                                 <div style={{ 
                                     fontFamily:'"Times New Roman", Times, serif', 
@@ -454,46 +457,28 @@ function CertificateView({
                                     fontSize:'46px', 
                                     color:'#c0392b', 
                                     lineHeight:'1',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    gap: '12px'
+                                    letterSpacing: '1px',
+                                    wordSpacing: '10px',
+                                    whiteSpace: 'pre-wrap'
                                 }}>
-                                    {name.split(' ').map((word, i) => (
-                                        <span key={i}>{word}</span>
-                                    ))}
+                                    {name}
                                 </div>
                             </div>
                         </div>
 
-                        {/* Sub text - Flex-Gap */}
-                        <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10, display:'flex', flexDirection:'column', gap:'8px', alignItems:'center' }}>
+                        {/* Sub text */}
+                        <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
                             <div style={{ 
                                 fontFamily:'"Times New Roman", Times, serif', 
                                 fontSize:'16px', 
                                 color:'#333', 
-                                lineHeight:'1.2',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '6px',
-                                flexWrap: 'wrap'
+                                lineHeight:'1.7',
+                                letterSpacing: '0.3px',
+                                wordSpacing: '5px',
+                                whiteSpace: 'pre-wrap'
                             }}>
-                                {["for", "registering", "as", "a", "blood", "donor", "and", "showing", "commitment", "to", "saving", "lives."].map((word, i) => (
-                                    <span key={i}>{word}</span>
-                                ))}
-                            </div>
-                            <div style={{ 
-                                fontFamily:'"Times New Roman", Times, serif', 
-                                fontSize:'16px', 
-                                color:'#333', 
-                                lineHeight:'1.2',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '6px',
-                                flexWrap: 'wrap'
-                            }}>
-                                {["Thank", "you", "—", "We", "really", "appreciate", "your", "actions."].map((word, i) => (
-                                    <span key={i}>{word}</span>
-                                ))}
+                                for registering as a blood donor and showing commitment to saving lives.{"\n"}
+                                Thank you — We really appreciate your actions.
                             </div>
                         </div>
 
@@ -508,18 +493,17 @@ function CertificateView({
                             <div style={{ 
                                 borderBottom: '1.5px solid #555',
                                 paddingBottom: '3px',
-                                minWidth: '170px'
+                                minWidth: '180px'
                             }}>
                                 <div style={{ 
                                     fontFamily:'"Times New Roman", Times, serif', 
                                     fontSize:'15px', 
                                     color:'#222',
-                                    display: 'flex',
-                                    gap: '5px'
+                                    letterSpacing: '0.5px',
+                                    wordSpacing: '4px',
+                                    whiteSpace: 'pre-wrap'
                                 }}>
-                                    {registrationDate.split(' ').map((word, i) => (
-                                        <span key={i}>{word}</span>
-                                    ))}
+                                    {registrationDate}
                                 </div>
                             </div>
                         </div>
@@ -532,15 +516,11 @@ function CertificateView({
                                 color:'#333', 
                                 marginBottom:'4px', 
                                 fontWeight:600,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '5px'
+                                letterSpacing: '0.5px',
+                                wordSpacing: '4px',
+                                whiteSpace: 'pre-wrap'
                             }}>
-                                <span>Founder</span>
-                                <span>&</span>
-                                <span>CEO</span>
-                                <span>of</span>
-                                <span>Pillora</span>
+                                Founder & CEO of Pillora
                             </div>
                             <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
                                 <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
@@ -551,13 +531,11 @@ function CertificateView({
                                 fontSize:'14px', 
                                 color:'#222', 
                                 fontWeight:700,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '6px'
+                                letterSpacing: '1px',
+                                wordSpacing: '5px',
+                                whiteSpace: 'pre-wrap'
                             }}>
-                                <span>Shah</span>
-                                <span>Yugam</span>
-                                <span>V</span>
+                                Shah Yugam V
                             </div>
                         </div>
                     </div>
@@ -634,6 +612,12 @@ function DonateForm() {
         try {
             const { default: html2canvas } = await import('html2canvas');
             const { default: jsPDF } = await import('jspdf');
+
+            // Wait for fonts to be ready to ensure correct character width measurement
+            if (document.fonts) {
+                await document.fonts.ready;
+            }
+
             const canvas = await html2canvas(certRef.current, { 
                 scale: 2, 
                 useCORS: true, 
