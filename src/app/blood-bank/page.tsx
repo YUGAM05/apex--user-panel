@@ -388,52 +388,72 @@ function CertificateView({
                                 <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
                             </svg>
                         </div>
-                        {/* Logo top-left — real brand images */}
-                        <div style={{ position:'absolute', top:'14px', left:'24px', display:'flex', alignItems:'center', gap:'10px', zIndex:10 }}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'80px', height:'80px', objectFit:'contain', flexShrink:0 }} crossOrigin="anonymous" />
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/pillora-text.png" alt="Pillora" style={{ height:'56px', width:'auto', objectFit:'contain', objectPosition:'left center', display:'block' }} crossOrigin="anonymous" />
+                        {/* Logo top-left */}
+                        <div style={{ position:'absolute', top:'20px', left:'30px', display:'block', zIndex:10 }}>
+                            <div style={{ display:'flex', alignItems:'center', gap:'12px' }}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'75px', height:'75px', objectFit:'contain' }} crossOrigin="anonymous" />
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src="/pillora-text.png" alt="Pillora" style={{ height:'50px', width:'auto' }} crossOrigin="anonymous" />
+                            </div>
                         </div>
+
                         {/* Certificate heading */}
-                        <div style={{ position:'absolute', top:'110px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'52px', color:'#111', letterSpacing:'6px', textTransform:'uppercase', lineHeight:'1' }}>CERTIFICATE</div>
-                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'13px', color:'#444', letterSpacing:'5px', marginTop:'6px', textTransform:'uppercase' }}>Of Blood Donor Registration</div>
+                        <div style={{ position:'absolute', top:'115px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'serif', fontWeight:900, fontSize:'54px', color:'#111', textTransform:'uppercase', lineHeight:'1.2' }}>CERTIFICATE</div>
+                            <div style={{ fontFamily:'sans-serif', fontSize:'14px', color:'#444', marginTop:'8px', textTransform:'uppercase', fontWeight:600 }}>Of Blood Donor Registration</div>
                         </div>
+
                         {/* Presented to */}
-                        <div style={{ position:'absolute', top:'225px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'Georgia,serif', fontSize:'18px', color:'#c0392b', fontStyle:'italic' }}>This Certificate is Presented to</div>
+                        <div style={{ position:'absolute', top:'235px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'serif', fontSize:'20px', color:'#c0392b', fontStyle:'italic' }}>This Certificate is Presented to</div>
                         </div>
-                        {/* Donor name */}
-                        <div style={{ position:'absolute', top:'256px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'Georgia,serif', fontWeight:900, fontSize:'40px', color:'#c0392b', lineHeight:'1.1' }}>{name}</div>
-                            <div style={{ width:'200px', height:'2px', background:'#555', margin:'8px auto 0' }} />
+
+                        {/* Donor name with underline */}
+                        <div style={{ position:'absolute', top:'275px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                            <div style={{ 
+                                display: 'inline-block',
+                                borderBottom: '2px solid #555',
+                                paddingBottom: '4px',
+                                minWidth: '350px'
+                            }}>
+                                <div style={{ fontFamily:'serif', fontWeight:900, fontSize:'44px', color:'#c0392b', lineHeight:'1' }}>{name}</div>
+                            </div>
                         </div>
+
                         {/* Sub text */}
-                        <div style={{ position:'absolute', top:'348px', left:'120px', right:'120px', textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'Georgia,serif', fontSize:'14px', color:'#333', lineHeight:'1.7' }}>
+                        <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
+                            <div style={{ fontFamily:'serif', fontSize:'15px', color:'#333', lineHeight:'1.8' }}>
                                 for registering as a blood donor and showing commitment to saving lives.<br/>
                                 Thank you — We really appreciate your actions.
                             </div>
                         </div>
+
                         {/* Gold medal image */}
-                        <div style={{ position:'absolute', bottom:'30px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
+                        <div style={{ position:'absolute', bottom:'35px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/gold-medal.png" alt="Award Medal" style={{ width:'90px', height:'auto', objectFit:'contain', display:'block' }} crossOrigin="anonymous" />
+                            <img src="/gold-medal.png" alt="Award Medal" style={{ width:'95px', height:'auto', display:'block' }} crossOrigin="anonymous" />
                         </div>
-                        {/* Date bottom-left */}
-                        <div style={{ position:'absolute', bottom:'54px', left:'58px', zIndex:10 }}>
-                            <div style={{ fontFamily:'Georgia,serif', fontSize:'13px', color:'#222' }}>{registrationDate}</div>
-                            <div style={{ width:'140px', height:'1px', background:'#555', marginTop:'4px' }} />
+
+                        {/* Date bottom-left with underline */}
+                        <div style={{ position:'absolute', bottom:'55px', left:'65px', zIndex:10, textAlign:'left' }}>
+                            <div style={{ 
+                                borderBottom: '1.5px solid #555',
+                                paddingBottom: '2px',
+                                minWidth: '160px'
+                            }}>
+                                <div style={{ fontFamily:'serif', fontSize:'14px', color:'#222' }}>{registrationDate}</div>
+                            </div>
                         </div>
+
                         {/* Signature bottom-right */}
-                        <div style={{ position:'absolute', bottom:'38px', right:'68px', zIndex:10, textAlign:'center' }}>
-                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#333', marginBottom:'2px' }}>Founder &amp; CEO of Pillora</div>
-                            <svg width="100" height="36" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
-                                <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.2" strokeLinecap="round"/>
+                        <div style={{ position:'absolute', bottom:'40px', right:'75px', zIndex:10, textAlign:'center' }}>
+                            <div style={{ fontFamily:'sans-serif', fontSize:'12px', color:'#333', marginBottom:'4px', fontWeight:600 }}>Founder &amp; CEO of Pillora</div>
+                            <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
+                                <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
                             </svg>
-                            <div style={{ width:'140px', height:'1px', background:'#555', margin:'0 auto 4px' }} />
-                            <div style={{ fontFamily:'Arial,sans-serif', fontSize:'12px', color:'#222' }}>Shah Yugam V</div>
+                            <div style={{ width:'150px', height:'1.5px', background:'#555', margin:'2px auto 6px' }} />
+                            <div style={{ fontFamily:'sans-serif', fontSize:'13px', color:'#222', fontWeight:700 }}>Shah Yugam V</div>
                         </div>
                     </div>
                 </div>
