@@ -386,11 +386,6 @@ function CertificateView({
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src="/cert-corner-top-right.png" alt="Pattern" style={{ width:'100%', height:'100%', objectFit:'contain' }} crossOrigin="anonymous" />
                         </div>
-                        {/* Bottom-left red diagonal pattern */}
-                        <div style={{ position:'absolute', bottom:0, left:0, width:'180px', height:'180px', pointerEvents:'none', zIndex:2, transform:'rotate(180deg)' }}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/cert-corner-top-right.png" alt="Pattern" style={{ width:'100%', height:'100%', objectFit:'contain' }} crossOrigin="anonymous" />
-                        </div>
                         {/* Blood drop watermark */}
                         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
                             <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
