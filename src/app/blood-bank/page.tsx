@@ -449,7 +449,7 @@ function CertificateView({
                                 <span style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'46px', color:'#c0392b', lineHeight:'1', letterSpacing: '1px', wordSpacing: '10px' }}>
                                     {name}
                                 </span>
-                                <div style={{ borderBottom: '1.5px solid #333', marginTop: '4px', width: '380px', margin: '4px auto 0' }} />
+                                <div style={{ borderBottom: '1.5px solid #000', marginTop: '6px', width: '400px', margin: '6px auto 0' }} />
                             </div>
                         </div>
 
@@ -480,7 +480,7 @@ function CertificateView({
                                 <span style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'15px', color:'#222', letterSpacing: '0.5px', wordSpacing: '4px' }}>
                                     {registrationDate}
                                 </span>
-                                <div style={{ borderBottom: '1.5px solid #333', marginTop: '4px', width: '150px' }} />
+                                <div style={{ borderBottom: '1.5px solid #000', marginTop: '6px', width: '160px' }} />
                             </div>
                         </div>
 
@@ -492,7 +492,7 @@ function CertificateView({
                             <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
                                 <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
                             </svg>
-                            <div style={{ borderBottom: '1.5px solid #333', margin: '2px auto 6px', width: '150px' }} />
+                            <div style={{ borderBottom: '1.5px solid #000', margin: '4px auto 6px', width: '150px' }} />
                             <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#222', fontWeight:700, letterSpacing: '1px', wordSpacing: '5px' }}>
                                 Shah Yugam V
                             </div>
