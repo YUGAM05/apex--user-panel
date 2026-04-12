@@ -381,17 +381,15 @@ function CertificateView({
                             boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
                         }}
                     >
-                        {/* Top-right red diagonals */}
-                        <div style={{ position:'absolute', top:0, right:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
-                            <div style={{ position:'absolute', top:'-10px', right:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
-                            <div style={{ position:'absolute', top:'-10px', right:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
-                            <div style={{ position:'absolute', top:'-10px', right:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
+                        {/* Top-right red diagonal pattern */}
+                        <div style={{ position:'absolute', top:0, right:0, width:'180px', height:'180px', pointerEvents:'none', zIndex:2 }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/cert-corner-top-right.png" alt="Pattern" style={{ width:'100%', height:'100%', objectFit:'contain' }} crossOrigin="anonymous" />
                         </div>
-                        {/* Bottom-left red diagonals */}
-                        <div style={{ position:'absolute', bottom:0, left:0, width:'160px', height:'160px', overflow:'hidden', zIndex:2 }}>
-                            <div style={{ position:'absolute', bottom:'-10px', left:'-20px', width:'60px', height:'200px', background:'#c0392b', transform:'rotate(45deg)', opacity:0.9 }} />
-                            <div style={{ position:'absolute', bottom:'-10px', left:'12px', width:'30px', height:'200px', background:'#e74c3c', transform:'rotate(45deg)', opacity:0.65 }} />
-                            <div style={{ position:'absolute', bottom:'-10px', left:'42px', width:'18px', height:'200px', background:'#7b241c', transform:'rotate(45deg)', opacity:0.5 }} />
+                        {/* Bottom-left red diagonal pattern */}
+                        <div style={{ position:'absolute', bottom:0, left:0, width:'180px', height:'180px', pointerEvents:'none', zIndex:2, transform:'rotate(180deg)' }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/cert-corner-top-right.png" alt="Pattern" style={{ width:'100%', height:'100%', objectFit:'contain' }} crossOrigin="anonymous" />
                         </div>
                         {/* Blood drop watermark */}
                         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
