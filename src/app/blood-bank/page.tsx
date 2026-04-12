@@ -421,11 +421,18 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Sub text */}
+                        {/* Sub text - Using non-breaking spaces for guaranteed gaps */}
                         <div style={{ position:'absolute', top:'365px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
-                            <div style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'16px', color:'#333', lineHeight:'1.8', wordSpacing:'3px', whiteSpace:'pre-wrap' }}>
-                                for registering as a blood donor and showing commitment to saving lives.{"\n"}
-                                Thank you — We really appreciate your actions.
+                            <div style={{ 
+                                fontFamily:'"Times New Roman", Times, serif', 
+                                fontSize:'16px', 
+                                color:'#333', 
+                                lineHeight:'1.8', 
+                                wordSpacing:'6px', 
+                                whiteSpace:'pre-wrap' 
+                            }}>
+                                for{"\u00A0"}registering{"\u00A0"}as{"\u00A0"}a{"\u00A0"}blood{"\u00A0"}donor{"\u00A0"}and{"\u00A0"}showing{"\u00A0"}commitment{"\u00A0"}to{"\u00A0"}saving{"\u00A0"}lives.{"\n"}
+                                Thank{"\u00A0"}you{"\u00A0"}—{"\u00A0"}We{"\u00A0"}really{"\u00A0"}appreciate{"\u00A0"}your{"\u00A0"}actions.
                             </div>
                         </div>
 
@@ -529,7 +536,13 @@ function DonateForm() {
         try {
             const { default: html2canvas } = await import('html2canvas');
             const { default: jsPDF } = await import('jspdf');
-            const canvas = await html2canvas(certRef.current, { scale: 3, useCORS: true, backgroundColor: '#ffffff' });
+            const canvas = await html2canvas(certRef.current, { 
+                scale: 3, 
+                useCORS: true, 
+                backgroundColor: '#ffffff',
+                // @ts-ignore - letterRendering helps with word-spacing issues in some environments
+                letterRendering: true 
+            });
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 3, canvas.height / 3] });
             pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
