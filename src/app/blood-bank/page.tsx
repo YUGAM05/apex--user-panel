@@ -325,14 +325,25 @@ function CertificateView({
             </div>
 
             {/* Certificate Preview */}
-            <div ref={wrapperRef} className="w-full flex justify-center overflow-hidden" style={{ height: `${visibleHeight}px`, minHeight: scale > 0 ? `${visibleHeight}px` : 'auto' }}>
+            <div 
+                ref={wrapperRef} 
+                className="w-full flex justify-center" 
+                style={{ 
+                    height: `${Math.round(600 * scale)}px`, 
+                    overflow: 'hidden',
+                    position: 'relative'
+                }}
+            >
                 {scale > 0 && (
                     <div style={{ 
                         transform: `scale(${scale})`, 
-                        transformOrigin: 'top center', 
+                        transformOrigin: 'top left', 
                         width: '860px', 
                         height: '600px',
-                        flexShrink: 0 
+                        flexShrink: 0,
+                        position: 'absolute',
+                        left: '50%',
+                        marginLeft: `-${Math.round(860 * scale / 2)}px`
                     }}>
                         <div
                             ref={certRef}
@@ -426,7 +437,7 @@ function CertificateView({
                             {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div */}
                             <div style={{
                                 position: 'absolute',
-                                top: '360px',
+                                top: '370px',
                                 left: '50%',
                                 transform: 'translateX(-50%)',
                                 width: '500px',
