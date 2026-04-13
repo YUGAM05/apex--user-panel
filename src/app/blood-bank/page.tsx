@@ -325,192 +325,199 @@ function CertificateView({
             </div>
 
             {/* Certificate Preview */}
-            <div ref={wrapperRef} className="w-full flex justify-center overflow-hidden" style={{ height: `${visibleHeight}px` }}>
-                <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', width: '860px', flexShrink: 0 }}>
-                    <div
-                        ref={certRef}
-                        style={{
-                            width: '860px', height: '600px',
-                            background: '#ffffff', position: 'relative', overflow: 'hidden',
-                            fontFamily: 'Georgia, serif',
-                            boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
-                        }}
-                    >
-                        {/* Blood drop watermark */}
-                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 1, opacity: 0.07 }}>
-                            <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
-                                <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
-                            </svg>
-                        </div>
+            <div ref={wrapperRef} className="w-full flex justify-center overflow-hidden" style={{ height: `${visibleHeight}px`, minHeight: scale > 0 ? `${visibleHeight}px` : 'auto' }}>
+                {scale > 0 && (
+                    <div style={{ 
+                        transform: `scale(${scale})`, 
+                        transformOrigin: 'top center', 
+                        width: '860px', 
+                        height: '600px',
+                        flexShrink: 0 
+                    }}>
+                        <div
+                            ref={certRef}
+                            style={{
+                                width: '860px', height: '600px',
+                                background: '#ffffff', position: 'relative', overflow: 'hidden',
+                                fontFamily: 'Georgia, serif',
+                                boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
+                            }}
+                        >
+                            {/* Blood drop watermark */}
+                            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 1, opacity: 0.07 }}>
+                                <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
+                                    <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
+                                </svg>
+                            </div>
 
-                        {/* Logo top-left */}
-                        <div style={{ position: 'absolute', top: '20px', left: '30px', zIndex: 10 }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            {/* Logo top-left */}
+                            <div style={{ position: 'absolute', top: '20px', left: '30px', zIndex: 10 }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width: '75px', height: '75px', objectFit: 'contain' }} crossOrigin="anonymous" />
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src="/pillora-text.png" alt="Pillora" style={{ height: '50px', width: 'auto' }} crossOrigin="anonymous" />
+                                </div>
+                            </div>
+
+                            {/* Certificate heading */}
+                            <div style={{ position: 'absolute', top: '105px', left: 0, right: 0, textAlign: 'center', zIndex: 10 }}>
+                                <div style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontWeight: 900,
+                                    fontSize: '54px',
+                                    color: '#111',
+                                    textTransform: 'uppercase',
+                                    lineHeight: '1.1',
+                                    letterSpacing: '2px',
+                                    wordSpacing: '12px',
+                                }}>
+                                    CERTIFICATE
+                                </div>
+                                <div style={{
+                                    fontFamily: 'Arial, Helvetica, sans-serif',
+                                    fontSize: '14px',
+                                    color: '#444',
+                                    marginTop: '20px',
+                                    textTransform: 'uppercase',
+                                    fontWeight: 600,
+                                    letterSpacing: '1px',
+                                    wordSpacing: '8px',
+                                }}>
+                                    OF BLOOD DONOR REGISTRATION
+                                </div>
+                            </div>
+
+                            {/* Presented to */}
+                            <div style={{ position: 'absolute', top: '235px', left: 0, right: 0, textAlign: 'center', zIndex: 10 }}>
+                                <div style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontSize: '22px',
+                                    color: '#c0392b',
+                                    fontStyle: 'italic',
+                                    letterSpacing: '0.5px',
+                                    wordSpacing: '6px',
+                                }}>
+                                    This Certificate is Presented to
+                                </div>
+                            </div>
+
+                            {/* ✅ FIX: Donor name — OWN absolute div, no underline inside */}
+                            <div style={{
+                                position: 'absolute',
+                                top: '278px',
+                                left: 0,
+                                right: 0,
+                                textAlign: 'center',
+                                zIndex: 10,
+                            }}>
+                                <span style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontWeight: 900,
+                                    fontSize: '46px',
+                                    color: '#c0392b',
+                                    letterSpacing: '1px',
+                                    wordSpacing: '10px',
+                                }}>
+                                    {name}
+                                </span>
+                            </div>
+
+                            {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div */}
+                            <div style={{
+                                position: 'absolute',
+                                top: '360px',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                width: '500px',
+                                borderBottom: '1.5px solid #333',
+                                zIndex: 10,
+                            }} />
+
+                            {/* Sub text */}
+                            <div style={{ position: 'absolute', top: '385px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
+                                <div style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontSize: '16px',
+                                    color: '#333',
+                                    lineHeight: '1.7',
+                                    letterSpacing: '0.3px',
+                                    wordSpacing: '5px',
+                                }}>
+                                    for registering as a blood donor and showing commitment to saving lives.
+                                    <br />
+                                    Thank you — We really appreciate your actions.
+                                </div>
+                            </div>
+
+                            {/* Gold medal image */}
+                            <div style={{ position: 'absolute', bottom: '35px', left: '50%', transform: 'translateX(-50%)', zIndex: 10 }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width: '75px', height: '75px', objectFit: 'contain' }} crossOrigin="anonymous" />
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/pillora-text.png" alt="Pillora" style={{ height: '50px', width: 'auto' }} crossOrigin="anonymous" />
+                                <img src="/gold-medal.png" alt="Award Medal" style={{ width: '95px', height: 'auto', display: 'block' }} crossOrigin="anonymous" />
                             </div>
-                        </div>
 
-                        {/* Certificate heading */}
-                        <div style={{ position: 'absolute', top: '105px', left: 0, right: 0, textAlign: 'center', zIndex: 10 }}>
+                            {/* ✅ FIX: Date text — OWN absolute div */}
                             <div style={{
-                                fontFamily: '"Times New Roman", Times, serif',
-                                fontWeight: 900,
-                                fontSize: '54px',
-                                color: '#111',
-                                textTransform: 'uppercase',
-                                lineHeight: '1.1',
-                                letterSpacing: '2px',
-                                wordSpacing: '12px',
+                                position: 'absolute',
+                                bottom: '78px',
+                                left: '65px',
+                                zIndex: 10,
                             }}>
-                                CERTIFICATE
+                                <span style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontSize: '15px',
+                                    color: '#222',
+                                    letterSpacing: '0.5px',
+                                    wordSpacing: '4px',
+                                }}>
+                                    {registrationDate}
+                                </span>
                             </div>
+
+                            {/* ✅ FIX: Date underline — COMPLETELY SEPARATE absolute div */}
                             <div style={{
-                                fontFamily: 'Arial, Helvetica, sans-serif',
-                                fontSize: '14px',
-                                color: '#444',
-                                marginTop: '20px',
-                                textTransform: 'uppercase',
-                                fontWeight: 600,
-                                letterSpacing: '1px',
-                                wordSpacing: '8px',
-                            }}>
-                                OF BLOOD DONOR REGISTRATION
+                                position: 'absolute',
+                                bottom: '62px',
+                                left: '65px',
+                                width: '180px',
+                                borderBottom: '1.5px solid #333',
+                                zIndex: 10,
+                            }} />
+
+                            {/* Signature bottom-right */}
+                            <div style={{ position: 'absolute', bottom: '40px', right: '75px', zIndex: 10, textAlign: 'center' }}>
+                                <div style={{
+                                    fontFamily: 'Arial, Helvetica, sans-serif',
+                                    fontSize: '13px',
+                                    color: '#333',
+                                    fontWeight: 600,
+                                    letterSpacing: '0.5px',
+                                    wordSpacing: '4px',
+                                }}>
+                                    Founder & CEO of Pillora
+                                </div>
+                                <svg width="110" height="40" viewBox="0 0 120 40" style={{ display: 'block', margin: '0 auto' }}>
+                                    <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round" />
+                                </svg>
+                                <div style={{ borderBottom: '1.5px solid #000', margin: '4px auto 6px', width: '150px' }} />
+                                <div style={{
+                                    fontFamily: 'Arial, Helvetica, sans-serif',
+                                    fontSize: '14px',
+                                    color: '#222',
+                                    fontWeight: 700,
+                                    letterSpacing: '1px',
+                                    wordSpacing: '5px',
+                                }}>
+                                    Shah Yugam V
+                                </div>
                             </div>
                         </div>
-
-                        {/* Presented to */}
-                        <div style={{ position: 'absolute', top: '235px', left: 0, right: 0, textAlign: 'center', zIndex: 10 }}>
-                            <div style={{
-                                fontFamily: '"Times New Roman", Times, serif',
-                                fontSize: '22px',
-                                color: '#c0392b',
-                                fontStyle: 'italic',
-                                letterSpacing: '0.5px',
-                                wordSpacing: '6px',
-                            }}>
-                                This Certificate is Presented to
-                            </div>
-                        </div>
-
-                        {/* ✅ FIX: Donor name — OWN absolute div, no underline inside */}
-                        <div style={{
-                            position: 'absolute',
-                            top: '278px',
-                            left: 0,
-                            right: 0,
-                            textAlign: 'center',
-                            zIndex: 10,
-                        }}>
-                            <span style={{
-                                fontFamily: '"Times New Roman", Times, serif',
-                                fontWeight: 900,
-                                fontSize: '46px',
-                                color: '#c0392b',
-                                letterSpacing: '1px',
-                                wordSpacing: '10px',
-                            }}>
-                                {name}
-                            </span>
-                        </div>
-
-                        {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div, top = 278 + font height(~70px) + gap(12px) = 360px */}
-                        <div style={{
-                            position: 'absolute',
-                            top: '360px',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            width: '500px',
-                            borderBottom: '1.5px solid #333',
-                            zIndex: 10,
-                        }} />
-
-                        {/* Sub text */}
-                        <div style={{ position: 'absolute', top: '385px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
-                            <div style={{
-                                fontFamily: '"Times New Roman", Times, serif',
-                                fontSize: '16px',
-                                color: '#333',
-                                lineHeight: '1.7',
-                                letterSpacing: '0.3px',
-                                wordSpacing: '5px',
-                            }}>
-                                for registering as a blood donor and showing commitment to saving lives.
-                                <br />
-                                Thank you — We really appreciate your actions.
-                            </div>
-                        </div>
-
-                        {/* Gold medal image */}
-                        <div style={{ position: 'absolute', bottom: '35px', left: '50%', transform: 'translateX(-50%)', zIndex: 10 }}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/gold-medal.png" alt="Award Medal" style={{ width: '95px', height: 'auto', display: 'block' }} crossOrigin="anonymous" />
-                        </div>
-
-                        {/* ✅ FIX: Date text — OWN absolute div */}
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '78px',
-                            left: '65px',
-                            zIndex: 10,
-                        }}>
-                            <span style={{
-                                fontFamily: '"Times New Roman", Times, serif',
-                                fontSize: '15px',
-                                color: '#222',
-                                letterSpacing: '0.5px',
-                                wordSpacing: '4px',
-                            }}>
-                                {registrationDate}
-                            </span>
-                        </div>
-
-                        {/* ✅ FIX: Date underline — COMPLETELY SEPARATE absolute div, below the date text */}
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '62px',
-                            left: '65px',
-                            width: '180px',
-                            borderBottom: '1.5px solid #333',
-                            zIndex: 10,
-                        }} />
-
-                        {/* Signature bottom-right */}
-                        <div style={{ position: 'absolute', bottom: '40px', right: '75px', zIndex: 10, textAlign: 'center' }}>
-                            <div style={{
-                                fontFamily: 'Arial, Helvetica, sans-serif',
-                                fontSize: '13px',
-                                color: '#333',
-                                fontWeight: 600,
-                                letterSpacing: '0.5px',
-                                wordSpacing: '4px',
-                            }}>
-                                Founder & CEO of Pillora
-                            </div>
-                            <svg width="110" height="40" viewBox="0 0 120 40" style={{ display: 'block', margin: '0 auto' }}>
-                                <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round" />
-                            </svg>
-                            <div style={{ borderBottom: '1.5px solid #000', margin: '4px auto 6px', width: '150px' }} />
-                            <div style={{
-                                fontFamily: 'Arial, Helvetica, sans-serif',
-                                fontSize: '14px',
-                                color: '#222',
-                                fontWeight: 700,
-                                letterSpacing: '1px',
-                                wordSpacing: '5px',
-                            }}>
-                                Shah Yugam V
-                            </div>
-                        </div>
-
                     </div>
-                </div>
+                )}
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm mt-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-full mt-4">
                 <button onClick={onDownload} className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                     Download Certificate
