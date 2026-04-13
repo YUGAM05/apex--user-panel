@@ -664,14 +664,14 @@ function DonateForm() {
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Full Name</label>
                     <div className="relative">
                         <User className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
-                        <input name="name" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all" placeholder="Enter your full name" />
+                        <input name="name" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all" placeholder="Enter your full name" />
                     </div>
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Blood Group</label>
                     <div className="relative">
                         <Droplet className="absolute left-3 top-3.5 w-5 h-5 text-red-500" />
-                        <select name="bloodGroup" onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
+                        <select name="bloodGroup" onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
                             {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(g => (
                                 <option key={g} value={g}>{g}</option>
                             ))}
@@ -680,11 +680,11 @@ function DonateForm() {
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Age</label>
-                    <input name="age" type="number" min="18" max="60" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="18-60 years" />
+                    <input name="age" type="number" min="18" max="60" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="18-60 years" />
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Gender</label>
-                    <select name="gender" onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+                    <select name="gender" onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
                         <option>Male</option>
                         <option>Female</option>
                         <option>Other</option>
@@ -694,7 +694,7 @@ function DonateForm() {
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Phone Number</label>
                     <div className="relative">
                         <Phone className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
-                        <input name="phone" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="+91 98765 00000" />
+                        <input name="phone" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="+91 98765 00000" />
                     </div>
                 </div>
             </div>
@@ -702,17 +702,17 @@ function DonateForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">City</label>
-                    <input name="city" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="City" />
+                    <input name="city" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="City" />
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Area / Locality</label>
-                    <input name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Locality" />
+                    <input name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Locality" />
                 </div>
             </div>
 
             <div>
                 <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Full Address</label>
-                <textarea name="address" rows={2} required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="House No, Street, Landmark" />
+                <textarea name="address" rows={2} required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="House No, Street, Landmark" />
             </div>
 
             <div className="bg-red-50 p-5 rounded-2xl flex items-start gap-4 border border-red-100 shadow-sm shadow-red-50">
@@ -846,18 +846,18 @@ function RequestForm() {
                 <div className="md:col-span-2 grid grid-cols-3 gap-6">
                     <div className="col-span-2">
                         <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Patient Name</label>
-                        <input name="patientName" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Patient Name" />
+                        <input name="patientName" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Patient Name" />
                     </div>
                     <div>
                         <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Age</label>
-                        <input name="age" type="number" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Age" />
+                        <input name="age" type="number" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Age" />
                     </div>
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Blood Group Needed</label>
                     <div className="relative">
                         <Droplet className="absolute left-3 top-3.5 w-5 h-5 text-red-600" />
-                        <select name="bloodGroup" onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none font-bold text-red-900">
+                        <select name="bloodGroup" onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none font-bold text-red-900">
                             {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(g => (
                                 <option key={g} value={g}>{g}</option>
                             ))}
@@ -866,7 +866,7 @@ function RequestForm() {
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Units Needed</label>
-                    <input name="units" type="number" min="1" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Ex: 2" />
+                    <input name="units" type="number" min="1" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Ex: 2" />
                 </div>
             </div>
 
@@ -874,34 +874,34 @@ function RequestForm() {
                 <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Hospital Name & Address</label>
                 <div className="relative">
                     <MapPin className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
-                    <textarea name="hospitalAddress" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Room No, Hospital Name, Area..." />
+                    <textarea name="hospitalAddress" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Room No, Hospital Name, Area..." />
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">City</label>
-                    <input name="city" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" />
+                    <input name="city" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" />
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Area / Locality</label>
-                    <input name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="e.g. Downtown" />
+                    <input name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="e.g. Downtown" />
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Contact Person Number</label>
-                    <input name="contactNumber" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="For coordination" />
+                    <input name="contactNumber" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="For coordination" />
                 </div>
             </div>
 
-            <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
+            <div className="bg-white border border-gray-200 p-6 rounded-2xl">
                 <div className="flex items-center gap-2 mb-4">
-                    <ShieldCheck className="w-5 h-5 text-blue-600" />
-                    <h3 className="font-bold text-blue-900">Mandatory KYC Verification</h3>
+                    <ShieldCheck className="w-5 h-5 text-gray-600" />
+                    <h3 className="font-bold text-gray-900">Mandatory KYC Verification</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Document Type</label>
-                        <select name="kycDocumentType" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none">
+                        <select name="kycDocumentType" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
                             <option value="Aadhar Card">Aadhar Card</option>
                             <option value="PAN Card">PAN Card</option>
                             <option value="Driving License">Driving License</option>
@@ -930,7 +930,7 @@ function RequestForm() {
                         )}
                     </div>
                 </div>
-                <p className="text-[10px] text-blue-600 mt-3 flex items-center gap-1">
+                <p className="text-[10px] text-gray-500 mt-3 flex items-center gap-1">
                     <Info className="w-3 h-3" /> Your ID is only used for verification and is not shared with donors. Your KYC is just used for preventing fraud.
                 </p>
             </div>
