@@ -293,6 +293,7 @@ function CertificateView({
     onReset: () => void;
 }) {
     const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const scaleWrapperRef = React.useRef<HTMLDivElement>(null);
     const [scale, setScale] = React.useState(1);
 
     React.useEffect(() => {
@@ -309,8 +310,7 @@ function CertificateView({
         return () => ro.disconnect();
     }, []);
 
-    const CERT_H = 600;
-    const visibleHeight = Math.round(CERT_H * scale);
+    const visibleHeight = Math.round(600 * scale);
 
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center gap-6 w-full">
@@ -324,27 +324,46 @@ function CertificateView({
                 </div>
             </div>
 
-            {/* Certificate Preview */}
-            <div 
-                ref={wrapperRef} 
-                className="w-full overflow-hidden" 
-                style={{ height: `${Math.round(600 * scale)}px` }}
+            {/* 
+                MOBILE RESPONSIVE WRAPPER STRATEGY:
+                - wrapperRef: measures available width, sets visible height
+                - scaleWrapperRef: applies CSS scale for screen display ONLY
+                - certRef: the actual 860x600 certificate — html2canvas captures this at full size
+                  Before capture we temporarily set scaleWrapperRef transform to scale(1)
+                  so html2canvas sees the full unscaled element
+            */}
+            <div
+                ref={wrapperRef}
+                style={{
+                    width: '100%',
+                    height: `${visibleHeight}px`,
+                    overflow: 'hidden',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                }}
             >
-                {/* Middle wrapper handles UI Scaling ONLY */}
-                <div style={{ 
-                    transform: `scale(${scale})`, 
-                    transformOrigin: 'top center', 
-                    width: '860px', 
-                    margin: '0 auto'
-                }}>
-                    {/* Inner div — This is what html2canvas captures. Stable Relative Base. */}
+                <div
+                    ref={scaleWrapperRef}
+                    style={{
+                        transform: `scale(${scale})`,
+                        transformOrigin: 'top center',
+                        width: '860px',
+                        flexShrink: 0,
+                    }}
+                >
+                    {/* ── CERTIFICATE ── html2canvas captures everything inside here ── */}
                     <div
                         ref={certRef}
                         style={{
-                            width: '860px', height: '600px',
-                            background: '#ffffff', position: 'relative', overflow: 'hidden',
+                            width: '860px',
+                            height: '600px',
+                            background: '#ffffff',
+                            position: 'relative',
+                            overflow: 'hidden',
                             fontFamily: 'Georgia, serif',
-                            boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
+                            boxShadow: '0 8px 48px rgba(0,0,0,0.18)',
+                            borderRadius: '8px',
                         }}
                     >
                         {/* Blood drop watermark */}
@@ -375,7 +394,7 @@ function CertificateView({
                                 lineHeight: '1.1',
                                 letterSpacing: '2px',
                                 wordSpacing: '12px',
-                             }}>
+                            }}>
                                 CERTIFICATE
                             </div>
                             <div style={{
@@ -406,7 +425,7 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* ✅ FIX: Donor name — OWN absolute div, no underline inside */}
+                        {/* Donor name — own absolute div */}
                         <div style={{
                             position: 'absolute',
                             top: '278px',
@@ -427,10 +446,10 @@ function CertificateView({
                             </span>
                         </div>
 
-                        {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div */}
+                        {/* Name underline — separate absolute div */}
                         <div style={{
                             position: 'absolute',
-                            top: '370px',
+                            top: '360px',
                             left: '50%',
                             transform: 'translateX(-50%)',
                             width: '500px',
@@ -439,7 +458,7 @@ function CertificateView({
                         }} />
 
                         {/* Sub text */}
-                        <div style={{ position: 'absolute', top: '385px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
+                        <div style={{ position: 'absolute', top: '375px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
                             <div style={{
                                 fontFamily: '"Times New Roman", Times, serif',
                                 fontSize: '16px',
@@ -454,19 +473,14 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Gold medal image */}
+                        {/* Gold medal */}
                         <div style={{ position: 'absolute', bottom: '35px', left: '50%', transform: 'translateX(-50%)', zIndex: 10 }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src="/gold-medal.png" alt="Award Medal" style={{ width: '95px', height: 'auto', display: 'block' }} crossOrigin="anonymous" />
                         </div>
 
-                        {/* ✅ FIX: Date text — OWN absolute div */}
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '78px',
-                            left: '65px',
-                            zIndex: 10,
-                        }}>
+                        {/* Date text */}
+                        <div style={{ position: 'absolute', bottom: '78px', left: '65px', zIndex: 10 }}>
                             <span style={{
                                 fontFamily: '"Times New Roman", Times, serif',
                                 fontSize: '15px',
@@ -478,7 +492,7 @@ function CertificateView({
                             </span>
                         </div>
 
-                        {/* ✅ FIX: Date underline — COMPLETELY SEPARATE absolute div */}
+                        {/* Date underline */}
                         <div style={{
                             position: 'absolute',
                             bottom: '62px',
@@ -488,7 +502,7 @@ function CertificateView({
                             zIndex: 10,
                         }} />
 
-                        {/* Signature bottom-right */}
+                        {/* Signature */}
                         <div style={{ position: 'absolute', bottom: '40px', right: '75px', zIndex: 10, textAlign: 'center' }}>
                             <div style={{
                                 fontFamily: 'Arial, Helvetica, sans-serif',
@@ -515,12 +529,14 @@ function CertificateView({
                                 Shah Yugam V
                             </div>
                         </div>
+
                     </div>
+                    {/* ── END CERTIFICATE ── */}
                 </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-full mt-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full mt-4">
                 <button onClick={onDownload} className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                     Download Certificate
@@ -544,6 +560,7 @@ function DonateForm() {
         phone: '', city: '', area: '', address: ''
     });
     const certRef = React.useRef<HTMLDivElement>(null);
+    const scaleWrapperRef = React.useRef<HTMLDivElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -582,15 +599,37 @@ function DonateForm() {
             const { default: html2canvas } = await import('html2canvas');
             const { default: jsPDF } = await import('jspdf');
 
-            if (document.fonts) {
-                await document.fonts.ready;
+            if (document.fonts) await document.fonts.ready;
+
+            // ✅ KEY FIX: Temporarily remove the CSS scale transform before capture
+            // so html2canvas sees the element at its full natural 860x600 size
+            const scaleWrapper = certRef.current.parentElement;
+            const originalTransform = scaleWrapper?.style.transform || '';
+            const originalTransformOrigin = scaleWrapper?.style.transformOrigin || '';
+
+            if (scaleWrapper) {
+                scaleWrapper.style.transform = 'scale(1)';
+                scaleWrapper.style.transformOrigin = 'top left';
             }
+
+            // Small delay to let the browser repaint after removing transform
+            await new Promise(resolve => setTimeout(resolve, 100));
 
             const canvas = await html2canvas(certRef.current, {
                 scale: 2,
                 useCORS: true,
                 backgroundColor: '#ffffff',
+                width: 860,
+                height: 600,
+                windowWidth: 860,
             });
+
+            // ✅ Restore the CSS scale transform after capture
+            if (scaleWrapper) {
+                scaleWrapper.style.transform = originalTransform;
+                scaleWrapper.style.transformOrigin = originalTransformOrigin;
+            }
+
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
             pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
