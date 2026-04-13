@@ -416,10 +416,10 @@ function CertificateView({
                             </span>
                         </div>
 
-                        {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div, top = 278 + font height(~55px) + gap(10px) = 343px */}
+                        {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div, top = 278 + font height(~70px) + gap(12px) = 360px */}
                         <div style={{
                             position: 'absolute',
-                            top: '343px',
+                            top: '360px',
                             left: '50%',
                             transform: 'translateX(-50%)',
                             width: '500px',
@@ -428,7 +428,7 @@ function CertificateView({
                         }} />
 
                         {/* Sub text */}
-                        <div style={{ position: 'absolute', top: '370px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
+                        <div style={{ position: 'absolute', top: '385px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
                             <div style={{
                                 fontFamily: '"Times New Roman", Times, serif',
                                 fontSize: '16px',
