@@ -31,7 +31,7 @@ export default function BloodBankPage() {
             }
         };
         fetchUserRequests();
-        const interval = setInterval(fetchUserRequests, 10000); // 10s sync
+        const interval = setInterval(fetchUserRequests, 10000);
         return () => clearInterval(interval);
     }, []);
 
@@ -39,7 +39,6 @@ export default function BloodBankPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            {/* Rejection Alert Notification */}
             <AnimatePresence>
                 {rejectedRequest && (
                     <motion.div
@@ -66,9 +65,8 @@ export default function BloodBankPage() {
                     </motion.div>
                 )}
             </AnimatePresence>
-            {/* Hero Section - Visual Enhancement */}
+
             <div className="bg-red-900 min-h-[400px] text-white pt-32 pb-48 px-4 relative overflow-hidden">
-                {/* Background Image Layer */}
                 <div
                     className="absolute inset-0 z-0 opacity-40 mix-blend-overlay scale-110"
                     style={{
@@ -77,12 +75,9 @@ export default function BloodBankPage() {
                         backgroundPosition: 'center'
                     }}
                 />
-
-                {/* Gradient Overlays */}
                 <div className="absolute inset-0 bg-gradient-to-b from-red-600/50 via-transparent to-red-900/80 z-0" />
                 <div className="absolute inset-0 bg-gradient-to-r from-red-800 via-transparent to-red-800 z-0 opacity-60" />
 
-                {/* Animated ECG Heartbeat Line */}
                 <div className="absolute bottom-24 left-0 w-full h-32 z-0 opacity-20 pointer-events-none">
                     <svg width="100%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none">
                         <motion.path
@@ -92,40 +87,21 @@ export default function BloodBankPage() {
                             strokeWidth="2"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 1 }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                ease: "linear",
-                                repeatType: "loop"
-                            }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatType: "loop" }}
                         />
                     </svg>
                 </div>
 
-                {/* Floating Decorative Icons */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
                     {[...Array(6)].map((_, i) => (
                         <motion.div
                             key={i}
                             initial={{ y: "110%", x: `${10 + i * 15}%`, opacity: 0 }}
-                            animate={{
-                                y: "-10%",
-                                opacity: [0, 0.4, 0],
-                                rotate: [0, 45, -45, 0]
-                            }}
-                            transition={{
-                                duration: 8 + i * 2,
-                                repeat: Infinity,
-                                delay: i * 1.5,
-                                ease: "easeInOut"
-                            }}
+                            animate={{ y: "-10%", opacity: [0, 0.4, 0], rotate: [0, 45, -45, 0] }}
+                            transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: "easeInOut" }}
                             className="absolute"
                         >
-                            {i % 2 === 0 ? (
-                                <Droplet className="w-8 h-8 text-red-200" />
-                            ) : (
-                                <Heart className="w-6 h-6 text-red-300" />
-                            )}
+                            {i % 2 === 0 ? <Droplet className="w-8 h-8 text-red-200" /> : <Heart className="w-6 h-6 text-red-300" />}
                         </motion.div>
                     ))}
                 </div>
@@ -152,7 +128,6 @@ export default function BloodBankPage() {
                         Every second counts. Every drop saves.
                     </motion.h2>
 
-                    {/* Live Metrics Bar - More Integrated & Clean */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -178,7 +153,6 @@ export default function BloodBankPage() {
                 </div>
             </div>
 
-            {/* Mission Section - The "In-Between" Content */}
             <div className="max-w-4xl mx-auto px-4 -mt-24 mb-16 relative z-30 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -195,7 +169,6 @@ export default function BloodBankPage() {
                         Be a Hero. <br className="hidden md:block" />
                         <span className="text-red-600">Save a Life.</span>
                     </motion.h1>
-
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -207,14 +180,10 @@ export default function BloodBankPage() {
                 </motion.div>
             </div>
 
-            {/* Main Content Area */}
             <div className="flex-1 max-w-7xl mx-auto w-full px-4 mb-20 relative z-20">
                 <div className="grid lg:grid-cols-3 gap-8">
-
-                    {/* Left Column: Forms */}
                     <div className="lg:col-span-2">
                         <div className="bg-white rounded-3xl shadow-xl border border-gray-100">
-                            {/* Stylish Tabs */}
                             <div className="flex p-2 bg-gray-50/80 backend-blur">
                                 <button
                                     onClick={() => setActiveTab('donate')}
@@ -237,14 +206,11 @@ export default function BloodBankPage() {
                                     Request Blood
                                 </button>
                             </div>
-
                             <div className="p-8 md:p-10">
                                 {activeTab === 'donate' ? <DonateForm /> : <RequestForm />}
                             </div>
                         </div>
                     </div>
-
-                    {/* Right Column: Live Urgent Requests */}
                     <div className="lg:col-span-1">
                         <BloodBankInfoSidebar />
                     </div>
@@ -265,9 +231,7 @@ function BloodBankInfoSidebar() {
                 </div>
                 <p className="text-red-600 text-xs">Essential information for our heroes & requesters</p>
             </div>
-
             <div className="p-6 space-y-6">
-                {/* Donor Section */}
                 <div>
                     <h4 className="flex items-center gap-2 font-bold text-gray-900 mb-3 text-sm uppercase tracking-wide">
                         <Heart className="w-4 h-4 text-red-500" /> For Donors
@@ -287,10 +251,7 @@ function BloodBankInfoSidebar() {
                         </li>
                     </ul>
                 </div>
-
                 <div className="w-full h-px bg-red-50" />
-
-                {/* Requester Section */}
                 <div>
                     <h4 className="flex items-center gap-2 font-bold text-gray-900 mb-3 text-sm uppercase tracking-wide">
                         <Siren className="w-4 h-4 text-red-500" /> For Requests
@@ -311,7 +272,6 @@ function BloodBankInfoSidebar() {
                     </ul>
                 </div>
             </div>
-
             <div className="bg-red-900 p-5 text-center text-white">
                 <p className="text-sm font-medium opacity-90 mb-2">Need direct assistance?</p>
                 <a href="tel:+919429167856" className="inline-flex items-center justify-center gap-2 bg-white text-red-900 font-bold py-2 px-6 rounded-full text-sm hover:bg-red-50 transition-colors">
@@ -321,6 +281,7 @@ function BloodBankInfoSidebar() {
         </div>
     );
 }
+
 
 // ── Responsive Certificate Preview ──────────────────────────────────────────
 function CertificateView({
@@ -355,7 +316,7 @@ function CertificateView({
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center gap-6 w-full">
 
-            {/* ── Success Banner ── */}
+            {/* Success Banner */}
             <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-2xl px-4 py-3 w-full">
                 <CheckCircle className="w-6 h-6 text-green-600 shrink-0" />
                 <div>
@@ -364,14 +325,9 @@ function CertificateView({
                 </div>
             </div>
 
-            {/* ── Certificate Preview (Scales to fit screen) ── */}
+            {/* Certificate Preview */}
             <div ref={wrapperRef} className="w-full flex justify-center overflow-hidden" style={{ height: `${visibleHeight}px` }}>
-                <div style={{ 
-                    transform: `scale(${scale})`, 
-                    transformOrigin: 'top center', 
-                    width: '860px',
-                    flexShrink: 0
-                }}>
+                <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', width: '860px', flexShrink: 0 }}>
                     <div
                         ref={certRef}
                         style={{
@@ -381,45 +337,45 @@ function CertificateView({
                             boxShadow: '0 8px 48px rgba(0,0,0,0.18)', borderRadius: '8px',
                         }}
                     >
-                        {/* Clean Corner (Design Removed) */}
                         {/* Blood drop watermark */}
-                        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:1, opacity:0.07 }}>
+                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 1, opacity: 0.07 }}>
                             <svg width="280" height="320" viewBox="0 0 100 120" fill="#c0392b">
                                 <path d="M50 5 C50 5,10 60,10 80 A40 40 0 0 0 90 80 C90 60,50 5,50 5Z" />
                             </svg>
                         </div>
+
                         {/* Logo top-left */}
-                        <div style={{ position:'absolute', top:'20px', left:'30px', display:'block', zIndex:10 }}>
-                            <div style={{ display:'flex', alignItems:'center', gap:'12px' }}>
+                        <div style={{ position: 'absolute', top: '20px', left: '30px', display: 'block', zIndex: 10 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width:'75px', height:'75px', objectFit:'contain' }} crossOrigin="anonymous" />
+                                <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width: '75px', height: '75px', objectFit: 'contain' }} crossOrigin="anonymous" />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/pillora-text.png" alt="Pillora" style={{ height:'50px', width:'auto' }} crossOrigin="anonymous" />
+                                <img src="/pillora-text.png" alt="Pillora" style={{ height: '50px', width: 'auto' }} crossOrigin="anonymous" />
                             </div>
                         </div>
 
                         {/* Certificate heading */}
-                        <div style={{ position:'absolute', top:'105px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ 
-                                fontFamily:'"Times New Roman", Times, serif', 
-                                fontWeight:900, 
-                                fontSize:'54px', 
-                                color:'#111', 
-                                textTransform:'uppercase', 
-                                lineHeight:'1.1',
-                                letterSpacing: '2px', 
+                        <div style={{ position: 'absolute', top: '105px', left: 0, right: 0, textAlign: 'center', zIndex: 10 }}>
+                            <div style={{
+                                fontFamily: '"Times New Roman", Times, serif',
+                                fontWeight: 900,
+                                fontSize: '54px',
+                                color: '#111',
+                                textTransform: 'uppercase',
+                                lineHeight: '1.1',
+                                letterSpacing: '2px',
                                 wordSpacing: '12px',
                                 whiteSpace: 'pre-wrap'
                             }}>
                                 CERTIFICATE
                             </div>
-                            <div style={{ 
-                                fontFamily:'Arial, Helvetica, sans-serif', 
-                                fontSize:'14px', 
-                                color:'#444', 
-                                marginTop:'20px', 
-                                textTransform:'uppercase', 
-                                fontWeight:600,
+                            <div style={{
+                                fontFamily: 'Arial, Helvetica, sans-serif',
+                                fontSize: '14px',
+                                color: '#444',
+                                marginTop: '20px',
+                                textTransform: 'uppercase',
+                                fontWeight: 600,
                                 letterSpacing: '1px',
                                 wordSpacing: '8px',
                                 whiteSpace: 'pre-wrap'
@@ -429,12 +385,12 @@ function CertificateView({
                         </div>
 
                         {/* Presented to */}
-                        <div style={{ position:'absolute', top:'235px', left:0, right:0, textAlign:'center', zIndex:10 }}>
-                            <div style={{ 
-                                fontFamily:'"Times New Roman", Times, serif', 
-                                fontSize:'22px', 
-                                color:'#c0392b', 
-                                fontStyle:'italic',
+                        <div style={{ position: 'absolute', top: '235px', left: 0, right: 0, textAlign: 'center', zIndex: 10 }}>
+                            <div style={{
+                                fontFamily: '"Times New Roman", Times, serif',
+                                fontSize: '22px',
+                                color: '#c0392b',
+                                fontStyle: 'italic',
                                 letterSpacing: '0.5px',
                                 wordSpacing: '6px',
                                 whiteSpace: 'pre-wrap'
@@ -443,23 +399,40 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Donor name with requested underline structure */}
-                        <div style={{ position:'absolute', top:'275px', left:0, right:0, textAlign:'center', zIndex:10 }}>
+                        {/* ✅ FIX 1: Donor name — line is now a separate block BELOW the name, not overlapping it */}
+                        <div style={{ position: 'absolute', top: '275px', left: 0, right: 0, zIndex: 10 }}>
+                            {/* Name text centered */}
                             <div style={{ textAlign: 'center' }}>
-                                <span style={{ fontFamily:'"Times New Roman", Times, serif', fontWeight:900, fontSize:'46px', color:'#c0392b', lineHeight:'1', letterSpacing: '1px', wordSpacing: '10px' }}>
+                                <span style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontWeight: 900,
+                                    fontSize: '46px',
+                                    color: '#c0392b',
+                                    lineHeight: '1.2',
+                                    letterSpacing: '1px',
+                                    wordSpacing: '10px',
+                                    display: 'inline-block',
+                                }}>
                                     {name}
                                 </span>
-                                <div style={{ borderBottom: '1.5px solid #000', marginTop: '6px', width: '400px', margin: '6px auto 0' }} />
                             </div>
+                            {/* Underline — separate div, BELOW the name, never touching it */}
+                            <div style={{
+                                width: '400px',
+                                borderBottom: '1.5px solid #000',
+                                marginTop: '8px',
+                                marginLeft: 'auto',
+                                marginRight: 'auto',
+                            }} />
                         </div>
 
                         {/* Sub text */}
-                        <div style={{ position:'absolute', top:'375px', left:'100px', right:'100px', textAlign:'center', zIndex:10 }}>
-                            <div style={{ 
-                                fontFamily:'"Times New Roman", Times, serif', 
-                                fontSize:'16px', 
-                                color:'#333', 
-                                lineHeight:'1.7',
+                        <div style={{ position: 'absolute', top: '375px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
+                            <div style={{
+                                fontFamily: '"Times New Roman", Times, serif',
+                                fontSize: '16px',
+                                color: '#333',
+                                lineHeight: '1.7',
                                 letterSpacing: '0.3px',
                                 wordSpacing: '5px'
                             }}>
@@ -469,42 +442,75 @@ function CertificateView({
                         </div>
 
                         {/* Gold medal image */}
-                        <div style={{ position:'absolute', bottom:'35px', left:'50%', transform:'translateX(-50%)', zIndex:10 }}>
+                        <div style={{ position: 'absolute', bottom: '35px', left: '50%', transform: 'translateX(-50%)', zIndex: 10 }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/gold-medal.png" alt="Award Medal" style={{ width:'95px', height:'auto', display:'block' }} crossOrigin="anonymous" />
+                            <img src="/gold-medal.png" alt="Award Medal" style={{ width: '95px', height: 'auto', display: 'block' }} crossOrigin="anonymous" />
                         </div>
 
-                        {/* Date bottom-left with separate underline div */}
-                        <div style={{ position:'absolute', bottom:'55px', left:'65px', zIndex:10 }}>
-                            <div style={{ textAlign: 'left' }}>
-                                <span style={{ fontFamily:'"Times New Roman", Times, serif', fontSize:'15px', color:'#222', letterSpacing: '0.5px', wordSpacing: '4px' }}>
+                        {/* ✅ FIX 2: Date — text and underline are in a flex column, line is strictly BELOW the text */}
+                        <div style={{ position: 'absolute', bottom: '55px', left: '65px', zIndex: 10 }}>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'flex-start',
+                                gap: '0px',
+                            }}>
+                                <span style={{
+                                    fontFamily: '"Times New Roman", Times, serif',
+                                    fontSize: '15px',
+                                    color: '#222',
+                                    letterSpacing: '0.5px',
+                                    wordSpacing: '4px',
+                                    display: 'block',
+                                    lineHeight: '1.4',
+                                }}>
                                     {registrationDate}
                                 </span>
-                                <div style={{ borderBottom: '1.5px solid #000', marginTop: '6px', width: '160px' }} />
+                                {/* Underline — separate element, always below text */}
+                                <div style={{
+                                    width: '160px',
+                                    borderBottom: '1.5px solid #000',
+                                    marginTop: '6px',
+                                }} />
                             </div>
                         </div>
 
-                        {/* Signature bottom-right with separate underline div */}
-                        <div style={{ position:'absolute', bottom:'40px', right:'75px', zIndex:10, textAlign:'center' }}>
-                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'13px', color:'#333', fontWeight:600, letterSpacing: '0.5px', wordSpacing: '4px' }}>
+                        {/* Signature bottom-right */}
+                        <div style={{ position: 'absolute', bottom: '40px', right: '75px', zIndex: 10, textAlign: 'center' }}>
+                            <div style={{
+                                fontFamily: 'Arial, Helvetica, sans-serif',
+                                fontSize: '13px',
+                                color: '#333',
+                                fontWeight: 600,
+                                letterSpacing: '0.5px',
+                                wordSpacing: '4px'
+                            }}>
                                 Founder & CEO of Pillora
                             </div>
-                            <svg width="110" height="40" viewBox="0 0 120 40" style={{ display:'block', margin:'0 auto' }}>
-                                <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round"/>
+                            <svg width="110" height="40" viewBox="0 0 120 40" style={{ display: 'block', margin: '0 auto' }}>
+                                <path d="M10 28 Q30 8 50 22 Q70 36 90 18 Q100 12 110 20" fill="none" stroke="#111" strokeWidth="2.5" strokeLinecap="round" />
                             </svg>
                             <div style={{ borderBottom: '1.5px solid #000', margin: '4px auto 6px', width: '150px' }} />
-                            <div style={{ fontFamily:'Arial, Helvetica, sans-serif', fontSize:'14px', color:'#222', fontWeight:700, letterSpacing: '1px', wordSpacing: '5px' }}>
+                            <div style={{
+                                fontFamily: 'Arial, Helvetica, sans-serif',
+                                fontSize: '14px',
+                                color: '#222',
+                                fontWeight: 700,
+                                letterSpacing: '1px',
+                                wordSpacing: '5px'
+                            }}>
                                 Shah Yugam V
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            {/* ── Action Buttons ── */}
+            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm mt-4">
                 <button onClick={onDownload} className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 w-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                     Download Certificate
                 </button>
                 <button onClick={onReset} className="flex-1 text-gray-600 font-semibold hover:bg-gray-100 py-3.5 px-6 rounded-xl transition-colors border border-gray-200 w-full">
@@ -543,22 +549,17 @@ function DonateForm() {
 
         setLoading(true);
         try {
-            console.log('Submitting donor registration:', formData);
             const response = await api.post('/blood-bank/donors', {
                 ...formData,
-                location: [0, 0] // Placeholder location
+                location: [0, 0]
             });
-            console.log('Registration successful:', response.data);
-            // Format date: "April, 11th 2026"
             const now = new Date();
-            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const day = now.getDate();
             const suffix = day === 1 || day === 21 || day === 31 ? 'st' : day === 2 || day === 22 ? 'nd' : day === 3 || day === 23 ? 'rd' : 'th';
             setRegistrationDate(`${months[now.getMonth()]}, ${day}${suffix} ${now.getFullYear()}`);
             setSuccess(true);
         } catch (error: any) {
-            console.error('Registration error:', error);
-            console.error('Error response:', error.response);
             const errorMessage = error.response?.data?.message || error.message || 'Registration failed';
             alert(errorMessage);
         } finally {
@@ -572,15 +573,18 @@ function DonateForm() {
             const { default: html2canvas } = await import('html2canvas');
             const { default: jsPDF } = await import('jspdf');
 
-            // Wait for fonts to be ready to ensure correct character width measurement
             if (document.fonts) {
                 await document.fonts.ready;
             }
 
-            const canvas = await html2canvas(certRef.current, { 
-                scale: 2, 
-                useCORS: true, 
-                backgroundColor: '#ffffff'
+            const canvas = await html2canvas(certRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                onclone: (clonedDoc) => {
+                    const el = clonedDoc.getElementById('certificate');
+                    if (el) el.style.display = 'block';
+                }
             });
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
@@ -674,9 +678,7 @@ function DonateForm() {
             <div className="bg-red-50 p-5 rounded-2xl flex items-start gap-4 border border-red-100 shadow-sm shadow-red-50">
                 <ShieldCheck className="w-6 h-6 text-red-600 shrink-0 mt-0.5" />
                 <div className="space-y-2">
-                    <p className="text-sm text-red-900 font-bold leading-tight">
-                        Security & Transparency Notice
-                    </p>
+                    <p className="text-sm text-red-900 font-bold leading-tight">Security & Transparency Notice</p>
                     <p className="text-xs text-red-700 leading-relaxed font-medium">
                         Your data will be securely saved in our donor network. When someone in your nearest area needs blood, your <strong>name and phone number</strong> will be shared with them to facilitate immediate assistance.
                     </p>
@@ -739,13 +741,9 @@ function RequestForm() {
 
         setLoading(true);
         try {
-            console.log('Submitting blood request:', formData);
             const response = await api.post('/blood-bank/requests', formData);
-            console.log('Request successful:', response.data);
             setSuccess(true);
         } catch (error: any) {
-            console.error('Request error:', error);
-            console.error('Error response:', error.response);
             const errorMessage = error.response?.data?.message || error.message || 'Failed to submit request';
             alert(errorMessage);
         } finally {
@@ -857,7 +855,6 @@ function RequestForm() {
                 </div>
             </div>
 
-            {/* KYC Verification Section */}
             <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
                 <div className="flex items-center gap-2 mb-4">
                     <ShieldCheck className="w-5 h-5 text-blue-600" />
@@ -881,28 +878,13 @@ function RequestForm() {
                             >
                                 <Upload className="w-8 h-8 text-gray-400 mb-2" />
                                 <span className="text-xs text-gray-500 font-medium">Click to upload Aadhar Card</span>
-                                <input
-                                    id="kyc-upload"
-                                    type="file"
-                                    accept="image/*"
-                                    className="hidden"
-                                    onChange={handleFileChange}
-                                />
+                                <input id="kyc-upload" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
                             </div>
                         ) : (
                             <div className="relative group rounded-xl overflow-hidden aspect-video border border-gray-200">
-                                <img
-                                    src={formData.kycDocumentImage}
-                                    alt="KYC Document"
-                                    className="w-full h-full object-cover"
-                                />
+                                <img src={formData.kycDocumentImage} alt="KYC Document" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                                    <button
-                                        type="button"
-                                        onClick={removeImage}
-                                        className="p-2 bg-white text-red-600 rounded-full hover:bg-red-50 transition-colors shadow-lg"
-                                        title="Remove Image"
-                                    >
+                                    <button type="button" onClick={removeImage} className="p-2 bg-white text-red-600 rounded-full hover:bg-red-50 transition-colors shadow-lg" title="Remove Image">
                                         <Trash2 className="w-5 h-5" />
                                     </button>
                                 </div>
@@ -911,7 +893,7 @@ function RequestForm() {
                     </div>
                 </div>
                 <p className="text-[10px] text-blue-600 mt-3 flex items-center gap-1">
-                    <Info className="w-3 h-3" /> Your ID is only used for verification and is not shared with donors your kyc is just used for preventing fraud
+                    <Info className="w-3 h-3" /> Your ID is only used for verification and is not shared with donors. Your KYC is just used for preventing fraud.
                 </p>
             </div>
 
