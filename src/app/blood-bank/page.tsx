@@ -184,7 +184,7 @@ export default function BloodBankPage() {
                 <div className="grid lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2">
                         <div className="bg-white rounded-3xl shadow-xl border border-gray-100">
-                            <div className="flex p-2 bg-gray-50/80 backend-blur">
+                            <div className="flex p-2 bg-gray-50/80">
                                 <button
                                     onClick={() => setActiveTab('donate')}
                                     className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-3 ${activeTab === 'donate'
@@ -283,7 +283,6 @@ function BloodBankInfoSidebar() {
 }
 
 
-// ── Responsive Certificate Preview ──────────────────────────────────────────
 function CertificateView({
     name, registrationDate, certRef, onDownload, onReset
 }: {
@@ -345,7 +344,7 @@ function CertificateView({
                         </div>
 
                         {/* Logo top-left */}
-                        <div style={{ position: 'absolute', top: '20px', left: '30px', display: 'block', zIndex: 10 }}>
+                        <div style={{ position: 'absolute', top: '20px', left: '30px', zIndex: 10 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width: '75px', height: '75px', objectFit: 'contain' }} crossOrigin="anonymous" />
@@ -365,7 +364,6 @@ function CertificateView({
                                 lineHeight: '1.1',
                                 letterSpacing: '2px',
                                 wordSpacing: '12px',
-                                whiteSpace: 'pre-wrap'
                             }}>
                                 CERTIFICATE
                             </div>
@@ -378,7 +376,6 @@ function CertificateView({
                                 fontWeight: 600,
                                 letterSpacing: '1px',
                                 wordSpacing: '8px',
-                                whiteSpace: 'pre-wrap'
                             }}>
                                 OF BLOOD DONOR REGISTRATION
                             </div>
@@ -393,50 +390,55 @@ function CertificateView({
                                 fontStyle: 'italic',
                                 letterSpacing: '0.5px',
                                 wordSpacing: '6px',
-                                whiteSpace: 'pre-wrap'
                             }}>
                                 This Certificate is Presented to
                             </div>
                         </div>
 
-                        {/* ✅ FIX 1: Donor name — line is now a separate block BELOW the name, not overlapping it */}
-                        <div style={{ position: 'absolute', top: '275px', left: 0, right: 0, zIndex: 10 }}>
-                            {/* Name text centered */}
-                            <div style={{ textAlign: 'center' }}>
-                                <span style={{
-                                    fontFamily: '"Times New Roman", Times, serif',
-                                    fontWeight: 900,
-                                    fontSize: '46px',
-                                    color: '#c0392b',
-                                    lineHeight: '1.2',
-                                    letterSpacing: '1px',
-                                    wordSpacing: '10px',
-                                    display: 'inline-block',
-                                }}>
-                                    {name}
-                                </span>
-                            </div>
-                            {/* Underline — separate div, BELOW the name, never touching it */}
-                            <div style={{
-                                width: '400px',
-                                borderBottom: '1.5px solid #000',
-                                marginTop: '8px',
-                                marginLeft: 'auto',
-                                marginRight: 'auto',
-                            }} />
+                        {/* ✅ FIX: Donor name — OWN absolute div, no underline inside */}
+                        <div style={{
+                            position: 'absolute',
+                            top: '278px',
+                            left: 0,
+                            right: 0,
+                            textAlign: 'center',
+                            zIndex: 10,
+                        }}>
+                            <span style={{
+                                fontFamily: '"Times New Roman", Times, serif',
+                                fontWeight: 900,
+                                fontSize: '46px',
+                                color: '#c0392b',
+                                letterSpacing: '1px',
+                                wordSpacing: '10px',
+                            }}>
+                                {name}
+                            </span>
                         </div>
 
+                        {/* ✅ FIX: Underline — COMPLETELY SEPARATE absolute div, top = 278 + font height(~55px) + gap(10px) = 343px */}
+                        <div style={{
+                            position: 'absolute',
+                            top: '343px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '500px',
+                            borderBottom: '1.5px solid #333',
+                            zIndex: 10,
+                        }} />
+
                         {/* Sub text */}
-                        <div style={{ position: 'absolute', top: '375px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
+                        <div style={{ position: 'absolute', top: '370px', left: '100px', right: '100px', textAlign: 'center', zIndex: 10 }}>
                             <div style={{
                                 fontFamily: '"Times New Roman", Times, serif',
                                 fontSize: '16px',
                                 color: '#333',
                                 lineHeight: '1.7',
                                 letterSpacing: '0.3px',
-                                wordSpacing: '5px'
+                                wordSpacing: '5px',
                             }}>
-                                for registering as a blood donor and showing commitment to saving lives.{"\n"}
+                                for registering as a blood donor and showing commitment to saving lives.
+                                <br />
                                 Thank you — We really appreciate your actions.
                             </div>
                         </div>
@@ -447,33 +449,33 @@ function CertificateView({
                             <img src="/gold-medal.png" alt="Award Medal" style={{ width: '95px', height: 'auto', display: 'block' }} crossOrigin="anonymous" />
                         </div>
 
-                        {/* ✅ FIX 2: Date — text and underline are in a flex column, line is strictly BELOW the text */}
-                        <div style={{ position: 'absolute', bottom: '55px', left: '65px', zIndex: 10 }}>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'flex-start',
-                                gap: '0px',
+                        {/* ✅ FIX: Date text — OWN absolute div */}
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '78px',
+                            left: '65px',
+                            zIndex: 10,
+                        }}>
+                            <span style={{
+                                fontFamily: '"Times New Roman", Times, serif',
+                                fontSize: '15px',
+                                color: '#222',
+                                letterSpacing: '0.5px',
+                                wordSpacing: '4px',
                             }}>
-                                <span style={{
-                                    fontFamily: '"Times New Roman", Times, serif',
-                                    fontSize: '15px',
-                                    color: '#222',
-                                    letterSpacing: '0.5px',
-                                    wordSpacing: '4px',
-                                    display: 'block',
-                                    lineHeight: '1.4',
-                                }}>
-                                    {registrationDate}
-                                </span>
-                                {/* Underline — separate element, always below text */}
-                                <div style={{
-                                    width: '160px',
-                                    borderBottom: '1.5px solid #000',
-                                    marginTop: '6px',
-                                }} />
-                            </div>
+                                {registrationDate}
+                            </span>
                         </div>
+
+                        {/* ✅ FIX: Date underline — COMPLETELY SEPARATE absolute div, below the date text */}
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '62px',
+                            left: '65px',
+                            width: '180px',
+                            borderBottom: '1.5px solid #333',
+                            zIndex: 10,
+                        }} />
 
                         {/* Signature bottom-right */}
                         <div style={{ position: 'absolute', bottom: '40px', right: '75px', zIndex: 10, textAlign: 'center' }}>
@@ -483,7 +485,7 @@ function CertificateView({
                                 color: '#333',
                                 fontWeight: 600,
                                 letterSpacing: '0.5px',
-                                wordSpacing: '4px'
+                                wordSpacing: '4px',
                             }}>
                                 Founder & CEO of Pillora
                             </div>
@@ -497,7 +499,7 @@ function CertificateView({
                                 color: '#222',
                                 fontWeight: 700,
                                 letterSpacing: '1px',
-                                wordSpacing: '5px'
+                                wordSpacing: '5px',
                             }}>
                                 Shah Yugam V
                             </div>
@@ -549,10 +551,7 @@ function DonateForm() {
 
         setLoading(true);
         try {
-            const response = await api.post('/blood-bank/donors', {
-                ...formData,
-                location: [0, 0]
-            });
+            await api.post('/blood-bank/donors', { ...formData, location: [0, 0] });
             const now = new Date();
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const day = now.getDate();
@@ -581,10 +580,6 @@ function DonateForm() {
                 scale: 2,
                 useCORS: true,
                 backgroundColor: '#ffffff',
-                onclone: (clonedDoc) => {
-                    const el = clonedDoc.getElementById('certificate');
-                    if (el) el.style.display = 'block';
-                }
             });
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
@@ -623,7 +618,6 @@ function DonateForm() {
                         <input name="name" required onChange={handleChange} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all" placeholder="Enter your full name" />
                     </div>
                 </div>
-
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Blood Group</label>
                     <div className="relative">
@@ -635,12 +629,10 @@ function DonateForm() {
                         </select>
                     </div>
                 </div>
-
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Age</label>
                     <input name="age" type="number" min="18" max="60" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="18-60 years" />
                 </div>
-
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Gender</label>
                     <select name="gender" onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
@@ -649,7 +641,6 @@ function DonateForm() {
                         <option>Other</option>
                     </select>
                 </div>
-
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Phone Number</label>
                     <div className="relative">
@@ -741,7 +732,7 @@ function RequestForm() {
 
         setLoading(true);
         try {
-            const response = await api.post('/blood-bank/requests', formData);
+            await api.post('/blood-bank/requests', formData);
             setSuccess(true);
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || error.message || 'Failed to submit request';
@@ -813,7 +804,6 @@ function RequestForm() {
                         <input name="age" type="number" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Age" />
                     </div>
                 </div>
-
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Blood Group Needed</label>
                     <div className="relative">
@@ -825,7 +815,6 @@ function RequestForm() {
                         </select>
                     </div>
                 </div>
-
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Units Needed</label>
                     <input name="units" type="number" min="1" required onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Ex: 2" />
