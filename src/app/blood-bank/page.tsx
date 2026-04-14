@@ -561,7 +561,7 @@ function DonateForm() {
     const [registrationDate, setRegistrationDate] = useState('');
     const [formData, setFormData] = useState({
         name: '', age: '', gender: 'Male', bloodGroup: 'A+',
-        phone: '', city: '', area: '', address: ''
+        phone: '', city: 'Ahmedabad', area: '', address: ''
     });
     const certRef = React.useRef<HTMLDivElement>(null);
     const scaleWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -706,7 +706,14 @@ function DonateForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">City</label>
-                    <input name="city" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="City" />
+                    <div className="relative">
+                        <select name="city" required onChange={handleChange} value={formData.city} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
+                            <option value="Ahmedabad">Ahmedabad</option>
+                        </select>
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Area / Locality</label>
@@ -759,7 +766,7 @@ function RequestForm() {
     const [success, setSuccess] = useState(false);
     const [formData, setFormData] = useState({
         patientName: '', age: '', bloodGroup: 'A+', units: '1',
-        hospitalAddress: '', area: '', city: '', contactNumber: '', isUrgent: false,
+        hospitalAddress: '', area: '', city: 'Ahmedabad', contactNumber: '', isUrgent: false,
         kycDocumentType: 'Aadhar Card', kycDocumentId: '', kycDocumentImage: ''
     });
 
@@ -895,7 +902,14 @@ function RequestForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">City</label>
-                    <input name="city" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" />
+                    <div className="relative">
+                        <select name="city" required onChange={handleChange} value={formData.city} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
+                            <option value="Ahmedabad">Ahmedabad</option>
+                        </select>
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Area / Locality</label>
