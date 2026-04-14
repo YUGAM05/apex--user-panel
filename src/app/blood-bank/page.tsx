@@ -6,6 +6,10 @@ import api from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+const AHMEDABAD_AREAS = [
+    "Navrangpura", "Ambawadi", "Paldi", "Naranpura", "Vastrapur", "Satellite", "Jodhpur", "Vejalpur", "Vasna", "Nava Vadaj", "Bodakdev", "Thaltej", "Sola", "Gota", "Science City Road", "Shilaj", "Bopal & South Bopal", "Ambli", "Sindhu Bhavan Road (SBR)", "Shahibaug", "Sabarmati", "Motera", "Chandkheda", "Meghani Nagar", "Asarwa", "Kalupur", "Khadia", "Dariapur", "Shahpur", "Jamalpur", "Lal Darwaja", "Astodia", "Gita Mandir", "Maninagar", "Kankaria (Lakefront area)", "Danilimda", "Behrampura", "Isanpur", "Ghodasar", "Vatva", "Bapunagar", "Naroda", "Nikol", "Vastral", "Amraiwadi", "Odhav", "Gomtipur", "Rakhial", "Sarkhej", "Juhapura", "Makarba", "Prahladnagar"
+];
+
 export default function BloodBankPage() {
     const [activeTab, setActiveTab] = useState<'donate' | 'request'>('donate');
     const [stats, setStats] = useState({ donors: 120, requests: 45, saved: 320 });
@@ -706,7 +710,17 @@ function DonateForm() {
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Area / Locality</label>
-                    <input name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Locality" />
+                    <div className="relative">
+                        <select name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
+                            <option value="">Select Area</option>
+                            {AHMEDABAD_AREAS.map(area => (
+                                <option key={area} value={area}>{area}</option>
+                            ))}
+                        </select>
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -885,7 +899,17 @@ function RequestForm() {
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Area / Locality</label>
-                    <input name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="e.g. Downtown" />
+                    <div className="relative">
+                        <select name="area" required onChange={handleChange} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none appearance-none">
+                            <option value="">Select Area</option>
+                            {AHMEDABAD_AREAS.map(area => (
+                                <option key={area} value={area}>{area}</option>
+                            ))}
+                        </select>
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Contact Person Number</label>
