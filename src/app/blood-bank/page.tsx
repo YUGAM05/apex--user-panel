@@ -22,7 +22,7 @@ export default function BloodBankPage() {
                 setActiveTab('request');
             }
         }
-        
+
         const fetchUserRequests = async () => {
             try {
                 const user = localStorage.getItem('user');
@@ -296,25 +296,31 @@ function CertificateView({
     onDownload: () => void;
     onReset: () => void;
 }) {
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
-    const scaleWrapperRef = React.useRef<HTMLDivElement>(null);
+    const CERT_W = 860;
+    const CERT_H = 600;
+
+    const outerRef = React.useRef<HTMLDivElement>(null);
     const [scale, setScale] = React.useState(1);
 
     React.useEffect(() => {
-        const CERT_W = 860;
         const update = () => {
-            if (wrapperRef.current) {
-                const w = wrapperRef.current.offsetWidth;
-                setScale(Math.min(1, w / CERT_W));
+            if (outerRef.current) {
+                // Use the card's inner content width (subtract any known padding if needed)
+                const availableWidth = outerRef.current.getBoundingClientRect().width;
+                setScale(Math.min(1, availableWidth / CERT_W));
             }
         };
+        // Run immediately + after fonts/images settle
         update();
+        const t = setTimeout(update, 100);
         const ro = new ResizeObserver(update);
-        if (wrapperRef.current) ro.observe(wrapperRef.current);
-        return () => ro.disconnect();
+        if (outerRef.current) ro.observe(outerRef.current);
+        return () => { ro.disconnect(); clearTimeout(t); };
     }, []);
 
-    const visibleHeight = Math.round(600 * scale);
+    // The container height must exactly match the scaled certificate height
+    // so it doesn't collapse or overflow
+    const containerHeight = Math.round(CERT_H * scale);
 
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center gap-6 w-full">
@@ -328,40 +334,42 @@ function CertificateView({
                 </div>
             </div>
 
-            {/* 
-                MOBILE RESPONSIVE WRAPPER STRATEGY:
-                - wrapperRef: measures available width, sets visible height
-                - scaleWrapperRef: applies CSS scale for screen display ONLY
-                - certRef: the actual 860x600 certificate — html2canvas captures this at full size
-                  Before capture we temporarily set scaleWrapperRef transform to scale(1)
-                  so html2canvas sees the full unscaled element
+            {/*
+                RESPONSIVE CERTIFICATE WRAPPER STRATEGY:
+                ─────────────────────────────────────────
+                outerRef      → measures available width via ResizeObserver
+                               height is set to CERT_H * scale so layout stays correct
+                scaleDiv      → CSS scale(scale) shrinks the 860-wide cert visually
+                               transform-origin: top left keeps it flush to the left edge
+                certRef       → the actual 860×600 cert; html2canvas captures this at native size
+                               (we temporarily reset the transform before capture)
             */}
             <div
-                ref={wrapperRef}
+                ref={outerRef}
                 style={{
                     width: '100%',
-                    height: `${visibleHeight}px`,
+                    height: `${containerHeight}px`,
+                    position: 'relative',        // needed so scaled child doesn't push siblings
                     overflow: 'hidden',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
                 }}
             >
                 <div
-                    ref={scaleWrapperRef}
                     style={{
                         transform: `scale(${scale})`,
-                        transformOrigin: 'top center',
-                        width: '860px',
-                        flexShrink: 0,
+                        transformOrigin: 'top left',
+                        width: `${CERT_W}px`,
+                        height: `${CERT_H}px`,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
                     }}
                 >
-                    {/* ── CERTIFICATE ── html2canvas captures everything inside here ── */}
+                    {/* ── CERTIFICATE ── html2canvas captures everything inside certRef ── */}
                     <div
                         ref={certRef}
                         style={{
-                            width: '860px',
-                            height: '600px',
+                            width: `${CERT_W}px`,
+                            height: `${CERT_H}px`,
                             background: '#ffffff',
                             position: 'relative',
                             overflow: 'hidden',
@@ -429,7 +437,7 @@ function CertificateView({
                             </div>
                         </div>
 
-                        {/* Donor name — own absolute div */}
+                        {/* Donor name */}
                         <div style={{
                             position: 'absolute',
                             top: '278px',
@@ -450,7 +458,7 @@ function CertificateView({
                             </span>
                         </div>
 
-                        {/* Name underline — separate absolute div */}
+                        {/* Name underline */}
                         <div style={{
                             position: 'absolute',
                             top: '360px',
@@ -564,7 +572,6 @@ function DonateForm() {
         phone: '', city: 'Ahmedabad', area: '', address: ''
     });
     const certRef = React.useRef<HTMLDivElement>(null);
-    const scaleWrapperRef = React.useRef<HTMLDivElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -605,19 +612,19 @@ function DonateForm() {
 
             if (document.fonts) await document.fonts.ready;
 
-            // ✅ KEY FIX: Temporarily remove the CSS scale transform before capture
-            // so html2canvas sees the element at its full natural 860x600 size
-            const scaleWrapper = certRef.current.parentElement;
-            const originalTransform = scaleWrapper?.style.transform || '';
-            const originalTransformOrigin = scaleWrapper?.style.transformOrigin || '';
+            // Find the scale wrapper (direct parent of certRef)
+            const scaleWrapper = certRef.current.parentElement as HTMLElement | null;
+            const originalTransform = scaleWrapper?.style.transform ?? '';
+            const originalTransformOrigin = scaleWrapper?.style.transformOrigin ?? '';
 
+            // Reset transform so html2canvas sees the element at native 860×600
             if (scaleWrapper) {
                 scaleWrapper.style.transform = 'scale(1)';
                 scaleWrapper.style.transformOrigin = 'top left';
             }
 
-            // Small delay to let the browser repaint after removing transform
-            await new Promise(resolve => setTimeout(resolve, 100));
+            // Let the browser repaint before capturing
+            await new Promise(resolve => setTimeout(resolve, 150));
 
             const canvas = await html2canvas(certRef.current, {
                 scale: 2,
@@ -628,7 +635,7 @@ function DonateForm() {
                 windowWidth: 860,
             });
 
-            // ✅ Restore the CSS scale transform after capture
+            // Restore transform after capture
             if (scaleWrapper) {
                 scaleWrapper.style.transform = originalTransform;
                 scaleWrapper.style.transformOrigin = originalTransformOrigin;
