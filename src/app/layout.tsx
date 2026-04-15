@@ -11,12 +11,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "Pillora",
     description: "Next-Gen Healthcare Platform",
-    icons: {
-        icon: "/favicon-96x96.png",
-        shortcut: "/favicon.ico",
-        apple: "/apple-touch-icon.png",
-    },
-    manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
