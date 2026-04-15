@@ -11,6 +11,18 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "E-Pharmacy & Blood Bank",
     description: "Next-Gen Healthcare Platform",
+    icons: {
+        icon: [
+            { url: "/favicon-96x96.png?v=20260415", sizes: "96x96", type: "image/png" },
+            { url: "/favicon.svg?v=20260415", type: "image/svg+xml" },
+        ],
+        shortcut: "/favicon.ico?v=20260415",
+        apple: "/apple-touch-icon.png?v=20260415",
+    },
+    manifest: "/site.webmanifest?v=20260415",
+    appleWebApp: {
+        title: "MyWebSite",
+    },
 };
 
 export default function RootLayout({
