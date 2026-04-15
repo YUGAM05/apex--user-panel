@@ -17,7 +17,9 @@ export const metadata: Metadata = {
             { url: "/favicon.svg?v=20260415", type: "image/svg+xml" },
         ],
         shortcut: "/favicon.ico?v=20260415",
-        apple: "/apple-touch-icon.png?v=20260415",
+        apple: [
+            { url: "/apple-touch-icon.png?v=20260415", sizes: "180x180", type: "image/png" },
+        ],
     },
     manifest: "/site.webmanifest?v=20260415",
     appleWebApp: {
