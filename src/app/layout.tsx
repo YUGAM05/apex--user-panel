@@ -9,22 +9,14 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "E-Pharmacy & Blood Bank",
+    title: "Pillora",
     description: "Next-Gen Healthcare Platform",
     icons: {
-        icon: [
-            { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-            { url: "/favicon.svg", type: "image/svg+xml" },
-        ],
+        icon: "/favicon-96x96.png",
         shortcut: "/favicon.ico",
-        apple: [
-            { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-        ],
+        apple: "/apple-touch-icon.png",
     },
     manifest: "/site.webmanifest",
-    appleWebApp: {
-        title: "MyWebSite",
-    },
 };
 
 export default function RootLayout({
