@@ -34,7 +34,10 @@ export default function Footer() {
                         <div className="flex gap-4 pt-2">
                             <SocialIcon icon={<Facebook className="w-4 h-4" />} />
                             <SocialIcon icon={<Twitter className="w-4 h-4" />} />
-                            <SocialIcon icon={<Instagram className="w-4 h-4" />} />
+                            <SocialIcon 
+                                icon={<Instagram className="w-4 h-4" />} 
+                                href="https://www.instagram.com/pillora_official?igsh=MnBpemU0MW40bW5m" 
+                            />
                         </div>
                     </div>
 
@@ -85,9 +88,14 @@ export default function Footer() {
     );
 }
 
-function SocialIcon({ icon }: any) {
+function SocialIcon({ icon, href = "#" }: any) {
     return (
-        <a href="#" className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-all">
+        <a 
+            href={href} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-all"
+        >
             {icon}
         </a>
     )
