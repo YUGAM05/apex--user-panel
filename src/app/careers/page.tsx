@@ -30,13 +30,6 @@ const staggerContainer = {
 
 const roles = [
     {
-        title: "E-Pharmacy Operations Manager",
-        icon: <Truck className="w-6 h-6" />,
-        color: "bg-blue-500",
-        description: "Oversees the supply chain. They manage relationships with pharmaceutical wholesalers and retailers and ensure that medicine delivery is fast, accurate, and temperature-controlled.",
-        tags: ["Supply Chain", "Logistics", "Full-Time"]
-    },
-    {
         title: "Real-Time Blood Registry Coordinator",
         icon: <Droplets className="w-6 h-6" />,
         color: "bg-red-500",
@@ -54,7 +47,7 @@ const roles = [
         title: "Regulatory & Compliance Specialist",
         icon: <ShieldAlert className="w-6 h-6" />,
         color: "bg-emerald-500",
-        description: "Ensures Pillora complies with Indian healthcare laws (like the Pharmacy Act and Data Privacy rules). They handle the 'paperwork' that keeps the digital platform legal.",
+        description: "Ensures Pillora complies with Indian healthcare laws (like Medical Data Privacy and Digital Health rules). They handle the 'paperwork' that keeps the digital platform legal.",
         tags: ["Legal", "Compliance", "Remote Optional"]
     },
     {
@@ -118,7 +111,7 @@ export default function CareersPage() {
                                 </h2>
                             </div>
                             <p className="text-gray-500 max-w-2xl font-medium mx-auto text-lg leading-relaxed">
-                                These roles manage the &quot;Movement&quot;—getting blood to patients, medicines to doorsteps, and hospitals onto the platform.
+                                These roles manage the &quot;Movement&quot;—getting blood to patients, verifying critical data, and onboarding hospitals onto the platform.
                             </p>
                         </div>
                     </motion.div>
