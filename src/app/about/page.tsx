@@ -247,8 +247,8 @@ export default function AboutPage() {
                                     className="absolute -right-8 bottom-1/3 bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/20 shadow-2xl z-30"
                                 >
                                     <Code2 className="w-8 h-8 text-blue-400 mb-2" />
-                                    <p className="text-xs font-black uppercase tracking-widest text-white/60">Lead Architect</p>
-                                    <p className="font-bold text-lg">Shah Yugam</p>
+                                    <p className="text-xs font-black uppercase tracking-widest text-white/60">Founder & CEO</p>
+                                    <p className="font-bold text-lg">Yugam Shah</p>
                                 </motion.div>
                             </div>
                         </motion.div>
@@ -261,7 +261,7 @@ export default function AboutPage() {
                                 </h2>
                                 <p className="text-xl text-slate-400 leading-relaxed max-w-2xl font-light">
                                     Pillora is the culmination of a vision to digitize the foundational layers of healthcare.
-                                    Led by Shah Yugam, a software engineer with deep roots in HealthTech systems, the project represents a merger of code and medical protocol.
+                                    Founded and led by Yugam Shah, Pillora represents a bold merger of technology and medical protocol — built not in a classroom, but in pursuit of transforming how healthcare is accessed and delivered.
                                 </p>
                             </div>
 
@@ -271,7 +271,7 @@ export default function AboutPage() {
                                         <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 group-hover:bg-blue-600/20 group-hover:border-blue-500/50 transition-all">
                                             <Building2 className="w-6 h-6 text-blue-400" />
                                         </div>
-                                        <span className="text-lg font-bold">LJ University Technologist</span>
+                                        <span className="text-lg font-bold">Founder & CEO, Pillora</span>
                                     </div>
                                     <div className="flex items-center gap-4 group">
                                         <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 group-hover:bg-purple-600/20 group-hover:border-purple-500/50 transition-all">
@@ -282,7 +282,7 @@ export default function AboutPage() {
                                 </div>
                                 <div className="bg-white/5 p-6 rounded-3xl border border-white/10">
                                     <p className="text-sm text-slate-500 font-bold uppercase mb-4 tracking-widest">Philosophy</p>
-                                        &quot;Software should be as reliable as a clinical record. In emergency tech, there is no room for error.&quot;
+                                        &quot;Software should be as reliable as a prescription. In healthcare tech, there is no room for error.&quot;
                                 </div>
                             </div>
 
