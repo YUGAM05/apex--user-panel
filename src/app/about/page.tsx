@@ -69,7 +69,7 @@ export default function AboutPage() {
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Digital Healthcare</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-600 leading-relaxed mb-12 max-w-3xl mx-auto font-medium">
-                            Pillora is not just a pharmacy; it&apos;s a fully integrated HealthTech ecosystem designed to provide seamless access to critical medical resources.
+                            Pillora is a fully integrated HealthTech ecosystem designed to provide seamless access to critical medical resources, starting with blood bank and hospital services.
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4">
