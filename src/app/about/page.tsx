@@ -161,8 +161,8 @@ export default function AboutPage() {
                                     <ShieldCheck className="w-7 h-7" />
                                 </div>
                                 <div>
-                                    <h4 className="text-xl font-bold text-slate-900 mb-2">Verified Pharmacy</h4>
-                                    <p className="text-slate-500">Connecting patients with verified local sellers for genuine pharmaceutical care.</p>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">Verified Blood Bank</h4>
+                                    <p className="text-slate-500">Connecting patients with verified blood donors and live inventory for genuine emergency care.</p>
                                 </div>
                             </motion.div>
                         </div>
@@ -193,7 +193,7 @@ export default function AboutPage() {
                             icon={ShieldCheck}
                             title="Pure Integrity"
                             color="blue"
-                            desc="We maintain a zero-tolerance policy for substandard medications and data inaccuracies."
+                            desc="We maintain a zero-tolerance policy for data inaccuracies and critical system delays."
                         />
                         <PillarCard
                             icon={Zap}
@@ -282,9 +282,7 @@ export default function AboutPage() {
                                 </div>
                                 <div className="bg-white/5 p-6 rounded-3xl border border-white/10">
                                     <p className="text-sm text-slate-500 font-bold uppercase mb-4 tracking-widest">Philosophy</p>
-                                    <p className="text-slate-300 italic">
-                                        &quot;Software should be as reliable as a prescription. In pharmacy tech, there is no room for error.&quot;
-                                    </p>
+                                        &quot;Software should be as reliable as a clinical record. In emergency tech, there is no room for error.&quot;
                                 </div>
                             </div>
 
@@ -319,7 +317,7 @@ export default function AboutPage() {
                                     The Connected <br />Health Grid
                                 </h3>
                                 <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                                    Our platform acts as the central nervous system for your medical needs, ensuring that whether you need a rare medicine or an emergency bed, the data is synchronized.
+                                    Our platform acts as the central nervous system for your medical needs, ensuring that whether you need live blood donor data or an emergency hospital bed, the information is synchronized.
                                 </p>
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
@@ -330,10 +328,8 @@ export default function AboutPage() {
                             </div>
 
                             <div className="flex-1 grid grid-cols-2 gap-6 relative">
-                                <EcosystemNode icon={Building2} label="E-Pharmacy" active />
-                                <EcosystemNode icon={Droplets} label="Blood Bank" />
+                                <EcosystemNode icon={Droplets} label="Blood Bank" active />
                                 <EcosystemNode icon={Hospital} label="Hospitals" />
-                                <EcosystemNode icon={ShieldAlert} label="Diagnostics" />
 
                                 {/* Connecting lines Simulation */}
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-600 rounded-full shadow-[0_0_20px_rgba(37,99,235,0.8)]" />
