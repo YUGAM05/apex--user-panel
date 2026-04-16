@@ -29,12 +29,7 @@ export default function HelpCenterPage() {
         {
             icon: <BookOpen className="w-8 h-8" />,
             title: "Verified Medical Knowledge Base",
-            description: "Knowledge is the first step to recovery. Our Health Centre features a library of pharmacist-verified content, offering insights into medication management, chronic disease care, and seasonal health alerts."
-        },
-        {
-            icon: <Stethoscope className="w-8 h-8" />,
-            title: "AI-Driven Patient Guidance",
-            description: "Leveraging advanced full-stack architecture, our Smart Health Assistant provides 24/7 guidance. Whether you need help understanding a prescription, our AI ensures support is always accessible."
+            description: "Knowledge is the first step to recovery. Our Health Centre features a library of medically-verified content, offering insights into health management, chronic disease care, and seasonal health alerts."
         },
     ];
 
@@ -123,7 +118,7 @@ export default function HelpCenterPage() {
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-blue-600" />
-                                    <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Pharmacist-Audited Knowledge</span>
+                                    <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Clinically-Audited Knowledge</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-blue-600" />
@@ -181,7 +176,7 @@ export default function HelpCenterPage() {
                             <span className="text-blue-600 font-black uppercase tracking-widest text-xs">Our Commitment</span>
                             <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-[1.1] tracking-tighter">
                                 Why Choose the <br className="hidden sm:block" />
-                                <span className="text-blue-600 italic">Apex Health Centre?</span>
+                                <span className="text-blue-600 italic">Pillora Health Centre?</span>
                             </h2>
                             <p className="text-slate-500 font-medium mt-6 md:mt-8 text-base md:text-lg">
                                 We combine medical expertise with cutting-edge technology to ensure your family&apos;s safety and well-being.
