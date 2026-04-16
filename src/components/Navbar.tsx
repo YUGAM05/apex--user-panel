@@ -76,7 +76,7 @@ export default function Navbar() {
                         />
                         <Image
                             src="/pillora-text.png"
-                            alt="Pillora text"
+                            alt="Pillora"
                             width={240}
                             height={80}
                             className="block h-10 sm:h-12 xl:h-[3.5rem] w-auto object-contain object-left mt-0.5 xl:mt-1"
