@@ -128,7 +128,7 @@ export default function AboutPage() {
                                 className="flex gap-6 items-start"
                             >
                                 <div className="shrink-0 w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-                                    <Droplets className="w-7 h-7" />
+                                    <Zap className="w-7 h-7" />
                                 </div>
                                 <div>
                                     <h4 className="text-xl font-bold text-slate-900 mb-2">Live Response Network</h4>
@@ -143,11 +143,11 @@ export default function AboutPage() {
                                 className="flex gap-6 items-start"
                             >
                                 <div className="shrink-0 w-14 h-14 bg-purple-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/30">
-                                    <Cpu className="w-7 h-7" />
+                                    <Droplets className="w-7 h-7" />
                                 </div>
                                 <div>
-                                    <h4 className="text-xl font-bold text-slate-900 mb-2">AI Safety Engine</h4>
-                                    <p className="text-slate-500">Sophisticated interaction checking developed with verified clinical data points.</p>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">Verified Blood Bank</h4>
+                                    <p className="text-slate-500">Connecting patients with verified blood donors and live inventory for genuine emergency care.</p>
                                 </div>
                             </motion.div>
                             <motion.div
@@ -158,11 +158,11 @@ export default function AboutPage() {
                                 className="flex gap-6 items-start"
                             >
                                 <div className="shrink-0 w-14 h-14 bg-emerald-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30">
-                                    <ShieldCheck className="w-7 h-7" />
+                                    <Hospital className="w-7 h-7" />
                                 </div>
                                 <div>
-                                    <h4 className="text-xl font-bold text-slate-900 mb-2">Verified Blood Bank</h4>
-                                    <p className="text-slate-500">Connecting patients with verified blood donors and live inventory for genuine emergency care.</p>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">Emergency Hospital Services</h4>
+                                    <p className="text-slate-500">Instant access to verified hospital data, bed availability, and specialist doctor profiles.</p>
                                 </div>
                             </motion.div>
                         </div>
