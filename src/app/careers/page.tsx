@@ -44,13 +44,6 @@ const roles = [
         tags: ["Partnerships", "Data", "On-Field"]
     },
     {
-        title: "Regulatory & Compliance Specialist",
-        icon: <ShieldAlert className="w-6 h-6" />,
-        color: "bg-emerald-500",
-        description: "Ensures Pillora complies with Indian healthcare laws (like Medical Data Privacy and Digital Health rules). They handle the 'paperwork' that keeps the digital platform legal.",
-        tags: ["Legal", "Compliance", "Remote Optional"]
-    },
-    {
         title: "Patient Success Associate",
         icon: <UserCheck className="w-6 h-6" />,
         color: "bg-purple-500",
