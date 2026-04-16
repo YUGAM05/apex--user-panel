@@ -27,18 +27,6 @@ export default function PartnersPage() {
 
     const partnerTypes = [
         {
-            icon: <Store className="w-8 h-8" />,
-            title: "For Pharmacies (E-Pharmacy Partners)",
-            subtitle: "Digitalize Your Reach",
-            description: "Transform your brick-and-mortar pharmacy into a digital powerhouse. By partnering with us, you gain access to thousands of local customers in Ahmedabad looking for reliable medicine delivery.",
-            benefits: [
-                { icon: <LayoutDashboard className="w-4 h-4" />, label: "Inventory Management", text: "Use our dashboard to manage stock and digital prescriptions." },
-                { icon: <ShieldCheck className="w-4 h-4" />, label: "Verified Orders", text: "Receive only vetted, doctor-approved prescriptions." },
-                { icon: <Truck className="w-4 h-4" />, label: "Logistics Support", text: "Use our delivery network to reach patients at their doorsteps." }
-            ],
-            color: "blue"
-        },
-        {
             icon: <Hospital className="w-8 h-8" />,
             title: "For Hospitals & Clinics (Directory Partners)",
             subtitle: "Be the First Choice in Emergencies",
@@ -99,7 +87,7 @@ export default function PartnersPage() {
             <section className="py-20 px-6 border-y border-slate-100">
                 <div className="max-w-4xl mx-auto text-center">
                     <p className="text-xl md:text-2xl font-bold text-slate-800 italic leading-relaxed">
-                        &quot;Whether you are a local pharmacy, a multi-specialty hospital, or a corporate wellness provider, partnering with Pillora means joining a tech-driven movement that prioritizes patient lives.&quot;
+                        &quot;Whether you are a multi-specialty hospital or a dedicated blood bank, partnering with Pillora means joining a tech-driven movement that prioritizes patient lives.&quot;
                     </p>
                 </div>
             </section>
