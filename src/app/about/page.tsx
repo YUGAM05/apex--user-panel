@@ -140,7 +140,7 @@ export default function AboutPage() {
                                     Our Mission
                                 </h3>
                                 <p className="text-lg text-slate-600 leading-relaxed italic border-l-4 border-rose-600 pl-6">
-                                    "In healthcare, a five-minute delay or a piece of wrong information can change everything. Pillora exists to eliminate that gap — giving patients, families, and caregivers fast, verified, and reliable access to critical medical resources."
+                                    &quot;In healthcare, a five-minute delay or a piece of wrong information can change everything. Pillora exists to eliminate that gap — giving patients, families, and caregivers fast, verified, and reliable access to critical medical resources.&quot;
                                 </p>
                             </div>
                         </div>
@@ -215,7 +215,7 @@ export default function AboutPage() {
                                     Security & Transparency
                                 </h3>
                                 <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                                    Donor data is stored securely within our verified donor network. A donor's name and phone number are only shared with a recipient when that recipient has completed full KYC verification and is located in the donor's nearest area.
+                                    Donor data is stored securely within our verified donor network. A donor&apos;s name and phone number are only shared with a recipient when that recipient has completed full KYC verification and is located in the donor&apos;s nearest area.
                                 </p>
                             </div>
                             <div className="space-y-6">
