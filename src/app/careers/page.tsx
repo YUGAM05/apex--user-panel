@@ -2,16 +2,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-    Truck,
     Droplets,
     Building2,
-    ShieldAlert,
-    UserCheck,
-    ChevronRight,
-    Briefcase,
-    Globe2,
+    Users,
+    Globe,
+    Zap,
+    Mail,
+    Rocket,
+    Code2,
+    HeartPulse,
+    Search,
     Clock,
-    ArrowRight
+    Sparkles,
+    ArrowRight,
+    MapPin
 } from 'lucide-react';
 
 const fadeIn = {
@@ -28,38 +32,23 @@ const staggerContainer = {
     }
 };
 
-const roles = [
-    {
-        title: "Real-Time Blood Registry Coordinator",
-        icon: <Droplets className="w-6 h-6" />,
-        color: "bg-red-500",
-        description: "At the heart of our Health Centre is a dedicated network designed to save lives through speed. We provide an accelerated pathway for users to connect with life-saving blood donors instantly via WhatsApp. To maintain the highest standards of safety and prevent fraudulent activity, we require KYC verification for all donors. This ensures that every match we deliver is verified, secure, and ready to help when every second counts.",
-        tags: ["Emergency", "Coordination", "24/7 Shift"]
-    },
-    {
-        title: "Hospital Network Manager",
-        icon: <Building2 className="w-6 h-6" />,
-        color: "bg-amber-500",
-        description: "The primary architect of our healthcare database, this role ensures every patient has access to life-saving information. They manage real-time onboarding for hospitals in Ahmedabad, with a core mission to verify the availability of Government Schemes (like Ayushman Bharat) and the exact extent of their coverage. By maintaining accurate data on specializations (Cancer, Surgery, etc.) and emergency contact numbers, they empower users to make informed financial and medical decisions.",
-        tags: ["Partnerships", "Data", "On-Field"]
-    },
-    {
-        title: "Patient Success Associate",
-        icon: <UserCheck className="w-6 h-6" />,
-        color: "bg-purple-500",
-        description: "The 'Human Touch.' They handle complex user queries—like helping a family find a specific blood type in an emergency when the automated system needs human intervention.",
-        tags: ["Support", "Patient Care", "Voice"]
-    }
-];
-
 export default function CareersPage() {
     return (
-        <main className="min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative py-24 px-6 overflow-hidden bg-slate-900 text-white">
-                <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-                    <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600 rounded-full blur-[120px]" />
+        <main className="min-h-screen bg-white selection:bg-rose-100 selection:text-rose-900">
+            {/* 1. Hero Section */}
+            <section className="relative py-28 md:py-40 px-6 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-50 via-white to-transparent">
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 90, 0],
+                            x: [0, 50, 0],
+                            y: [0, 30, 0]
+                        }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] bg-rose-400/10 rounded-full blur-[140px]"
+                    />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]" />
                 </div>
 
                 <div className="max-w-7xl mx-auto relative z-10">
@@ -69,89 +58,176 @@ export default function CareersPage() {
                         variants={fadeIn}
                         className="text-center max-w-4xl mx-auto"
                     >
-                        <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-blue-400 uppercase bg-blue-400/10 rounded-full border border-blue-400/20">
-                            Join the Mission
-                        </span>
-                        <h1 className="text-4xl md:text-7xl font-black mb-8 leading-tight tracking-tight">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                            className="inline-flex items-center gap-2 px-5 py-2 mb-8 text-xs font-black tracking-[0.2em] text-rose-700 uppercase bg-rose-600/10 border border-rose-600/20 rounded-full backdrop-blur-md"
+                        >
+                            <Sparkles className="w-4 h-4" />
+                            Careers — Pillora
+                        </motion.div>
+                        <h1 className="text-5xl md:text-8xl font-black text-slate-900 mb-10 leading-tight tracking-tighter">
                             Build the Future of <br />
-                            <span className="text-blue-500">Digital Healthcare</span>
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 via-red-600 to-rose-700 font-black">Digital Healthcare</span>
                         </h1>
-                        <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                            Pillora is more than just a platform; it&apos;s a movement to make healthcare accessible,
-                            transparent, and fast for everyone.
+                        <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-bold max-w-2xl mx-auto">
+                            Pillora is more than just a platform — it&apos;s a movement to make healthcare accessible, transparent, and fast for everyone in India.
                         </p>
                     </motion.div>
                 </div>
             </section>
 
-            {/* Roles Section */}
+            {/* 2. Where We Are Right Now */}
             <section className="py-24 px-6 bg-slate-50">
                 <div className="max-w-7xl mx-auto">
-                    <motion.div
-                        initial="initial"
-                        whileInView="animate"
-                        viewport={{ once: true }}
-                        variants={fadeIn}
-                        className="text-center mb-16"
-                    >
-                        <div className="flex flex-col items-center">
-                            <div className="flex items-center justify-center gap-3 mb-4">
-                                <div className="p-2 bg-blue-600 rounded-lg text-white">
-                                    <Briefcase className="w-5 h-5" />
-                                </div>
-                                <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight">
-                                    Operations & Logistics Roles
-                                </h2>
-                            </div>
-                            <p className="text-gray-500 max-w-2xl font-medium mx-auto text-lg leading-relaxed">
-                                These roles manage the &quot;Movement&quot;—getting blood to patients, verifying critical data, and onboarding hospitals onto the platform.
-                            </p>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="initial"
-                        whileInView="animate"
-                        viewport={{ once: true }}
-                        className="grid grid-cols-1 gap-6"
-                    >
-                        {roles.map((role, idx) => (
+                    <div className="flex flex-col lg:flex-row gap-16 items-center">
+                        <div className="w-full lg:w-1/2 space-y-8">
                             <motion.div
-                                key={idx}
-                                variants={fadeIn}
-                                className="group bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-300 relative overflow-hidden"
+                                initial={{ opacity: 0, x: -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-black tracking-widest text-slate-500 uppercase bg-white border border-slate-200 rounded-full shadow-sm"
                             >
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full -mr-16 -mt-16 group-hover:bg-blue-50 transition-colors" />
-
-                                <div className="flex flex-col lg:flex-row lg:items-center gap-8 relative z-10">
-                                    <div className={`w-16 h-16 ${role.color} rounded-2xl flex items-center justify-center text-white shadow-lg shrink-0 group-hover:scale-110 transition-transform`}>
-                                        {role.icon}
-                                    </div>
-
-                                    <div className="flex-1 space-y-4">
-                                        <div className="flex flex-wrap gap-2">
-                                            {role.tags.map((tag, tIdx) => (
-                                                <span key={tIdx} className="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-widest rounded-full">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                        <h3 className="text-2xl font-black text-gray-900 group-hover:text-blue-600 transition-colors">
-                                            {role.title}
-                                        </h3>
-                                        <p className="text-gray-500 leading-relaxed font-medium">
-                                            {role.description}
-                                        </p>
-                                    </div>
-
-                                </div>
+                                <Zap className="w-4 h-4 text-rose-500" />
+                                Current State
                             </motion.div>
-                        ))}
-                    </motion.div>
+                            <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">
+                                Where We Are <br /><span className="text-rose-600">Right Now</span>
+                            </h2>
+                            <p className="text-lg text-slate-600 leading-relaxed font-medium">
+                                Pillora is currently a lean, technology-driven platform. Our Blood Connect service is powered by AI-based KYC verification and automated donor-recipient matching. Our Hospital Information Service is built to give patients instant, self-serve access to critical healthcare data — <span className="text-slate-900 font-bold">all with minimal human intervention by design.</span>
+                            </p>
+                            <div className="p-6 bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-200/50">
+                                <p className="text-slate-900 font-black text-lg flex items-center gap-3">
+                                    <Rocket className="w-6 h-6 text-rose-600" />
+                                    This is our strength.
+                                </p>
+                                <p className="text-slate-500 mt-2 font-medium">
+                                    We build systems that work at scale, without needing a large team behind them.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <Card
+                                icon={Droplets}
+                                title="Blood Connect"
+                                desc="Powered by AI-based KYC and automated matching."
+                                color="rose"
+                            />
+                            <Card
+                                icon={Building2}
+                                title="Hospital Services"
+                                desc="Instant access to critical healthcare data."
+                                color="blue"
+                            />
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            {/* 3. Where We Are Going */}
+            <section className="py-24 px-6 bg-white">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-20 max-w-3xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-xs font-black tracking-widest text-rose-700 uppercase bg-rose-50 rounded-full"
+                        >
+                            <Globe className="w-4 h-4" />
+                            Our Expansion
+                        </motion.div>
+                        <h2 className="text-5xl font-black text-slate-900 mb-8">Where We Are Going</h2>
+                        <p className="text-lg text-slate-600 leading-relaxed font-medium">
+                            As Pillora expands city by city across India, we will need passionate people who share our mission — to make life-saving information and resources accessible to every Indian, instantly and reliably.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            { title: "Healthcare Ops", desc: "Coordination & clinical logic", icon: HeartPulse, color: "rose" },
+                            { title: "Hospital Mgmt", desc: "Partnerships & data integrity", icon: Building2, color: "blue" },
+                            { title: "Patient Support", desc: "Community & advocacy", icon: Users, color: "indigo" },
+                            { title: "Tech & Product", desc: "Development & engineering", icon: Code2, color: "purple" }
+                        ].map((item, idx) => (
+                            <motion.div
+                                key={idx}
+                                whileHover={{ y: -10 }}
+                                className="p-8 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-center group transition-colors hover:border-rose-200"
+                            >
+                                <div className={`w-14 h-14 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-white shadow-lg text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-all`}>
+                                    <item.icon className="w-6 h-6" />
+                                </div>
+                                <h4 className="text-xl font-black text-slate-900 mb-2">{item.title}</h4>
+                                <p className="text-sm text-slate-500 font-medium">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. No Open Positions & Contact */}
+            <section className="py-32 px-6 bg-slate-950 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-600/10 rounded-full blur-[120px] -mr-64 -mt-64" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -ml-64 -mb-64" />
+                
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="inline-flex items-center gap-2 px-5 py-2 mb-8 text-xs font-black tracking-[0.3em] text-slate-400 uppercase bg-white/5 border border-white/10 rounded-full"
+                    >
+                        <Clock className="w-4 h-4" />
+                        Current Status
+                    </motion.div>
+                    <h2 className="text-4xl md:text-6xl font-black mb-10 leading-tight tracking-tight">
+                        No Open Positions <br />
+                        <span className="text-rose-500">Right Now</span>
+                    </h2>
+                    <p className="text-xl text-slate-400 leading-relaxed font-light mb-12">
+                        We don&apos;t have any active openings at the moment — but if you believe in what we&apos;re building and want to be part of it when we scale, we&apos;d love to hear from you.
+                    </p>
+
+                    <div className="group relative inline-block">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-rose-600 to-rose-700 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+                        <a
+                            href="mailto:shahyugam037@gmail.com"
+                            className="relative flex items-center gap-4 px-10 py-6 bg-white text-slate-900 rounded-2xl font-black text-xl shadow-2xl transition-transform hover:scale-105"
+                        >
+                            <Mail className="w-7 h-7 text-rose-600" />
+                            Drop us a note at shahyugam037@gmail.com
+                        </a>
+                    </div>
+                    
+                    <p className="mt-10 text-rose-500 font-black tracking-[0.2em] uppercase text-xs">
+                        We read every message.
+                    </p>
+                </div>
+            </section>
         </main>
+    );
+}
+
+function Card({ icon: Icon, title, desc, color }: any) {
+    const themes: any = {
+        rose: { bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-rose-100' },
+        blue: { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-100' },
+    };
+    const theme = themes[color];
+
+    return (
+        <motion.div
+            whileHover={{ y: -8 }}
+            className={`p-10 rounded-[2.5rem] bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex flex-col items-center text-center`}
+        >
+            <div className={`w-16 h-16 ${theme.bg} ${theme.text} rounded-2xl flex items-center justify-center mb-8`}>
+                <Icon className="w-8 h-8" />
+            </div>
+            <h3 className="text-2xl font-black text-slate-900 mb-4">{title}</h3>
+            <p className="text-slate-500 font-medium leading-relaxed">{desc}</p>
+        </motion.div>
     );
 }
