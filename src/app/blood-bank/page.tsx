@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Heart, Activity, MapPin, Droplet, User, Phone, CheckCircle, AlertOctagon, Clock, ShieldCheck, Siren, Info, Upload, FileIcon, Trash2, Image } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/lib/api';
+import { socket } from '@/lib/socket';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -34,10 +35,44 @@ export default function BloodBankPage() {
                 console.error('Failed to fetch user requests:', error);
             }
         };
+
+        const setupSocket = () => {
+            const userStr = localStorage.getItem('user');
+            if (userStr) {
+                const user = JSON.parse(userStr);
+                socket.connect();
+                socket.emit('join', user._id || user.id);
+                console.log("[Socket] Joined room:", user._id || user.id);
+
+                socket.on('blood_request_updated', (data) => {
+                    console.log("[Socket] Received update:", data);
+                    setUserRequests(prev => {
+                        const exists = prev.find(r => r._id === data._id);
+                        if (exists) {
+                            return prev.map(r => r._id === data._id ? data : r);
+                        }
+                        return [data, ...prev];
+                    });
+                });
+            }
+        };
+
         fetchUserRequests();
-        const interval = setInterval(fetchUserRequests, 10000);
-        return () => clearInterval(interval);
-    }, []);
+        setupSocket();
+
+        // Efficient Polling Fallback (30s) - only if in request tab
+        const interval = setInterval(() => {
+            if (activeTab === 'request') {
+                fetchUserRequests();
+            }
+        }, 30000);
+
+        return () => {
+            clearInterval(interval);
+            socket.off('blood_request_updated');
+            socket.disconnect();
+        };
+    }, [activeTab]);
 
     const rejectedRequest = userRequests.find(r => r.aiVerificationStatus === 'Rejected');
 
@@ -844,10 +879,21 @@ function RequestForm() {
         }
 
         setLoading(true);
+
+        // Security Timeout: 30 seconds threshold
+        const timeoutId = setTimeout(() => {
+            if (loading) {
+                setLoading(false);
+                alert("Broadcasting failed, please try again (Connection Timeout)");
+            }
+        }, 30000);
+
         try {
             await api.post('/blood-bank/requests', formData);
+            clearTimeout(timeoutId);
             setSuccess(true);
         } catch (error: any) {
+            clearTimeout(timeoutId);
             const errorMessage = error.response?.data?.message || error.message || 'Failed to submit request';
             alert(errorMessage);
         } finally {
