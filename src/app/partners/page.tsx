@@ -21,11 +21,15 @@ import {
     Building2,
     UserCircle,
     Activity,
-    Plus
+    Plus,
+    Handshake,
+    Layout
 } from 'lucide-react';
 
+type FormType = 'hospital' | 'ngo' | null;
+
 export default function PartnersPage() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeForm, setActiveForm] = useState<FormType>(null);
     const [formSubmitted, setFormSubmitted] = useState(false);
 
     const fadeIn = {
@@ -67,9 +71,14 @@ export default function PartnersPage() {
         e.preventDefault();
         setFormSubmitted(true);
         setTimeout(() => {
-            setIsModalOpen(false);
+            setActiveForm(null);
             setFormSubmitted(false);
         }, 5000);
+    };
+
+    const openForm = (type: FormType) => {
+        setActiveForm(type);
+        setFormSubmitted(false);
     };
 
     return (
@@ -138,7 +147,7 @@ export default function PartnersPage() {
                             </div>
                             
                             <button 
-                                onClick={() => setIsModalOpen(true)}
+                                onClick={() => openForm('hospital')}
                                 className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-blue-600 transition-all shadow-xl shadow-slate-200 uppercase tracking-widest text-xs"
                             >
                                 Become a Partner Now <ChevronRight className="w-4 h-4" />
@@ -163,196 +172,6 @@ export default function PartnersPage() {
                     </div>
                 </div>
             </section>
-
-            {/* Partner Form Modal */}
-            <AnimatePresence>
-                {isModalOpen && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 overflow-y-auto bg-slate-900/60 backdrop-blur-sm pt-20 pb-10">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="w-full max-w-4xl bg-white rounded-[40px] shadow-2xl relative overflow-hidden"
-                        >
-                            {/* Modal Header */}
-                            <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-md px-8 py-6 border-b border-slate-100 flex items-center justify-between">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white">
-                                        <Plus className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Partner with Pillora</h3>
-                                        <p className="text-sm text-slate-500 font-medium italic">Hospital & Clinic Registration</p>
-                                    </div>
-                                </div>
-                                <button 
-                                    onClick={() => setIsModalOpen(false)}
-                                    className="p-3 hover:bg-slate-100 rounded-2xl transition-colors text-slate-400 hover:text-slate-900"
-                                >
-                                    <X className="w-6 h-6" />
-                                </button>
-                            </div>
-
-                            {/* Modal Content */}
-                            <div className="p-8 md:p-12 overflow-y-auto max-h-[80vh]">
-                                {formSubmitted ? (
-                                    <motion.div 
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        className="py-20 text-center"
-                                    >
-                                        <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8">
-                                            <CheckCircle2 className="w-10 h-10" />
-                                        </div>
-                                        <h2 className="text-3xl font-black text-slate-900 mb-4">Form Submitted!</h2>
-                                        <p className="text-xl text-slate-600 font-medium italic">
-                                            Thank you for your interest in partnering with Pillora. Our team will contact you shortly.
-                                        </p>
-                                    </motion.div>
-                                ) : (
-                                    <form onSubmit={handleSubmit} className="space-y-12">
-                                        {/* Facility Information */}
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-8">
-                                                <Building2 className="w-5 h-5 text-blue-600" />
-                                                <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Facility Information</h4>
-                                            </div>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Hospital / Clinic Name</label>
-                                                    <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Apollo Hospital" />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Type of Facility</label>
-                                                    <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium">
-                                                        <option value="">Select Type</option>
-                                                        <option>Multi-specialty Hospital</option>
-                                                        <option>Single Specialty Hospital</option>
-                                                        <option>Clinic</option>
-                                                        <option>Diagnostic Center</option>
-                                                    </select>
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Registration Number (Govt.)</label>
-                                                    <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Registration No." />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">City</label>
-                                                    <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Area / Locality</label>
-                                                    <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Satellite" />
-                                                </div>
-                                                <div className="md:col-span-2 space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Address</label>
-                                                    <textarea required rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Contact Person Information */}
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-8">
-                                                <UserCircle className="w-5 h-5 text-blue-600" />
-                                                <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Contact Person Information</h4>
-                                            </div>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Name</label>
-                                                    <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Designation</label>
-                                                    <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium">
-                                                        <option value="">Select Designation</option>
-                                                        <option>Owner</option>
-                                                        <option>Administrator</option>
-                                                        <option>Manager</option>
-                                                    </select>
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Phone Number</label>
-                                                    <input required type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Official Email Address</label>
-                                                    <input required type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="email@hospital.com" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Services Information */}
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-8">
-                                                <Activity className="w-5 h-5 text-blue-600" />
-                                                <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Services Information</h4>
-                                            </div>
-                                            <div className="space-y-8">
-                                                <div className="space-y-4">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Specializations / Departments Available</label>
-                                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                                        {['General', 'Cardiology', 'Orthopedics', 'Gynecology', 'Neurology', 'Pediatrics', 'Oncology', 'Dermatology'].map(spec => (
-                                                            <label key={spec} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
-                                                                <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
-                                                                <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{spec}</span>
-                                                            </label>
-                                                        ))}
-                                                    </div>
-                                                </div>
-
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Number of Doctors</label>
-                                                    <input required type="number" className="w-full md:w-1/3 px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Total doctors count" />
-                                                </div>
-
-                                                <div className="space-y-4">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Facilities Available</label>
-                                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                                                        {['ICU', 'OT', 'Emergency', 'Pharmacy', 'Lab'].map(fac => (
-                                                            <label key={fac} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
-                                                                <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
-                                                                <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{fac}</span>
-                                                            </label>
-                                                        ))}
-                                                    </div>
-                                                </div>
-
-                                                <div className="space-y-4">
-                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Government Schemes Accepted</label>
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                        {['Ayushman Bharat', 'State Health Schemes', 'ESIC', 'CGHS'].map(scheme => (
-                                                            <label key={scheme} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
-                                                                <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
-                                                                <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{scheme}</span>
-                                                            </label>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Additional Information */}
-                                        <div className="space-y-6">
-                                            <div className="space-y-2">
-                                                <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Additional Message (Optional)</label>
-                                                <textarea rows={4} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Any additional information you'd like to share..."></textarea>
-                                            </div>
-
-                                            <button 
-                                                type="submit"
-                                                className="w-full py-6 bg-blue-600 text-white font-black rounded-3xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-200 uppercase tracking-[0.2em] text-sm"
-                                            >
-                                                Submit Application
-                                            </button>
-                                        </div>
-                                    </form>
-                                )}
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
 
             {/* NGOs Section */}
             <section className="py-32 px-6 bg-slate-900 text-white overflow-hidden relative">
@@ -416,6 +235,13 @@ export default function PartnersPage() {
                                 ))}
                             </div>
 
+                            <button 
+                                onClick={() => openForm('ngo')}
+                                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all shadow-xl shadow-black/20 uppercase tracking-widest text-xs mb-10"
+                            >
+                                Become a Partner <ChevronRight className="w-4 h-4" />
+                            </button>
+
                             <div className="p-6 rounded-2xl bg-white/5 border border-white/10 italic text-sm text-slate-400">
                                 <span className="text-red-500 font-bold uppercase tracking-widest text-[10px] block mb-2">Important Note</span>
                                 Pillora's opt-in process ensures every donor from your database has explicitly consented to being part of the Blood Connect network before their information is used. Donor privacy and consent are non-negotiable.
@@ -424,6 +250,317 @@ export default function PartnersPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Form Modal */}
+            <AnimatePresence>
+                {activeForm !== null && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 overflow-y-auto bg-slate-900/60 backdrop-blur-sm pt-20 pb-10">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="w-full max-w-4xl bg-white rounded-[40px] shadow-2xl relative overflow-hidden"
+                        >
+                            {/* Modal Header */}
+                            <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-md px-8 py-6 border-b border-slate-100 flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white ${activeForm === 'hospital' ? 'bg-blue-600' : 'bg-red-600'}`}>
+                                        {activeForm === 'hospital' ? <Building2 className="w-6 h-6" /> : <Handshake className="w-6 h-6" />}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Partner with Pillora</h3>
+                                        <p className="text-sm text-slate-500 font-medium italic">
+                                            {activeForm === 'hospital' ? 'Hospital & Clinic registration' : 'NGO & Blood Donor Organization registration'}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button 
+                                    onClick={() => setActiveForm(null)}
+                                    className="p-3 hover:bg-slate-100 rounded-2xl transition-colors text-slate-400 hover:text-slate-900"
+                                >
+                                    <X className="w-6 h-6" />
+                                </button>
+                            </div>
+
+                            {/* Modal Content */}
+                            <div className="p-8 md:p-12 overflow-y-auto max-h-[80vh]">
+                                {formSubmitted ? (
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="py-20 text-center"
+                                    >
+                                        <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8">
+                                            <CheckCircle2 className="w-10 h-10" />
+                                        </div>
+                                        <h2 className="text-3xl font-black text-slate-900 mb-4">Form Submitted!</h2>
+                                        <p className="text-xl text-slate-600 font-medium italic">
+                                            Thank you for your interest in partnering with Pillora. Our team will contact you shortly.
+                                        </p>
+                                    </motion.div>
+                                ) : (
+                                    <form onSubmit={handleSubmit} className="space-y-12">
+                                        {activeForm === 'hospital' ? (
+                                            <>
+                                                {/* Facility Information */}
+                                                <div>
+                                                    <div className="flex items-center gap-3 mb-8">
+                                                        <Building2 className="w-5 h-5 text-blue-600" />
+                                                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Facility Information</h4>
+                                                    </div>
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Hospital / Clinic Name</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Apollo Hospital" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Type of Facility</label>
+                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                                <option value="">Select Type</option>
+                                                                <option>Multi-specialty Hospital</option>
+                                                                <option>Single Specialty Hospital</option>
+                                                                <option>Clinic</option>
+                                                                <option>Diagnostic Center</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Registration Number (Govt.)</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Registration No." />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">City</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Area / Locality</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Satellite" />
+                                                        </div>
+                                                        <div className="md:col-span-2 space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Address</label>
+                                                            <textarea required rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Contact Person Information */}
+                                                <div>
+                                                    <div className="flex items-center gap-3 mb-8">
+                                                        <UserCircle className="w-5 h-5 text-blue-600" />
+                                                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Contact Person Information</h4>
+                                                    </div>
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Name</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Designation</label>
+                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                                <option value="">Select Designation</option>
+                                                                <option>Owner</option>
+                                                                <option>Administrator</option>
+                                                                <option>Manager</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Phone Number</label>
+                                                            <input required type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Official Email Address</label>
+                                                            <input required type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="email@hospital.com" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Services Information */}
+                                                <div>
+                                                    <div className="flex items-center gap-3 mb-8">
+                                                        <Activity className="w-5 h-5 text-blue-600" />
+                                                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Services Information</h4>
+                                                    </div>
+                                                    <div className="space-y-8">
+                                                        <div className="space-y-4">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Specializations / Departments Available</label>
+                                                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                                                {['General', 'Cardiology', 'Orthopedics', 'Gynecology', 'Neurology', 'Pediatrics', 'Oncology', 'Dermatology'].map(spec => (
+                                                                    <label key={spec} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
+                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
+                                                                        <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{spec}</span>
+                                                                    </label>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Number of Doctors</label>
+                                                            <input required type="number" className="w-full md:w-1/3 px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Total doctors count" />
+                                                        </div>
+
+                                                        <div className="space-y-4">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Facilities Available</label>
+                                                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                                                                {['ICU', 'OT', 'Emergency', 'Pharmacy', 'Lab'].map(fac => (
+                                                                    <label key={fac} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
+                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
+                                                                        <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{fac}</span>
+                                                                    </label>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="space-y-4">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Government Schemes Accepted</label>
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                                {['Ayushman Bharat', 'State Health Schemes', 'ESIC', 'CGHS'].map(scheme => (
+                                                                    <label key={scheme} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
+                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
+                                                                        <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{scheme}</span>
+                                                                    </label>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {/* NGO Organization Information */}
+                                                <div>
+                                                    <div className="flex items-center gap-3 mb-8">
+                                                        <Handshake className="w-5 h-5 text-red-600" />
+                                                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Organization Information</h4>
+                                                    </div>
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Organization / NGO Name</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Red Cross Society" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Type of Organization</label>
+                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                                <option value="">Select Type</option>
+                                                                <option>NGO</option>
+                                                                <option>Voluntary Blood Donor Group</option>
+                                                                <option>Community Organization</option>
+                                                                <option>Other</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Registration Number (Optional)</label>
+                                                            <input type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Govt. / NGO registration" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">City</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Area / Locality</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Paldi" />
+                                                        </div>
+                                                        <div className="md:col-span-2 space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Address</label>
+                                                            <textarea required rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Contact Person Information */}
+                                                <div>
+                                                    <div className="flex items-center gap-3 mb-8">
+                                                        <UserCircle className="w-5 h-5 text-red-600" />
+                                                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Contact Person Information</h4>
+                                                    </div>
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Name</label>
+                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Designation</label>
+                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                                <option value="">Select Designation</option>
+                                                                <option>Founder</option>
+                                                                <option>Director</option>
+                                                                <option>Coordinator</option>
+                                                                <option>Manager</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Phone Number</label>
+                                                            <input required type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Official Email Address</label>
+                                                            <input required type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="email@organization.org" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Donor Database Information */}
+                                                <div>
+                                                    <div className="flex items-center gap-3 mb-8">
+                                                        <Database className="w-5 h-5 text-red-600" />
+                                                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Donor Database Information</h4>
+                                                    </div>
+                                                    <div className="space-y-8">
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                            <div className="space-y-2">
+                                                                <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Approx. Number of Donors</label>
+                                                                <input required type="number" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Total donors count" />
+                                                            </div>
+                                                            <div className="space-y-2">
+                                                                <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Is donor data digitized?</label>
+                                                                <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                                    <option value="">Select Option</option>
+                                                                    <option>Yes</option>
+                                                                    <option>No</option>
+                                                                    <option>Partially</option>
+                                                                </select>
+                                                            </div>
+                                                            <div className="md:col-span-2 space-y-2">
+                                                                <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Cities / Areas covered</label>
+                                                                <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad, Gandhinagar, Surat" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="space-y-4">
+                                                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Blood Groups Available</label>
+                                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                                {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(group => (
+                                                                    <label key={group} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-red-50 transition-colors group">
+                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-red-600 focus:ring-red-500 focus:ring-offset-0" />
+                                                                        <span className="text-sm font-semibold text-slate-700 group-hover:text-red-700">{group}</span>
+                                                                    </label>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {/* Additional Information */}
+                                        <div className="space-y-6">
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Additional Message (Optional)</label>
+                                                <textarea rows={4} className={`w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 transition-all font-medium resize-none ${activeForm === 'hospital' ? 'focus:ring-blue-600/20' : 'focus:ring-red-600/20'} focus:bg-white`} placeholder="Any additional information you'd like to share..."></textarea>
+                                            </div>
+
+                                            <button 
+                                                type="submit"
+                                                className={`w-full py-6 text-white font-black rounded-3xl transition-all shadow-2xl uppercase tracking-[0.2em] text-sm ${activeForm === 'hospital' ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-200' : 'bg-red-600 hover:bg-red-700 shadow-red-200'}`}
+                                            >
+                                                Submit Application
+                                            </button>
+                                        </div>
+                                    </form>
+                                )}
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
 
             {/* Comparison Table */}
             <section className="py-32 px-6">
