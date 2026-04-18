@@ -99,7 +99,7 @@ export default function HelpCenterPage() {
         },
         {
             question: "Can I remove myself from the donor network?",
-            answer: "Yes. Contact us at support@pillora.in and we will remove your profile from the network promptly."
+            answer: "Yes. Contact us at shahyugam037@gmail.com and we will remove your profile from the network promptly."
         },
         {
             question: "Is there any cost to register as a donor?",
