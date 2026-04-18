@@ -882,34 +882,78 @@ function RequestForm() {
             return;
         }
 
+        if (isImageProcessing) {
+            alert('Please wait — your document image is still being processed.');
+            return;
+        }
+
         setLoading(true);
 
-        // Security Timeout & Abort Controller
+        // Build a clean payload — do NOT send the entire formData state object
+        // because React state updates are async and could be stale
+        const payload = {
+            patientName: formData.patientName,
+            age: formData.age,
+            bloodGroup: formData.bloodGroup,
+            units: formData.units,
+            hospitalAddress: formData.hospitalAddress,
+            area: formData.area,
+            city: formData.city,
+            contactNumber: formData.contactNumber,
+            isUrgent: formData.isUrgent,
+            kycDocumentType: formData.kycDocumentType,
+            kycDocumentId: formData.kycDocumentId,
+            kycDocumentImage: formData.kycDocumentImage || undefined, // strip empty string
+        };
+
+        // Remove undefined/empty fields
+        Object.keys(payload).forEach(key => {
+            if ((payload as any)[key] === undefined || (payload as any)[key] === '') {
+                delete (payload as any)[key];
+            }
+        });
+
+        console.log('[BloodRequest] Submitting payload (image omitted):', {
+            ...payload,
+            kycDocumentImage: payload.kycDocumentImage ? `[base64 ~${Math.round((payload.kycDocumentImage.length * 0.75) / 1024)}KB]` : 'none'
+        });
+
+        // AbortController for safety — 60s is plenty since backend responds instantly now
         const controller = new AbortController();
         const timeoutId = setTimeout(() => {
             controller.abort();
             setLoading(false);
-            alert("The network is taking longer than usual. The request might still be processing on the server.");
-        }, 60000); // 60s absolute timeout for slow uploads
+            alert('Request timed out. Please check your internet connection and try again.');
+        }, 60000);
 
         try {
-            await api.post('/blood-bank/requests', formData, {
-                signal: controller.signal
+            const response = await api.post('/blood-bank/requests', payload, {
+                signal: controller.signal,
             });
             clearTimeout(timeoutId);
+            console.log('[BloodRequest] Success:', response.data);
             setSuccess(true);
         } catch (error: any) {
             clearTimeout(timeoutId);
-            if (error.name === 'AbortError' || error.message === 'canceled') {
-                console.warn("Request was aborted due to timeout");
-                return; // Already handled by setTimeout
+            console.error('[BloodRequest] Error details:', {
+                name: error.name,
+                message: error.message,
+                status: error.response?.status,
+                data: error.response?.data,
+            });
+
+            if (error.name === 'CanceledError' || error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+                // Already handled by the timeout alert above
+                return;
             }
-            const errorMessage = error.response?.data?.message || error.message || 'Failed to submit request';
-            alert(errorMessage);
+
+            const errorMessage = error.response?.data?.message || error.message || 'Failed to submit request. Please try again.';
+            alert(`Error: ${errorMessage}`);
         } finally {
             setLoading(false);
         }
     };
+
 
     if (success) {
         return (
