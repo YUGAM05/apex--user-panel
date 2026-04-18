@@ -183,7 +183,7 @@ export default function AdminDashboard() {
                 <section className="bg-slate-900/50 backdrop-blur border border-white/5 rounded-3xl p-8">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="text-xl font-bold flex items-center gap-2 text-red-400">
-                            <Droplet className="w-5 h-5" /> Blood Connect Management
+                            <Droplets className="w-5 h-5" /> Blood Connect Management
                         </h3>
                         <button
                             onClick={() => setShowBloodBank(!showBloodBank)}
