@@ -885,8 +885,8 @@ function RequestForm() {
         const timeoutId = setTimeout(() => {
             controller.abort();
             setLoading(false);
-            alert("Broadcasting timed out. Please check your internet and try again.");
-        }, 15000); // 15s absolute timeout as requested
+            alert("Broadcasting is taking longer than usual. Please wait a moment or try again.");
+        }, 25000); // 25s absolute timeout (AI OCR requires more time)
 
         try {
             await api.post('/blood-bank/requests', formData, {
