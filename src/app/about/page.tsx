@@ -338,7 +338,7 @@ export default function AboutPage() {
                         <span className="text-rose-500">Health Grid of India</span>
                     </h2>
                     <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-light mb-12">
-                        By 2028, Pillora aims to be a real-time network where Blood Connect, emergency beds, and specialist availability are all synchronized in one place, accessible to anyone, anywhere, in moments.
+                        By 2028, Pillora aims to be a real-time network where Blood Connect and specialist availability are all synchronized in one place, accessible to anyone, anywhere, in moments.
                     </p>
                     <div className="flex items-center justify-center gap-4 text-rose-500 font-black tracking-widest uppercase">
                         <div className="h-px w-12 bg-rose-500/50" />
