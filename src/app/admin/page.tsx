@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -15,10 +15,7 @@ export default function AdminDashboard() {
     const [showBloodBank, setShowBloodBank] = useState(false);
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             await Promise.all([fetchStats(), fetchPendingUsers()]);
         } catch (error) {
@@ -26,9 +23,13 @@ export default function AdminDashboard() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [fetchStats, fetchPendingUsers]);
 
-    const fetchPendingUsers = async () => {
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const fetchPendingUsers = useCallback(async () => {
         const token = localStorage.getItem("token");
         try {
             const res = await api.get("/admin/users?status=pending", {
@@ -38,7 +39,7 @@ export default function AdminDashboard() {
         } catch (err: any) {
             console.error("Failed to fetch pending users", err);
         }
-    };
+    }, []);
 
     const handleStatusUpdate = async (userId: string, status: 'approved' | 'rejected') => {
         const token = localStorage.getItem("token");
@@ -57,7 +58,7 @@ export default function AdminDashboard() {
         }
     };
 
-    const fetchStats = async () => {
+    const fetchStats = useCallback(async () => {
         try {
             const token = localStorage.getItem("token");
             if (!token) {
@@ -77,7 +78,7 @@ export default function AdminDashboard() {
                 setError("Failed to load dashboard data.");
             }
         }
-    };
+    }, [router]);
 
     if (loading) {
         return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-teal-500">Loading Dashboard...</div>
