@@ -5,14 +5,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AIChatBox from "@/components/AIChatBox";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Pillora",
-    description: "Next-Gen Healthcare Platform",
+    title: "Pillora — Blood Connect & Hospital Information | India's HealthTech Platform",
+    description: "Pillora connects voluntary blood donors with verified recipients through Blood Connect and helps patients find hospitals, doctors, pricing, and government schemes across India.",
     icons: {
         icon: [
             { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
@@ -46,7 +45,6 @@ export default function RootLayout({
                         {children}
                     </div>
                     <Footer />
-                    <AIChatBox />
                 </ThemeProvider>
                 <Analytics />
                 <SpeedInsights />

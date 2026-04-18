@@ -62,33 +62,16 @@ const Hero3DAnimation = () => {
                         className="flex flex-col items-center gap-4"
                     >
                         <div className="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center shadow-lg shadow-blue-200">
-                            <PlusSquare className="w-12 h-12 text-white" />
+                            <Activity className="w-12 h-12 text-white" />
                         </div>
                         <div className="text-center">
                             <span className="block font-bold text-gray-800 text-xl tracking-tight">PILLORA+</span>
-                            <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest">Premium Pharmacy</span>
+                            <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest">Health Network</span>
                         </div>
                     </motion.div>
                 </div>
 
                 {/* Orbiting Elements */}
-
-                {/* Pill 1 */}
-                <motion.div
-                    className="absolute -top-10 -left-10 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center border border-gray-100"
-                    animate={{
-                        x: [0, 15, 0],
-                        y: [0, -15, 0],
-                        rotate: [0, 15, 0],
-                    }}
-                    transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                >
-                    <Pill className="w-8 h-8 text-blue-500" />
-                </motion.div>
 
                 {/* Heart */}
                 <motion.div

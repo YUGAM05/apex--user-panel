@@ -62,7 +62,7 @@ export default function BlogPage() {
         }
     };
 
-    const categories = ["All", "Life-Saver Series", "Pharmacy Guides", "Tech & Innovation", "Local Focus", "Health"];
+    const categories = ["All", "Life-Saver Series", "Healthcare Guides", "Tech & Innovation", "Local Focus", "Health"];
 
     const filteredPosts = blogs.filter(post => {
         const matchesCategory = activeCategory === "All" || post.category === activeCategory;
@@ -74,7 +74,7 @@ export default function BlogPage() {
     const getCategoryIcon = (category: string) => {
         switch (category) {
             case "Life-Saver Series": return <Droplets className="w-5 h-5" />;
-            case "Pharmacy Guides": return <Pill className="w-5 h-5" />;
+            case "Healthcare Guides": return <BookOpen className="w-5 h-5" />;
             case "Tech & Innovation": return <Cpu className="w-5 h-5" />;
             case "Local Focus": return <MapPin className="w-5 h-5" />;
             default: return <BookOpen className="w-5 h-5" />;
@@ -84,7 +84,7 @@ export default function BlogPage() {
     const getCategoryColor = (category: string) => {
         switch (category) {
             case "Life-Saver Series": return "bg-red-50 text-red-600";
-            case "Pharmacy Guides": return "bg-blue-50 text-blue-600";
+            case "Healthcare Guides": return "bg-blue-50 text-blue-600";
             case "Tech & Innovation": return "bg-purple-50 text-purple-600";
             case "Local Focus": return "bg-emerald-50 text-emerald-600";
             default: return "bg-blue-50 text-blue-600";
@@ -112,7 +112,7 @@ export default function BlogPage() {
                             Pillora <span className="text-blue-600">Insights.</span>
                         </h1>
                         <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">
-                            Your guide to modern healthcare in 2026. From life-saving blood connect tips to the latest AI innovations in pharmaceutical tech.
+                            Your guide to modern healthcare in 2026. From life-saving blood connect tips to the latest innovations in health tech.
                         </p>
 
                         {/* Search & Filter Bar */}

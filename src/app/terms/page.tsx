@@ -204,7 +204,7 @@ export default function TermsAndConditionsPage() {
                     <motion.section {...fadeIn} className="bg-white p-8 md:p-12 rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-200/50">
                         <h2 className="text-2xl font-black text-slate-900 mb-10 italic tracking-tight uppercase">08. Governing Law</h2>
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                            {["IT Act 2000", "DPDP Act 2023", "Aadhaar Act 2016", "Drugs Act 1940"].map((law) => (
+                            {["IT Act 2000", "DPDP Act 2023", "Aadhaar Act 2016", "Health Policy 2017"].map((law) => (
                                 <div key={law} className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                     <Gavel className="w-4 h-4 text-slate-400" />
                                     <span className="font-bold text-slate-900 text-xs">{law}</span>

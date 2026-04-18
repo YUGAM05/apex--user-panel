@@ -114,7 +114,7 @@ export default function OrderMap({ sellerLocation, customerLocation, deliveryLoc
                     <Marker position={[sellerLocation.lat, sellerLocation.lng]} icon={sellerIcon as any}>
                         <Popup>
                             <div className="text-center">
-                                <p className="font-bold text-gray-800">Pharmacy Location</p>
+                                <p className="font-bold text-gray-800">Facility Location</p>
                                 <p className="text-xs text-gray-500">Pickup Point</p>
                             </div>
                         </Popup>

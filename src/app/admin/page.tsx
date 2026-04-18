@@ -125,9 +125,9 @@ export default function AdminDashboard() {
                         color="bg-rose-500/10 border-rose-500/20"
                     />
                     <StatCard
-                        icon={<Package className="w-8 h-8 text-emerald-400" />}
-                        label="Orders Processed"
-                        value={stats?.counts?.orders || 0}
+                        icon={<Activity className="w-8 h-8 text-emerald-400" />}
+                        label="Platform Activity"
+                        value={stats?.counts?.activity || 0}
                         color="bg-emerald-500/10 border-emerald-500/20"
                     />
                 </div>
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
                     )}
                 </section>
 
-                {/* Blood Bank Management Section */}
+                {/* Blood Connect Management Section */}
                 <section className="bg-slate-900/50 backdrop-blur border border-white/5 rounded-3xl p-8">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="text-xl font-bold flex items-center gap-2 text-red-400">
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
                         <BloodBankAdmin />
                     ) : (
                         <div className="text-center py-12 text-slate-500">
-                            <Droplet className="w-16 h-16 mx-auto mb-4 text-red-500/30" />
+                            <Droplets className="w-16 h-16 mx-auto mb-4 text-red-500/30" />
                             <p>Click &quot;View Details&quot; to access blood connect data and export options</p>
                         </div>
                     )}
