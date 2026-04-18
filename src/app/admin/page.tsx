@@ -48,19 +48,18 @@ export default function AdminDashboard() {
         }
     }, [router]);
 
-    const fetchData = useCallback(async () => {
-        try {
-            await Promise.all([fetchStats(), fetchPendingUsers()]);
-        } catch (error) {
-            console.error("Error fetching admin data", error);
-        } finally {
-            setLoading(false);
-        }
-    }, [fetchStats, fetchPendingUsers]);
-
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await Promise.all([fetchStats(), fetchPendingUsers()]);
+            } catch (error) {
+                console.error("Error fetching admin data", error);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchData();
-    }, [fetchData]);
+    }, [fetchStats, fetchPendingUsers]);
 
     const handleStatusUpdate = async (userId: string, status: 'approved' | 'rejected') => {
         const token = localStorage.getItem("token");

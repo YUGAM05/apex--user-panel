@@ -805,6 +805,7 @@ function RequestForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [isImageProcessing, setIsImageProcessing] = useState(false);
     const [formData, setFormData] = useState({
         patientName: '', age: '', bloodGroup: 'A+', units: '1',
         hospitalAddress: '', area: '', city: 'Ahmedabad', contactNumber: '', isUrgent: false,
@@ -825,9 +826,11 @@ function RequestForm() {
                 console.warn("Large image detected, compressing...");
             }
 
+            setIsImageProcessing(true);
             const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
+                img.onerror = () => setIsImageProcessing(false);
                 img.onload = () => {
                     // Create canvas for compression
                     const canvas = document.createElement('canvas');
@@ -855,7 +858,8 @@ function RequestForm() {
 
                     // Export as compressed JPEG
                     const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-                    setFormData({ ...formData, kycDocumentImage: compressedBase64 });
+                    setFormData(prev => ({ ...prev, kycDocumentImage: compressedBase64 }));
+                    setIsImageProcessing(false);
                     console.log("Image compressed successfully.");
                 };
                 img.src = event.target?.result as string;
@@ -885,8 +889,8 @@ function RequestForm() {
         const timeoutId = setTimeout(() => {
             controller.abort();
             setLoading(false);
-            alert("Broadcasting is taking longer than usual. Please wait a moment or try again.");
-        }, 25000); // 25s absolute timeout (AI OCR requires more time)
+            alert("The network is taking longer than usual. The request might still be processing on the server.");
+        }, 60000); // 60s absolute timeout for slow uploads
 
         try {
             await api.post('/blood-bank/requests', formData, {
@@ -1079,11 +1083,11 @@ function RequestForm() {
 
             <button
                 type="submit"
-                disabled={loading}
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-red-200 transition-all flex items-center justify-center gap-2"
+                disabled={loading || isImageProcessing}
+                className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-red-200 transition-all flex items-center justify-center gap-2"
             >
                 {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Siren className="w-5 h-5" />}
-                {loading ? 'Broadcasting...' : 'Broadcast Request'}
+                {isImageProcessing ? 'Processing Image...' : (loading ? 'Broadcasting...' : 'Broadcast Request')}
             </button>
         </form>
     );
