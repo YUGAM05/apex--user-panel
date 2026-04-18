@@ -1,209 +1,284 @@
 "use client";
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Activity,
-    ShieldCheck,
-    Zap,
-    Lock,
-    Target,
-    Stethoscope,
+    Search,
+    Plus,
+    Minus,
+    Droplets,
     HeartPulse,
-    BookOpen,
-    ArrowRight
+    Hospital,
+    Handshake,
+    Mail,
+    Zap,
+    HelpCircle,
+    ArrowRight,
+    SearchCheck,
+    Stethoscope
 } from 'lucide-react';
 
-export default function HelpCenterPage() {
-    const fadeIn = {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6 }
-    };
+interface FAQ {
+    question: string;
+    answer: string;
+}
 
-    const coreFunctions = [
+interface FAQSectionProps {
+    title: string;
+    icon: React.ReactNode;
+    faqs: FAQ[];
+    color: string;
+}
+
+const FAQItem = ({ faq }: { faq: FAQ }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="border-b border-slate-100 last:border-0">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full py-6 flex items-start justify-between gap-4 text-left group"
+            >
+                <span className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors leading-tight">
+                    {faq.question}
+                </span>
+                <div className={`mt-1 p-1 rounded-lg transition-colors ${isOpen ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'}`}>
+                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                </div>
+            </button>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                    >
+                        <p className="pb-8 text-slate-600 font-medium leading-relaxed italic">
+                            {faq.answer}
+                        </p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
+const FAQSection = ({ title, icon, faqs, color }: FAQSectionProps) => (
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16 last:mb-0"
+    >
+        <div className="flex items-center gap-4 mb-8">
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${color}`}>
+                {icon}
+            </div>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase">
+                {title}
+            </h2>
+        </div>
+        <div className="bg-white rounded-[32px] p-6 md:p-12 shadow-xl shadow-slate-200/50 border border-slate-50">
+            {faqs.map((faq, index) => (
+                <FAQItem key={index} faq={faq} />
+            ))}
+        </div>
+    </motion.div>
+);
+
+export default function HelpCenterPage() {
+    const bloodDonorFAQs: FAQ[] = [
         {
-            icon: <HeartPulse className="w-8 h-8" />,
-            title: "The Real-Time Blood Registry",
-            description: "At the heart of our Health Centre is a dedicated network designed to save lives through speed. We provide an accelerated pathway for users to connect with life-saving blood donors instantly via WhatsApp. To maintain the highest standards of safety and prevent fraudulent activity, we require KYC verification for all donors. This ensures that every match we deliver is verified, secure, and ready to help when every second counts."
+            question: "How do I register as a blood donor?",
+            answer: "Visit the Blood Connect section and fill in your Full Name, Blood Group, Age, Gender, Phone Number, City, Area, and Full Address. Once submitted, your profile is added to our donor network."
         },
         {
-            icon: <BookOpen className="w-8 h-8" />,
-            title: "Verified Medical Knowledge Base",
-            description: "Knowledge is the first step to recovery. Our Health Centre features a library of medically-verified content, offering insights into health management, chronic disease care, and seasonal health alerts."
+            question: "When will my contact details be shared?",
+            answer: "Your name and phone number are only shared when a KYC-verified recipient in your nearest area needs blood that matches your blood group. Your details are never shared without a verified match."
         },
+        {
+            question: "Can I remove myself from the donor network?",
+            answer: "Yes. Contact us at support@pillora.in and we will remove your profile from the network promptly."
+        },
+        {
+            question: "Is there any cost to register as a donor?",
+            answer: "No. Registering as a donor on Pillora is completely free."
+        }
     ];
 
-    const trustPoints = [
-        { icon: <ShieldCheck className="w-5 h-5" />, label: "Accuracy", detail: "Data is audited regularly by our medical operations team." },
-        { icon: <Zap className="w-5 h-5" />, label: "Speed", detail: "Optimized search algorithms to reduce 'time-to-care'." },
-        { icon: <Lock className="w-5 h-5" />, label: "Privacy", detail: "Bank-grade encryption for all patient-sensitive data." },
-        { icon: <Target className="w-5 h-5" />, label: "Local Focus", detail: "Deeply integrated with the healthcare infrastructure of Gujarat." }
+    const bloodRecipientFAQs: FAQ[] = [
+        {
+            question: "How do I request blood?",
+            answer: "Go to the Blood Connect section and submit a request with — Patient Name, Age, Blood Group Needed, Units Needed, Hospital Name & Address, City, Area/Locality, and Contact Person Number."
+        },
+        {
+            question: "Why is KYC verification mandatory?",
+            answer: "KYC verification protects donors from fraud and misuse. Every recipient must verify their identity via Aadhaar card before any donor contact details are shared with them."
+        },
+        {
+            question: "How does the Aadhaar verification work?",
+            answer: "Upload a clear photo of your Aadhaar card on the platform. Our AI-powered system verifies it automatically. Once approved, you will receive an SMS confirmation on your registered contact number."
+        },
+        {
+            question: "Is my Aadhaar number stored safely?",
+            answer: "Yes. Your Aadhaar number is never stored in full. It is masked and saved as **** **** **XX — only the last 2 digits are visible in our admin panel."
+        },
+        {
+            question: "How long does it take to find a matching donor?",
+            answer: "Matching is automated and happens instantly once your KYC is verified. If a donor with your required blood group is available in your area, their details are shared with you immediately."
+        },
+        {
+            question: "What if no donor is found in my area?",
+            answer: "If no match is found in your immediate area, we recommend also contacting your nearest licensed blood bank or hospital blood storage facility directly."
+        }
+    ];
+
+    const hospitalFAQs: FAQ[] = [
+        {
+            question: "How do I search for a hospital on Pillora?",
+            answer: "Go to the Hospitals section and search by city, area, specialty, or doctor name. You can compare hospitals based on doctors, pricing, facilities, and government schemes accepted."
+        },
+        {
+            question: "Is the hospital information on Pillora verified?",
+            answer: "Yes. All hospital data is verified before being listed on the platform and updated regularly in coordination with our hospital partners."
+        },
+        {
+            question: "What information is available for each hospital?",
+            answer: "For every listed hospital we provide — doctor profiles with specializations and experience, consultation availability schedules, pricing for consultations and treatments, government schemes accepted (Ayushman Bharat, state schemes, and others), and facilities & departments available."
+        },
+        {
+            question: "Can I book an appointment through Pillora?",
+            answer: "Currently Pillora provides hospital and doctor information to help you make informed decisions. For appointments, you can directly contact the hospital using the details provided on their profile."
+        }
+    ];
+
+    const partnerFAQs: FAQ[] = [
+        {
+            question: "How can my hospital get listed on Pillora?",
+            answer: "Visit our Partners page and click &quot;Become a Partner&quot; under the Hospitals & Clinics section. Fill in your facility details and our team will contact you shortly."
+        },
+        {
+            question: "We are an NGO with a donor database. How do we partner?",
+            answer: "Visit our Partners page and click &quot;Become a Partner&quot; under the NGO & Blood Donor Organizations section. Share details about your donor database and our team will contact you shortly."
+        }
     ];
 
     return (
-        <main className="min-h-screen bg-slate-50">
+        <main className="min-h-screen bg-slate-50 font-sans pb-32">
             {/* Hero Section */}
-            <section className="relative min-h-[70vh] py-20 flex items-center justify-center overflow-hidden bg-slate-900">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-slate-900/90" />
-                    <img
-                        src="/medical_hero_bg_1769443580457.png"
-                        alt="Medical Background"
-                        className="w-full h-full object-cover opacity-30"
-                    />
-                </div>
-
-                <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-
-                    <motion.h1
-                        {...fadeIn}
-                        className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 md:mb-8 tracking-tighter"
+            <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-slate-900 text-white">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] -mr-48 -mt-48" />
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] -ml-24 -mb-24" />
+                
+                <div className="max-w-5xl mx-auto text-center relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-2xl shadow-blue-500/20"
                     >
-                        The Pillora <br className="hidden sm:block" />
-                        <span className="text-blue-500 italic">Health Centre</span>
+                        <HelpCircle className="w-10 h-10 text-white" />
+                    </motion.div>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight"
+                    >
+                        Help Center — <span className="text-blue-500 italic">Pillora</span>
                     </motion.h1>
                     <motion.p
-                        {...fadeIn}
-                        transition={{ delay: 0.2 }}
-                        className="text-lg md:text-2xl font-medium text-slate-300 max-w-3xl mx-auto leading-relaxed px-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="text-2xl text-slate-400 font-medium mb-12 italic"
                     >
-                        Where Technology Meets Clinical Excellence. <br className="hidden md:block" />
-                        A comprehensive digital wellness ecosystem designed to empower your journey.
+                        How can we help you?
                     </motion.p>
+
+                    {/* Search Bar */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="max-w-2xl mx-auto relative group"
+                    >
+                        <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                            <Search className="w-6 h-6" />
+                        </div>
+                        <input 
+                            type="text" 
+                            placeholder="Search for answers..."
+                            className="w-full pl-16 pr-8 py-6 bg-white/10 border border-white/20 rounded-[32px] backdrop-blur-md text-white text-lg font-medium placeholder:text-slate-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:bg-white/15 transition-all shadow-2xl"
+                        />
+                    </motion.div>
                 </div>
             </section>
 
-            {/* Overview Section */}
-            <section className="py-16 md:py-24 px-6">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="space-y-6 md:space-y-8 text-center lg:text-left"
-                    >
-                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight">
-                            More than just a directory, <br className="hidden md:block" />
-                            <span className="text-blue-600 underline decoration-blue-200 underline-offset-8">your primary point of contact.</span>
-                        </h2>
-                        <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed">
-                            The Pillora Health Centre is a comprehensive digital wellness ecosystem designed to empower users with verified medical resources, emergency coordination, and proactive health management. Our platform serves as your primary point of contact for navigating the complexities of modern healthcare.
+            {/* FAQ Sections */}
+            <section className="py-24 px-6">
+                <div className="max-w-4xl mx-auto">
+                    <FAQSection 
+                        title="Blood Connect — Donor FAQs" 
+                        icon={<Droplets className="w-6 h-6" />} 
+                        faqs={bloodDonorFAQs} 
+                        color="bg-red-600 shadow-red-200" 
+                    />
+                    
+                    <FAQSection 
+                        title="Blood Connect — Recipient FAQs" 
+                        icon={<HeartPulse className="w-6 h-6" />} 
+                        faqs={bloodRecipientFAQs} 
+                        color="bg-red-500 shadow-red-100" 
+                    />
+
+                    <FAQSection 
+                        title="Hospital Information — FAQs" 
+                        icon={<Hospital className="w-6 h-6" />} 
+                        faqs={hospitalFAQs} 
+                        color="bg-blue-600 shadow-blue-200" 
+                    />
+
+                    <FAQSection 
+                        title="Partner FAQs" 
+                        icon={<Handshake className="w-6 h-6" />} 
+                        faqs={partnerFAQs} 
+                        color="bg-slate-900 shadow-slate-200" 
+                    />
+                </div>
+            </section>
+
+            {/* Contact CTA */}
+            <section className="px-6">
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="max-w-5xl mx-auto bg-blue-600 rounded-[40px] p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-blue-200"
+                >
+                    <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-[100px] -ml-48 -mt-48" />
+                    
+                    <div className="relative z-10">
+                        <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center mx-auto mb-10 backdrop-blur-sm">
+                            <Mail className="w-10 h-10" />
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">Still Need Help?</h2>
+                        <p className="text-xl text-blue-100 mb-12 font-medium max-w-2xl mx-auto italic">
+                            Can&apos;t find what you&apos;re looking for? Reach out to us directly. Our team is here to assist you.
                         </p>
 
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="relative p-8 md:p-12 bg-white rounded-[2.5rem] shadow-2xl border border-slate-100"
-                    >
-                        <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-600/10 rounded-full blur-2xl" />
-                        <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-slate-100 rounded-full blur-2xl" />
-
-                        <div className="relative z-10 space-y-6">
-                            <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                                <ShieldCheck className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-2xl font-black text-slate-900 italic tracking-tight underline decoration-blue-100 underline-offset-4">
-                                Clinical Excellence & Trusted Networks
-                            </h3>
-                            <p className="text-slate-600 font-medium leading-relaxed italic">
-                                &quot;Our health centre is more than a platform; it&apos;s a bridge to verified medical facilities. We collaborate with top-tier clinical institutions to ensure every data point and every service meets a standard of care that you can rely on during critical moments.&quot;
-                            </p>
-                            <div className="space-y-4 pt-4 border-t border-slate-50">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-blue-600" />
-                                    <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Verified Hospital Registry</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-blue-600" />
-                                    <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Clinically-Audited Knowledge</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-blue-600" />
-                                    <span className="text-sm font-bold text-slate-900 uppercase tracking-wider">Bank-Grade Encryption Standards</span>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Core Functions */}
-            <section className="relative py-20 md:py-32 bg-white overflow-hidden border-y border-slate-100">
-                {/* Background Decorations */}
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-50 rounded-full blur-[80px] md:blur-[100px] -translate-y-1/2" />
-                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-slate-50 rounded-full blur-[120px] translate-y-1/2" />
-
-                <div className="relative z-10 max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-12 md:mb-20">
-                        <span className="text-blue-600 font-black uppercase tracking-widest text-xs">Innovation in Care</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 tracking-tight">Core Functions</h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {coreFunctions.map((func, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="group p-6 md:p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100/50 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500"
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                            <a 
+                                href="mailto:shahyugam037@gmail.com"
+                                className="w-full md:w-auto px-10 py-6 bg-white text-blue-600 font-black rounded-3xl hover:bg-slate-100 transition-all shadow-xl uppercase tracking-widest text-sm flex items-center justify-center gap-3"
                             >
-                                <div className="w-16 h-16 bg-blue-600/10 text-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                                    {func.icon}
-                                </div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4 italic tracking-tight">{func.title}</h3>
-                                <p className="text-slate-600 font-medium leading-relaxed">
-                                    {func.description}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Why Choose Section */}
-            <section className="py-20 md:py-32 bg-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50 rounded-full blur-[100px] -mr-64 -mt-64" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-slate-50 rounded-full blur-[100px] -ml-64 -mb-64" />
-
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div className="lg:col-span-5 text-center lg:text-left">
-                            <span className="text-blue-600 font-black uppercase tracking-widest text-xs">Our Commitment</span>
-                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-[1.1] tracking-tighter">
-                                Why Choose the <br className="hidden sm:block" />
-                                <span className="text-blue-600 italic">Pillora Health Centre?</span>
-                            </h2>
-                            <p className="text-slate-500 font-medium mt-6 md:mt-8 text-base md:text-lg">
-                                We combine medical expertise with cutting-edge technology to ensure your family&apos;s safety and well-being.
-                            </p>
-                        </div>
-
-                        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            {trustPoints.map((point, index) => (
-                                <motion.div
-                                    key={index}
-                                    whileHover={{ y: -10 }}
-                                    className="p-6 md:p-8 bg-slate-50 border border-slate-100 rounded-3xl"
-                                >
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <div className="w-10 h-10 bg-white shadow-sm rounded-xl flex items-center justify-center text-blue-600">
-                                            {point.icon}
-                                        </div>
-                                        <h4 className="font-black text-slate-900 uppercase tracking-widest text-[11px]">{point.label}</h4>
-                                    </div>
-                                    <p className="text-sm text-slate-500 font-bold leading-relaxed italic">
-                                        {point.detail}
-                                    </p>
-                                </motion.div>
-                            ))}
+                                shahyugam037@gmail.com <ArrowRight className="w-4 h-4" />
+                            </a>
+                            <div className="px-10 py-6 bg-blue-700/50 border border-white/20 rounded-3xl font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                                Response Time: Within 24 hours <Zap className="w-3 h-3 fill-current" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </section>
         </main>
     );
