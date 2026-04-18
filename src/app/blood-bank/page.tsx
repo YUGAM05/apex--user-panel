@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Heart, Activity, MapPin, Droplet, User, Phone, CheckCircle, AlertOctagon, Clock, ShieldCheck, Siren, Info, Upload, FileIcon, Trash2, Image } from 'lucide-react';
+import { Heart, Activity, MapPin, Droplet, User, Phone, CheckCircle, AlertOctagon, Clock, ShieldCheck, Siren, Info, Upload, FileIcon, Trash2, Image as ImageIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/lib/api';
 import { socket } from '@/lib/socket';
