@@ -99,7 +99,7 @@ export default function PartnersPage() {
                         transition={{ delay: 0.1 }}
                         className="text-5xl md:text-7xl font-black text-slate-900 mb-8 tracking-tighter leading-[1.1]"
                     >
-                        Join India's Growing <br />
+                        Join India&apos;s Growing <br />
                         <span className="text-blue-600 italic">HealthTech Ecosystem</span>
                     </motion.h1>
                     <motion.p
@@ -107,7 +107,7 @@ export default function PartnersPage() {
                         transition={{ delay: 0.2 }}
                         className="text-xl md:text-2xl text-slate-600 font-medium leading-relaxed max-w-3xl mx-auto italic"
                     >
-                        At Pillora, we are on a mission to make healthcare accessible, transparent, and immediate. We don't work alone — we build through collaboration.
+                        At Pillora, we are on a mission to make healthcare accessible, transparent, and immediate. We don&apos;t work alone — we build through collaboration.
                     </motion.p>
                 </div>
             </section>
@@ -244,7 +244,7 @@ export default function PartnersPage() {
 
                             <div className="p-6 rounded-2xl bg-white/5 border border-white/10 italic text-sm text-slate-400">
                                 <span className="text-red-500 font-bold uppercase tracking-widest text-[10px] block mb-2">Important Note</span>
-                                Pillora's opt-in process ensures every donor from your database has explicitly consented to being part of the Blood Connect network before their information is used. Donor privacy and consent are non-negotiable.
+                                Pillora&apos;s opt-in process ensures every donor from your database has explicitly consented to being part of the Blood Connect network before their information is used. Donor privacy and consent are non-negotiable.
                             </div>
                         </motion.div>
                     </div>
@@ -544,7 +544,7 @@ export default function PartnersPage() {
                                         <div className="space-y-6">
                                             <div className="space-y-2">
                                                 <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Additional Message (Optional)</label>
-                                                <textarea rows={4} className={`w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 transition-all font-medium resize-none ${activeForm === 'hospital' ? 'focus:ring-blue-600/20' : 'focus:ring-red-600/20'} focus:bg-white`} placeholder="Any additional information you'd like to share..."></textarea>
+                                                <textarea rows={4} className={`w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 transition-all font-medium resize-none ${activeForm === 'hospital' ? 'focus:ring-blue-600/20' : 'focus:ring-red-600/20'} focus:bg-white`} placeholder="Any additional information you&apos;d like to share..."></textarea>
                                             </div>
 
                                             <button 
