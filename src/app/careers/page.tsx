@@ -36,7 +36,7 @@ export default function CareersPage() {
     return (
         <main className="min-h-screen bg-white selection:bg-rose-100 selection:text-rose-900">
             {/* 1. Hero Section */}
-            <section className="relative py-28 md:py-40 px-6 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-50 via-white to-transparent">
+            <section className="relative py-16 md:py-20 px-6 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-50 via-white to-transparent">
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <motion.div
                         animate={{
@@ -62,12 +62,12 @@ export default function CareersPage() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-5 py-2 mb-8 text-xs font-black tracking-[0.2em] text-rose-700 uppercase bg-rose-600/10 border border-rose-600/20 rounded-full backdrop-blur-md"
+                            className="inline-flex items-center gap-2 px-5 py-2 mb-6 text-xs font-black tracking-[0.2em] text-rose-700 uppercase bg-rose-600/10 border border-rose-600/20 rounded-full backdrop-blur-md"
                         >
                             <Sparkles className="w-4 h-4" />
                             Careers — Pillora
                         </motion.div>
-                        <h1 className="text-5xl md:text-8xl font-black text-slate-900 mb-10 leading-tight tracking-tighter">
+                        <h1 className="text-5xl md:text-8xl font-black text-slate-900 mb-6 leading-tight tracking-tighter">
                             Build the Future of <br />
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 via-red-600 to-rose-700 font-black">Digital Healthcare</span>
                         </h1>
