@@ -158,7 +158,7 @@ export default function AboutPage() {
                             className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs font-bold tracking-widest text-rose-700 uppercase bg-rose-50 rounded-full"
                         >
                             <Droplets className="w-4 h-4" />
-                            Blood Bank Services
+                            Blood Connect Services
                         </motion.div>
                         <h2 className="text-5xl font-black text-slate-900">Blood Connect</h2>
                     </div>

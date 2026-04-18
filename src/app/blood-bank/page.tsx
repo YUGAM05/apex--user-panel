@@ -119,7 +119,7 @@ export default function BloodBankPage() {
                         <span className="relative flex h-3.5 w-3.5">
                             <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white"></span>
                         </span>
-                        <span className="font-black text-sm tracking-[0.2em] uppercase">Live Blood Bank Network</span>
+                        <span className="font-black text-sm tracking-[0.2em] uppercase">Live Blood Connect Network</span>
                     </motion.div>
 
                     <motion.h2
@@ -215,7 +215,7 @@ export default function BloodBankPage() {
                         </div>
                     </div>
                     <div className="lg:col-span-1">
-                        <BloodBankInfoSidebar />
+                        <BloodConnectInfoSidebar />
                     </div>
                 </div>
             </div>
@@ -224,13 +224,13 @@ export default function BloodBankPage() {
 }
 
 
-function BloodBankInfoSidebar() {
+function BloodConnectInfoSidebar() {
     return (
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-red-100 sticky top-24">
             <div className="bg-red-50 p-6 border-b border-red-100">
                 <div className="flex items-center gap-2 mb-1">
                     <ShieldCheck className="w-5 h-5 text-red-600" />
-                    <h3 className="font-bold text-red-900 text-lg">Blood Bank Guidelines</h3>
+                    <h3 className="font-bold text-red-900 text-lg">Blood Connect Guidelines</h3>
                 </div>
                 <p className="text-red-600 text-xs">Essential information for our heroes & requesters</p>
             </div>

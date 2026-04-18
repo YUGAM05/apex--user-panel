@@ -56,7 +56,7 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold text-gray-900 mb-4">Services</h3>
                         <ul className="space-y-3 text-sm text-gray-500">
-                            <li><Link href="/blood-bank" className="hover:text-blue-600 transition-colors">Blood Bank</Link></li>
+                            <li><Link href="/blood-bank" className="hover:text-blue-600 transition-colors">Blood Connect</Link></li>
                             <li><Link href="/hospitals" className="hover:text-blue-600 transition-colors">Hospitals</Link></li>
                         </ul>
                     </div>

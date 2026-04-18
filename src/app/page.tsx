@@ -89,7 +89,7 @@ function FeatureItem({ icon, title, desc }: FeatureItemProps) {
 const slides = [
     {
         id: "blood-1",
-        tag: "Blood Bank",
+        tag: "Blood Connect",
         title: "Need blood urgently?",
         subtext: "Enter your blood group and area — we match you with a verified donor nearby in minutes.",
         buttonText: "Request blood now",
@@ -128,7 +128,7 @@ const slides = [
     },
     {
         id: "blood-2",
-        tag: "Blood Bank",
+        tag: "Blood Connect",
         title: "Be someone's reason to live",
         subtext: "Register as a verified donor on Pillora. Your one donation can save up to 3 lives.",
         buttonText: "Become a donor",

@@ -55,7 +55,7 @@ export default function Navbar() {
     const navLinks = [
         { href: "/", label: "Home" },
         { href: "/health-hub", label: "Health Hub", hideOnLowRes: true },
-        { href: "/blood-bank", label: "Blood Bank", isSpecial: true, hideOnLowRes: true },
+        { href: "/blood-bank", label: "Blood Connect", isSpecial: true, hideOnLowRes: true },
         { href: "/hospitals", label: "Hospitals", hideOnLowRes: true },
     ];
 

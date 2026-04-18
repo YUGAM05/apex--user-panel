@@ -112,7 +112,7 @@ export default function BlogPage() {
                             Pillora <span className="text-blue-600">Insights.</span>
                         </h1>
                         <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">
-                            Your guide to modern healthcare in 2026. From life-saving blood bank tips to the latest AI innovations in pharmaceutical tech.
+                            Your guide to modern healthcare in 2026. From life-saving blood connect tips to the latest AI innovations in pharmaceutical tech.
                         </p>
 
                         {/* Search & Filter Bar */}

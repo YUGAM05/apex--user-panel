@@ -133,7 +133,7 @@ export default function BloodBankAdmin() {
     if (loading) {
         return (
             <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-                <div className="text-teal-500 text-xl">Loading Blood Bank Data...</div>
+                <div className="text-teal-500 text-xl">Loading Blood Connect Data...</div>
             </div>
         );
     }
@@ -142,7 +142,7 @@ export default function BloodBankAdmin() {
         <div className="min-h-screen bg-slate-950 text-white p-8">
             <header className="mb-12 max-w-7xl mx-auto">
                 <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600 mb-2">
-                    Blood Bank Management
+                    Blood Connect Management
                 </h1>
                 <p className="text-slate-400">Manage donors and blood requests</p>
             </header>
