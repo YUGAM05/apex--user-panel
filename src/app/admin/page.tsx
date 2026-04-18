@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Users, Heart, Package, Activity, Lock, Droplet } from "lucide-react";
+import { Users, Heart, Package, Activity, Lock, Droplets } from "lucide-react";
 import BloodBankAdmin from "@/components/BloodBankAdmin";
 
 export default function AdminDashboard() {
