@@ -130,7 +130,7 @@ export default function HelpCenterPage() {
         },
         {
             question: "What if no donor is found in my area?",
-            answer: "If no match is found in your immediate area, we recommend also contacting your nearest licensed blood connect or hospital blood storage facility directly."
+            answer: "If no match is found in your immediate area, we recommend also contacting your nearest licensed Blood Connect or hospital blood storage facility directly."
         }
     ];
 
