@@ -9,10 +9,10 @@ export default function LabTestsComingSoon() {
         <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-b from-white to-blue-50/50 p-6 relative overflow-hidden">
 
             {/* Background elements */}
-            <div className="absolute top-20 left-10 opacity-20 animate-pulse">
+            <div className="absolute top-20 left-10 opacity-20">
                 <Dna className="w-24 h-24 text-blue-300" />
             </div>
-            <div className="absolute bottom-20 right-10 opacity-20 animate-pulse delay-700">
+            <div className="absolute bottom-20 right-10 opacity-20 delay-700">
                 <Microscope className="w-32 h-32 text-indigo-300" />
             </div>
 
@@ -51,20 +51,7 @@ export default function LabTestsComingSoon() {
                     </Link>
                 </div>
 
-                <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 text-left opacity-60 max-w-xl mx-auto">
-                    <div className="bg-white p-4 rounded-2xl border border-slate-100">
-                        <div className="h-2 w-12 bg-blue-100 rounded-full mb-3" />
-                        <div className="h-2 w-20 bg-slate-100 rounded-full" />
-                    </div>
-                    <div className="bg-white p-4 rounded-2xl border border-slate-100">
-                        <div className="h-2 w-12 bg-emerald-100 rounded-full mb-3" />
-                        <div className="h-2 w-20 bg-slate-100 rounded-full" />
-                    </div>
-                    <div className="bg-white p-4 rounded-2xl border border-slate-100 hidden md:block">
-                        <div className="h-2 w-12 bg-purple-100 rounded-full mb-3" />
-                        <div className="h-2 w-20 bg-slate-100 rounded-full" />
-                    </div>
-                </div>
+
             </motion.div>
         </div>
     );

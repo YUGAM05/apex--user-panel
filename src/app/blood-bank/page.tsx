@@ -53,7 +53,7 @@ export default function BloodBankPage() {
                     >
                         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
                             <div className="flex items-center gap-3">
-                                <AlertOctagon className="w-5 h-5 animate-pulse" />
+                                <AlertOctagon className="w-5 h-5" />
                                 <div className="text-sm">
                                     <span className="font-black uppercase tracking-wider mr-2">Action Required:</span>
                                     Your KYC for {rejectedRequest.patientName}&apos;s request was rejected. AI: &quot;{rejectedRequest.aiVerificationRemarks}&quot;
@@ -117,7 +117,6 @@ export default function BloodBankPage() {
                         className="inline-flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-8 py-2.5 mb-8 backdrop-blur-md shadow-xl"
                     >
                         <span className="relative flex h-3.5 w-3.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-200 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white"></span>
                         </span>
                         <span className="font-black text-sm tracking-[0.2em] uppercase">Live Blood Bank Network</span>
@@ -141,7 +140,7 @@ export default function BloodBankPage() {
                         <div className="flex flex-col items-center">
                             <div className="flex items-center gap-2 mb-0.5">
                                 <span className="text-xl md:text-2xl font-black text-white">85+</span>
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
                             </div>
                             <span className="text-[9px] uppercase tracking-[0.2em] text-red-200 font-bold">Donors Online</span>
                         </div>
@@ -149,7 +148,7 @@ export default function BloodBankPage() {
                         <div className="flex flex-col items-center">
                             <div className="flex items-center gap-2 mb-0.5">
                                 <span className="text-xl md:text-2xl font-black text-white">12</span>
-                                <div className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
                             </div>
                             <span className="text-[9px] uppercase tracking-[0.2em] text-red-200 font-bold">Active Requests</span>
                         </div>
@@ -206,7 +205,7 @@ export default function BloodBankPage() {
                                         : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
                                         }`}
                                 >
-                                    <Siren className={`w-5 h-5 ${activeTab === 'request' ? 'text-red-600 animate-pulse' : ''}`} />
+                                    <Siren className={`w-5 h-5 ${activeTab === 'request' ? 'text-red-600' : ''}`} />
                                     Request Blood
                                 </button>
                             </div>

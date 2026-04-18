@@ -150,12 +150,7 @@ export default function BlogPage() {
             {/* 2. Blog Grid */}
             <section className="py-20 px-6">
                 <div className="max-w-7xl mx-auto">
-                    {loading ? (
-                        <div className="flex flex-col items-center justify-center py-32">
-                            <Loader2 className="w-12 h-12 text-blue-600 animate-spin mb-4" />
-                            <p className="text-gray-500 font-bold animate-pulse">Fetching latest insights...</p>
-                        </div>
-                    ) : (
+                    {loading ? null : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <AnimatePresence mode="popLayout">
                                 {filteredPosts.map((post) => (

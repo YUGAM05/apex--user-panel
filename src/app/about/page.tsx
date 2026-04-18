@@ -95,7 +95,7 @@ export default function AboutPage() {
             </section>
 
             {/* 2. Who We Are & Leadership */}
-            <section className="py-24 px-6 relative bg-slate-50 overflow-hidden">
+            <section className="py-24 px-4 relative bg-slate-50 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col lg:flex-row gap-16 items-center">
                         <motion.div

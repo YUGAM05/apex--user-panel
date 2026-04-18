@@ -323,7 +323,7 @@ function RequestsTable({ requests }: { requests: any[] }) {
                                 <div>
                                     <p className="font-bold text-white flex items-center gap-2">
                                         {request.patientName}
-                                        {request.isUrgent && <span className="px-2 py-0.5 bg-red-500 text-white text-xs rounded-full animate-pulse">URGENT</span>}
+                                        {request.isUrgent && <span className="px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">URGENT</span>}
                                     </p>
                                     <p className="text-sm text-slate-400">Age: {request.age}</p>
                                 </div>

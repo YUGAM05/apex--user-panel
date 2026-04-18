@@ -44,7 +44,7 @@ export default function AddressMap({ location }: AddressMapProps) {
         });
     }, []);
 
-    if (!isMounted) return <div className="h-64 w-full bg-gray-100 rounded-xl animate-pulse flex items-center justify-center text-gray-500 font-medium">Loading Map...</div>;
+    if (!isMounted) return null;
 
     if (!location) return null;
 

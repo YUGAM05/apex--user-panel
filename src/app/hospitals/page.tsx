@@ -241,11 +241,7 @@ export default function HospitalsPage() {
                 </div>
 
                 {/* Grid */}
-                {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
-                        {[1, 2, 3].map(i => <div key={i} className="bg-white rounded-2xl h-96 shadow-sm" />)}
-                    </div>
-                ) : (
+                {loading ? null : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filtered.map((hospital, index) => {
                             const imgs = getImages(hospital);

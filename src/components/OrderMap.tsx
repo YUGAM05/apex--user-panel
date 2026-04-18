@@ -89,7 +89,7 @@ export default function OrderMap({ sellerLocation, customerLocation, deliveryLoc
         }
     }, []);
 
-    if (!isMounted) return <div className="h-[400px] bg-gray-100 rounded-3xl animate-pulse flex items-center justify-center text-gray-500">Loading Map Engine...</div>;
+    if (!isMounted) return null;
 
     // Default center (India) if no location is available
     const center: [number, number] =
@@ -154,7 +154,7 @@ export default function OrderMap({ sellerLocation, customerLocation, deliveryLoc
             </MapContainer>
 
             <div className="absolute top-4 right-4 z-[400] bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-gray-100 shadow-sm flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-green-500 rounded-full" />
                 <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest italic">Live Tracking</span>
             </div>
         </div>

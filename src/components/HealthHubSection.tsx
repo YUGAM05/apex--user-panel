@@ -75,13 +75,7 @@ export default function HealthHubSection() {
                     </Link>
                 </div>
 
-                {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="bg-gray-50 rounded-2xl h-80 animate-pulse" />
-                        ))}
-                    </div>
-                ) : (
+                {loading ? null : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {displayTips.map((tip) => (
                             <Link

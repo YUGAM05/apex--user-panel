@@ -77,9 +77,6 @@ export default function Footer() {
                         &copy; {new Date().getFullYear()} Pillora Inc. All rights reserved.
                     </p>
                     <div className="flex items-center gap-2">
-                        <span className="w-8 h-5 bg-gray-100 rounded border border-gray-200" />
-                        <span className="w-8 h-5 bg-gray-100 rounded border border-gray-200" />
-                        <span className="w-8 h-5 bg-gray-100 rounded border border-gray-200" />
                     </div>
                 </div>
             </div>
