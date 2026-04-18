@@ -784,9 +784,46 @@ function RequestForm() {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
+            
+            // Check file size (warn if > 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                console.warn("Large image detected, compressing...");
+            }
+
             const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData({ ...formData, kycDocumentImage: reader.result as string });
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    // Create canvas for compression
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Max dimensions 1000px
+                    const MAX_SIZE = 1000;
+                    if (width > height) {
+                        if (width > MAX_SIZE) {
+                            height *= MAX_SIZE / width;
+                            width = MAX_SIZE;
+                        }
+                    } else {
+                        if (height > MAX_SIZE) {
+                            width *= MAX_SIZE / height;
+                            height = MAX_SIZE;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx?.drawImage(img, 0, 0, width, height);
+
+                    // Export as compressed JPEG
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    setFormData({ ...formData, kycDocumentImage: compressedBase64 });
+                    console.log("Image compressed successfully.");
+                };
+                img.src = event.target?.result as string;
             };
             reader.readAsDataURL(file);
         }
