@@ -182,7 +182,7 @@ export default function PrivacyPolicyPage() {
                         </div>
                         <div className="flex items-start gap-4 p-6 bg-red-600 text-white rounded-[2rem] shadow-xl shadow-red-200 font-bold italic">
                             <AlertCircle className="w-6 h-6 flex-shrink-0" />
-                            <p>Under no circumstances is donor information shared without all three conditions being met. Donors may request removal at any time by contacting support@pillora.in.</p>
+                            <p>Under no circumstances is donor information shared without all three conditions being met. Donors may request removal at any time by contacting shahyugam037@gmail.com</p>
                         </div>
                     </motion.section>
 
