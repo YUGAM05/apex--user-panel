@@ -952,18 +952,22 @@ function RequestForm() {
                         </select>
                     </div>
                     <div>
-                        <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Aadhar Card Image</label>
+                        <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Document Number (Optional if image uploaded)</label>
+                        <input name="kycDocumentId" onChange={handleChange} value={formData.kycDocumentId} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder={formData.kycDocumentType === 'Aadhar Card' ? 'XXXX XXXX XXXX' : 'Enter ID number'} />
+                    </div>
+                    <div className="md:col-span-2">
+                        <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">{formData.kycDocumentType} Image (Recommended for OCR)</label>
                         {!formData.kycDocumentImage ? (
                             <div
                                 onClick={() => document.getElementById('kyc-upload')?.click()}
-                                className="w-full aspect-video border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors"
+                                className="w-full h-32 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors"
                             >
                                 <Upload className="w-8 h-8 text-gray-400 mb-2" />
-                                <span className="text-xs text-gray-500 font-medium">Click to upload Aadhar Card</span>
+                                <span className="text-xs text-gray-500 font-medium">Click to upload {formData.kycDocumentType}</span>
                                 <input id="kyc-upload" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
                             </div>
                         ) : (
-                            <div className="relative group rounded-xl overflow-hidden aspect-video border border-gray-200">
+                            <div className="relative group rounded-xl overflow-hidden h-32 border border-gray-200">
                                 <img src={formData.kycDocumentImage} alt="KYC Document" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                                     <button type="button" onClick={removeImage} className="p-2 bg-white text-red-600 rounded-full hover:bg-red-50 transition-colors shadow-lg" title="Remove Image">
@@ -974,9 +978,14 @@ function RequestForm() {
                         )}
                     </div>
                 </div>
-                <p className="text-[10px] text-gray-500 mt-3 flex items-center gap-1">
-                    <Info className="w-3 h-3" /> Your ID is only used for verification and is not shared with donors. Your KYC is just used for preventing fraud.
-                </p>
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg flex items-start gap-3 border border-blue-100">
+                    <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <p className="text-[10px] text-blue-700 leading-normal">
+                        <strong>Privacy Secure:</strong> We use temporary OCR to extract your document number. 
+                        The <strong>image is never stored</strong> in our database and is discarded immediately after processing. 
+                        Only a masked version of your ID (e.g., **** **** 12) is saved for verification.
+                    </p>
+                </div>
             </div>
 
             <button

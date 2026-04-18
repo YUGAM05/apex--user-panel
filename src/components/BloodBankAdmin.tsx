@@ -312,6 +312,7 @@ function RequestsTable({ requests }: { requests: any[] }) {
                         <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Units</th>
                         <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Hospital</th>
                         <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Contact</th>
+                        <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">KYC Verification</th>
                         <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Status</th>
                         <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Date</th>
                     </tr>
@@ -346,6 +347,15 @@ function RequestsTable({ requests }: { requests: any[] }) {
                                 <div className="flex items-center gap-2 text-slate-300">
                                     <Phone className="w-4 h-4" />
                                     {request.contactNumber}
+                                </div>
+                            </td>
+                            <td className="px-6 py-4">
+                                <div className="space-y-1">
+                                    <p className="text-white font-mono text-sm">{request.kycDocumentId || 'No ID Extracted'}</p>
+                                    <div className="flex items-center gap-1.5">
+                                        <span className={`w-1.5 h-1.5 rounded-full ${request.aiVerificationStatus === 'Verified' ? 'bg-green-500' : request.aiVerificationStatus === 'Rejected' ? 'bg-red-500' : 'bg-amber-500'}`} />
+                                        <span className="text-[10px] uppercase font-bold text-slate-400">{request.aiVerificationStatus}</span>
+                                    </div>
                                 </div>
                             </td>
                             <td className="px-6 py-4">
