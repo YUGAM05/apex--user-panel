@@ -880,20 +880,26 @@ function RequestForm() {
 
         setLoading(true);
 
-        // Security Timeout: 30 seconds threshold
+        // Security Timeout & Abort Controller
+        const controller = new AbortController();
         const timeoutId = setTimeout(() => {
-            if (loading) {
-                setLoading(false);
-                alert("Broadcasting failed, please try again (Connection Timeout)");
-            }
-        }, 30000);
+            controller.abort();
+            setLoading(false);
+            alert("Broadcasting timed out. Please check your internet and try again.");
+        }, 15000); // 15s absolute timeout as requested
 
         try {
-            await api.post('/blood-bank/requests', formData);
+            await api.post('/blood-bank/requests', formData, {
+                signal: controller.signal
+            });
             clearTimeout(timeoutId);
             setSuccess(true);
         } catch (error: any) {
             clearTimeout(timeoutId);
+            if (error.name === 'AbortError' || error.message === 'canceled') {
+                console.warn("Request was aborted due to timeout");
+                return; // Already handled by setTimeout
+            }
             const errorMessage = error.response?.data?.message || error.message || 'Failed to submit request';
             alert(errorMessage);
         } finally {
