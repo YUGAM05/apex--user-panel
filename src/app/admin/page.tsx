@@ -14,7 +14,6 @@ export default function AdminDashboard() {
     const [error, setError] = useState("");
     const [showBloodBank, setShowBloodBank] = useState(false);
 
-    useEffect(() => {
     const fetchData = useCallback(async () => {
         try {
             await Promise.all([fetchStats(), fetchPendingUsers()]);
