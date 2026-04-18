@@ -14,20 +14,6 @@ export default function AdminDashboard() {
     const [error, setError] = useState("");
     const [showBloodBank, setShowBloodBank] = useState(false);
 
-    const fetchData = useCallback(async () => {
-        try {
-            await Promise.all([fetchStats(), fetchPendingUsers()]);
-        } catch (error) {
-            console.error("Error fetching admin data", error);
-        } finally {
-            setLoading(false);
-        }
-    }, [fetchStats, fetchPendingUsers]);
-
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
-
     const fetchPendingUsers = useCallback(async () => {
         const token = localStorage.getItem("token");
         try {
@@ -39,23 +25,6 @@ export default function AdminDashboard() {
             console.error("Failed to fetch pending users", err);
         }
     }, []);
-
-    const handleStatusUpdate = async (userId: string, status: 'approved' | 'rejected') => {
-        const token = localStorage.getItem("token");
-        if (!confirm(`Are you sure you want to ${status} this user?`)) return;
-
-        try {
-            await api.put(`/api/admin/users/${userId}/status`, { status }, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            // Remove from list locally
-            setPendingUsers(prev => prev.filter(u => u._id !== userId));
-            // Refresh stats
-            fetchStats();
-        } catch (err) {
-            alert("Failed to update status");
-        }
-    };
 
     const fetchStats = useCallback(async () => {
         try {
@@ -78,6 +47,37 @@ export default function AdminDashboard() {
             }
         }
     }, [router]);
+
+    const fetchData = useCallback(async () => {
+        try {
+            await Promise.all([fetchStats(), fetchPendingUsers()]);
+        } catch (error) {
+            console.error("Error fetching admin data", error);
+        } finally {
+            setLoading(false);
+        }
+    }, [fetchStats, fetchPendingUsers]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const handleStatusUpdate = async (userId: string, status: 'approved' | 'rejected') => {
+        const token = localStorage.getItem("token");
+        if (!confirm(`Are you sure you want to ${status} this user?`)) return;
+
+        try {
+            await api.put(`/api/admin/users/${userId}/status`, { status }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            // Remove from list locally
+            setPendingUsers(prev => prev.filter(u => u._id !== userId));
+            // Refresh stats
+            fetchStats();
+        } catch (err) {
+            alert("Failed to update status");
+        }
+    };
 
     if (loading) {
         return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-teal-500">Loading Dashboard...</div>
