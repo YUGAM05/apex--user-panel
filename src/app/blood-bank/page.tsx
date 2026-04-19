@@ -808,26 +808,7 @@ function RequestForm() {
     const [kycStatus, setKycStatus] = useState<string | null>(null);
     const [kycRemarks, setKycRemarks] = useState<string>('');
     const [isImageProcessing, setIsImageProcessing] = useState(false);
-    const [isAIVerifying, setIsAIVerifying] = useState(false);
-    const [submittedRequestId, setSubmittedRequestId] = useState<string | null>(null);
 
-    useEffect(() => {
-        if (!submittedRequestId) return;
-
-        const handleUpdate = (data: any) => {
-            if (data._id === submittedRequestId && data.aiVerificationStatus !== 'Pending') {
-                setKycStatus(data.aiVerificationStatus);
-                setKycRemarks(data.aiVerificationRemarks || '');
-                setIsAIVerifying(false);
-                setSuccess(true);
-            }
-        };
-
-        socket.on('blood_request_updated', handleUpdate);
-        return () => {
-            socket.off('blood_request_updated', handleUpdate);
-        };
-    }, [submittedRequestId]);
     const [formData, setFormData] = useState({
         patientName: '', age: '', bloodGroup: 'A+', units: '1',
         hospitalAddress: '', area: '', city: 'Ahmedabad', contactNumber: '', isUrgent: false,
@@ -955,16 +936,9 @@ function RequestForm() {
             clearTimeout(timeoutId);
             console.log('[BloodRequest] Success:', response.data);
 
-            if (payload.kycDocumentType === 'Aadhar Card' && payload.kycDocumentImage) {
-                // Switch to socket waiting state instead of instant success
-                // to prevent HTTP 30s timeout on slow AI OCR
-                setSubmittedRequestId(response.data._id);
-                setIsAIVerifying(true);
-            } else {
-                setKycStatus(response.data.aiVerificationStatus || 'Pending');
-                setKycRemarks(response.data.aiVerificationRemarks || '');
-                setSuccess(true);
-            }
+            setKycStatus(response.data.aiVerificationStatus || 'Pending');
+            setKycRemarks(response.data.aiVerificationRemarks || '');
+            setSuccess(true);
         } catch (error: any) {
             clearTimeout(timeoutId);
             console.error('[BloodRequest] Error details:', {
@@ -985,18 +959,6 @@ function RequestForm() {
             setLoading(false);
         }
     };
-
-    if (isAIVerifying) {
-        return (
-            <div className="text-center py-16 flex flex-col items-center justify-center">
-                <div className="w-16 h-16 border-4 border-red-200 border-t-red-600 rounded-full animate-spin mb-6" />
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Verifying KYC Document</h2>
-                <p className="text-gray-500 max-w-sm mx-auto">
-                    Please wait while our AI agent securely extracts and validates your Aadhaar details. This may take up to 45 seconds. Do not close this page.
-                </p>
-            </div>
-        );
-    }
 
     if (success) {
         return (
