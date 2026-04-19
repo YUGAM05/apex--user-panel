@@ -190,11 +190,13 @@ export default function HospitalsPage() {
         <div className="min-h-screen bg-gray-50">
 
             {/* ── Hero Banner ── */}
-            <div className="relative overflow-hidden bg-slate-950 text-white border-b border-white/10">
-                {/* Premium Grid & Glow Background */}
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdHRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-50" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full sm:w-[800px] h-[400px] bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
-                <div className="absolute -top-24 -right-24 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none" />
+            <div className="relative bg-slate-950 text-white border-b border-white/10 z-20">
+                {/* Premium Grid & Glow Background (clamped to prevent page overflow, while allowing content dropdown to escape) */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdHRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-50" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full sm:w-[800px] h-[400px] bg-blue-600/15 rounded-full blur-[100px]" />
+                    <div className="absolute -top-24 -right-24 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px]" />
+                </div>
                 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 z-10">
                     <div className="text-center max-w-2xl mx-auto">
