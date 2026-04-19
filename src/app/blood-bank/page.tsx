@@ -1124,8 +1124,15 @@ function RequestForm() {
                         </select>
                     </div>
                     <div>
-                        <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">Document Number (Optional if image uploaded)</label>
-                        <input name="kycDocumentId" onChange={handleChange} value={formData.kycDocumentId} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder={formData.kycDocumentType === 'Aadhar Card' ? 'XXXX XXXX XXXX' : 'Enter ID number'} />
+                        <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">
+                            {formData.kycDocumentType === 'Aadhar Card' ? 'Aadhaar Number (Mandatory)' : 'Document Number'}
+                        </label>
+                        <input 
+                            name="kycDocumentId" required 
+                            onChange={handleChange} value={formData.kycDocumentId} 
+                            className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" 
+                            placeholder={formData.kycDocumentType === 'Aadhar Card' ? 'XXXX XXXX XXXX' : 'Enter ID number'} 
+                        />
                     </div>
                     <div className="md:col-span-2">
                         <label className="text-sm font-bold text-gray-700 block mb-1.5 ml-1">{formData.kycDocumentType} Image (Recommended for OCR)</label>
