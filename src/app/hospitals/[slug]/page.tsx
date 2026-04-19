@@ -19,6 +19,7 @@ interface Doctor {
 
 interface Hospital {
     _id: string;
+    slug: string;
     name: string;
     address: string;
     mapLink?: string;
