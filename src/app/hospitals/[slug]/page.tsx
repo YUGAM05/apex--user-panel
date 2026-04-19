@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import {
     MapPin, Phone, Clock, CreditCard, Ambulance, ShieldCheck,
     Star, ChevronLeft, ChevronRight, User, CheckCircle, XCircle,
-    Building, ArrowLeft, ExternalLink
+    Building, ArrowLeft, ExternalLink, Share2
 } from 'lucide-react';
 import api from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -95,7 +95,7 @@ function ImageSlideshow({ images, alt }: { images: string[]; alt: string }) {
                                 className={`h-2 rounded-full transition-all ${i === idx ? 'bg-white w-5' : 'bg-white/50 w-2'}`} />
                         ))}
                     </div>
-                    <div className="absolute top-3 right-3 bg-black/40 text-white text-xs px-2 py-0.5 rounded-full z-10">
+                    <div className="absolute bottom-3 left-3 bg-black/40 text-white text-xs px-2 py-0.5 rounded-full z-10 shadow-sm font-medium">
                         {idx + 1}/{images.length}
                     </div>
                 </>
@@ -243,9 +243,26 @@ export default function HospitalDetailPage() {
             {/* ── Hospital Name + Address — clearly below image, white background ── */}
             <div className="bg-white border-b border-gray-100 shadow-sm">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight mb-2">
-                        {hospital.name}
-                    </h1>
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
+                            {hospital.name}
+                        </h1>
+                        <button
+                            onClick={() => {
+                                const url = `https://www.pillora.in/hospitals/${hospital.slug}`;
+                                if (navigator.share) {
+                                    navigator.share({ title: hospital.name, url });
+                                } else {
+                                    navigator.clipboard.writeText(url);
+                                    alert('Link copied to clipboard!');
+                                }
+                            }}
+                            className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-xl transition-colors shrink-0 outline-none focus:ring-2 focus:ring-blue-500 font-semibold text-xs sm:text-sm"
+                        >
+                            <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <span className="hidden sm:inline">Share</span>
+                        </button>
+                    </div>
                     <a
                         href={getMapUrl(hospital)}
                         target="_blank"

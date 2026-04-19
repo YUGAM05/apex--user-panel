@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
-import { Search, MapPin, Phone, Clock, CreditCard, Star, ChevronLeft, ChevronRight, User, ExternalLink, Building2 } from 'lucide-react';
+import { Search, MapPin, Phone, Clock, CreditCard, Star, ChevronLeft, ChevronRight, User, ExternalLink, Building2, Share2 } from 'lucide-react';
 import api from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -84,7 +84,7 @@ function ImageSlideshow({ images, alt }: { images: string[]; alt: string }) {
                                 className={`h-1.5 rounded-full transition-all ${i === idx ? 'bg-white w-3' : 'bg-white/50 w-1.5'}`} />
                         ))}
                     </div>
-                    <div className="absolute top-2 right-2 bg-black/40 text-white text-[10px] px-1.5 py-0.5 rounded-full z-10">
+                    <div className="absolute bottom-3 left-3 bg-black/40 text-white text-[10px] px-2 py-0.5 rounded-full z-10 font-medium">
                         {idx + 1}/{images.length}
                     </div>
                 </>
@@ -382,8 +382,24 @@ export default function HospitalsPage() {
                                         </div>
 
                                         {/* CTA */}
-                                        <div className="mt-4">
-                                            <div className="w-full text-center py-2 rounded-xl bg-blue-50 text-blue-700 text-xs sm:text-sm font-semibold group-hover:bg-blue-600 group-hover:text-white transition-all duration-200">
+                                        <div className="mt-4 flex items-center gap-2">
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    const url = `https://www.pillora.in/hospitals/${hospital.slug}`;
+                                                    if (navigator.share) {
+                                                        navigator.share({ title: hospital.name, url });
+                                                    } else {
+                                                        navigator.clipboard.writeText(url);
+                                                        alert('Link copied to clipboard!');
+                                                    }
+                                                }}
+                                                className="p-2 rounded-xl bg-gray-50 text-gray-600 hover:bg-gray-200 transition-colors border border-gray-200"
+                                                title="Share Hospital"
+                                            >
+                                                <Share2 className="w-5 h-5" />
+                                            </button>
+                                            <div className="flex-1 text-center py-2 rounded-xl bg-blue-50 text-blue-700 text-xs sm:text-sm font-semibold group-hover:bg-blue-600 group-hover:text-white transition-all duration-200">
                                                 View Details →
                                             </div>
                                         </div>
