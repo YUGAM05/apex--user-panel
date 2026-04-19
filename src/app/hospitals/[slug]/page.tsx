@@ -198,10 +198,17 @@ export default function HospitalDetailPage() {
 
     const processedDesc = hospital.description
         ? hospital.description
-            .replace(/<strong>/gi, '<b>')
-            .replace(/<\/strong>/gi, '</b>')
+            // Normalise tags
+            .replace(/<strong>/gi, '<b>').replace(/<\/strong>/gi, '</b>')
+            .replace(/<em>/gi, '<i>').replace(/<\/em>/gi, '</i>')
+            // Strip inline styles so our CSS controls appearance
+            .replace(/ style="[^"]*"/gi, '')
+            .replace(/ style='[^']*'/gi, '')
+            // Ensure proper spacing between bold segments
             .replace(/<\/b>(\s*:)/gi, '</b>$1<br/>')
             .replace(/([^>])\s*<b>/gi, '$1<br/><b>')
+            // Remove consecutive empty <br> spam
+            .replace(/(<br\s*\/?>(\s*)){3,}/gi, '<br/><br/>')
         : '';
 
     return (
@@ -297,25 +304,48 @@ export default function HospitalDetailPage() {
                         {/* Description */}
                         {processedDesc && (
                             <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100">
-                                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                    <span className="p-2 bg-blue-50 text-blue-600 rounded-lg"><Building className="w-4 h-4 sm:w-5 sm:h-5" /></span>
-                                    About the Hospital
-                                </h3>
-                                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5">
-                                    <div
-                                        dangerouslySetInnerHTML={{ __html: processedDesc }}
-                                        className="
-                                            text-gray-700 text-sm sm:text-[15px] leading-relaxed
-                                            [&_p]:mb-3 [&_p:last-child]:mb-0
-                                            [&_b]:font-semibold [&_b]:text-blue-800
-                                            [&_i]:italic [&_u]:underline
-                                            [&_br]:block [&_br]:mb-2
-                                            [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3 [&_ul]:space-y-1
-                                            [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3 [&_ol]:space-y-1
-                                            [&_li]:text-gray-600
-                                        "
-                                    />
+                                {/* Section header */}
+                                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
+                                    <div className="p-2.5 bg-blue-50 rounded-xl shrink-0">
+                                        <Building className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-tight">About the Hospital</h3>
+                                        <p className="text-xs text-gray-400 mt-0.5">Details provided by the hospital</p>
+                                    </div>
                                 </div>
+
+                                {/* Description body */}
+                                <style>{`
+                                    .hosp-desc { font-size: 14px; line-height: 1.8; color: #374151; }
+                                    @media (min-width: 640px) { .hosp-desc { font-size: 15px; } }
+                                    .hosp-desc b, .hosp-desc strong {
+                                        font-weight: 700;
+                                        color: #1d4ed8;
+                                        display: block;
+                                        margin-top: 12px;
+                                        margin-bottom: 2px;
+                                        font-size: 13px;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.04em;
+                                    }
+                                    .hosp-desc b:first-child, .hosp-desc strong:first-child { margin-top: 0; }
+                                    .hosp-desc i, .hosp-desc em { font-style: italic; color: #6b7280; }
+                                    .hosp-desc u { text-decoration: underline; text-underline-offset: 3px; }
+                                    .hosp-desc p { margin-bottom: 10px; }
+                                    .hosp-desc p:last-child { margin-bottom: 0; }
+                                    .hosp-desc br { display: block; margin-bottom: 4px; content: ''; }
+                                    .hosp-desc ul { list-style: disc; padding-left: 20px; margin-bottom: 12px; }
+                                    .hosp-desc ol { list-style: decimal; padding-left: 20px; margin-bottom: 12px; }
+                                    .hosp-desc li { margin-bottom: 4px; color: #4b5563; }
+                                    .hosp-desc h1, .hosp-desc h2 { font-weight: 700; color: #111827; margin: 12px 0 6px; }
+                                    .hosp-desc h1 { font-size: 16px; } 
+                                    .hosp-desc h2 { font-size: 14px; }
+                                `}</style>
+                                <div
+                                    className="hosp-desc"
+                                    dangerouslySetInnerHTML={{ __html: processedDesc }}
+                                />
                             </div>
                         )}
 
