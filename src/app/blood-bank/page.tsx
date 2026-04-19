@@ -805,6 +805,8 @@ function RequestForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [kycStatus, setKycStatus] = useState<string | null>(null);
+    const [kycRemarks, setKycRemarks] = useState<string>('');
     const [isImageProcessing, setIsImageProcessing] = useState(false);
     const [formData, setFormData] = useState({
         patientName: '', age: '', bloodGroup: 'A+', units: '1',
@@ -932,6 +934,8 @@ function RequestForm() {
             });
             clearTimeout(timeoutId);
             console.log('[BloodRequest] Success:', response.data);
+            setKycStatus(response.data.aiVerificationStatus || 'Pending');
+            setKycRemarks(response.data.aiVerificationRemarks || '');
             setSuccess(true);
         } catch (error: any) {
             clearTimeout(timeoutId);
@@ -969,6 +973,36 @@ function RequestForm() {
                 <p className="text-gray-600 max-w-md mx-auto mb-8">
                     We have notified donors in your vicinity. Our automated system is calling verified donors now.
                 </p>
+                {kycStatus === 'Verified' && (
+                    <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-xl mb-8 max-w-lg mx-auto flex items-start gap-4 text-left shadow-sm shadow-green-100/50">
+                        <CheckCircle className="w-8 h-8 text-green-600 shrink-0 mt-0.5" />
+                        <div>
+                            <p className="font-bold text-lg">KYC Verification Accepted!</p>
+                            <p className="text-sm mt-1">{kycRemarks}</p>
+                        </div>
+                    </div>
+                )}
+                {kycStatus === 'Rejected' && (
+                    <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-xl mb-8 max-w-lg mx-auto flex items-start gap-4 text-left shadow-sm shadow-red-100/50">
+                        <AlertOctagon className="w-8 h-8 text-red-600 shrink-0 mt-0.5" />
+                        <div>
+                            <p className="font-bold text-lg">KYC Verification Rejected!</p>
+                            <p className="text-sm mt-1">AI Agent Remarks: &quot;{kycRemarks}&quot;</p>
+                            <p className="text-sm mt-2 font-semibold">Your request will not be shown to donors until the issues are fixed.</p>
+                            <Link href="/my-blood-requests" className="mt-3 inline-block bg-white border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-100 shadow-sm transition-colors">Fix KYC Issue</Link>
+                        </div>
+                    </div>
+                )}
+                {(kycStatus === 'Pending' || kycStatus === 'Error') && (
+                    <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-xl mb-8 max-w-lg mx-auto flex items-start gap-4 text-left shadow-sm shadow-yellow-100/50">
+                        <Clock className="w-8 h-8 text-yellow-600 shrink-0 mt-0.5" />
+                        <div>
+                            <p className="font-bold text-lg">KYC Verification Pending</p>
+                            <p className="text-sm mt-1">{kycRemarks}</p>
+                            <p className="text-sm mt-1 opacity-80">Manual verification may be required.</p>
+                        </div>
+                    </div>
+                )}
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                     <Link href="/my-blood-requests" className="bg-gray-900 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-gray-200 flex items-center gap-2">
                         <Activity className="w-5 h-5" /> Track Request Status
