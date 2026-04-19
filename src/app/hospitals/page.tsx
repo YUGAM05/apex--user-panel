@@ -190,18 +190,23 @@ export default function HospitalsPage() {
         <div className="min-h-screen bg-gray-50">
 
             {/* ── Hero Banner ── */}
-            <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+            <div className="relative overflow-hidden bg-slate-950 text-white border-b border-white/10">
+                {/* Premium Grid & Glow Background */}
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdHRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-50" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full sm:w-[800px] h-[400px] bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none" />
+                
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 z-10">
                     <div className="text-center max-w-2xl mx-auto">
-                        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-                            <Building2 className="w-4 h-4" />
-                            <span>{hospitals.length > 0 ? `${hospitals.length} Hospitals Listed` : 'Hospital Directory'}</span>
+                        <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5 text-sm font-medium mb-6 text-blue-200">
+                            <Building2 className="w-4 h-4 text-blue-400" />
+                            <span>{hospitals.length > 0 ? `${hospitals.length} Premium Hospitals Listed` : 'Hospital Directory'}</span>
                         </div>
-                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3">
-                            Find Trusted Hospitals<br className="hidden sm:block" /> Near You
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] mb-5 text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
+                            Trusted Healthcare<br className="hidden sm:block" /> When You Need It Most
                         </h1>
-                        <p className="text-blue-100 text-sm sm:text-base max-w-xl mx-auto mb-8">
-                            Access emergency services, accepted government schemes, consultation costs, and more.
+                        <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-10 leading-relaxed">
+                            Access emergency services, accepted government schemes, consultation costs, and more across all top-rated facilities.
                         </p>
 
                         {/* Search */}
