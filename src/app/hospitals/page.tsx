@@ -252,13 +252,15 @@ export default function HospitalsPage() {
                                     className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col cursor-pointer"
                                     onClick={() => router.push(`/hospitals/${hospital.slug}`)}
                                 >
-                                    {/* Image / slideshow */}
-                                    <div className="h-48 relative">
+                                    {/* ── Image section — fixed height, fully clipped ── */}
+                                    <div className="relative h-48 w-full overflow-hidden flex-shrink-0">
                                         <ImageSlideshow images={imgs} alt={hospital.name} className="h-full w-full" />
+                                        {/* Rating badge */}
                                         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm z-10">
                                             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                                             <span className="font-bold text-gray-800 text-sm">{hospital.rating}</span>
                                         </div>
+                                        {/* 24/7 badge */}
                                         {hospital.isOpen24Hours && (
                                             <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-sm flex items-center gap-1 z-10">
                                                 <Clock className="w-3 h-3" /> Open 24/7
@@ -266,10 +268,12 @@ export default function HospitalsPage() {
                                         )}
                                     </div>
 
-                                    <div className="p-5 flex-1 flex flex-col">
-                                        <h3 className="text-xl font-bold text-gray-900 mb-1">{hospital.name}</h3>
-                                        <div className="flex items-center text-gray-500 text-sm mb-4">
-                                            <MapPin className="w-4 h-4 mr-1 shrink-0" />{hospital.address}, {hospital.city}
+                                    {/* ── Content section — always below the image, never overlapping ── */}
+                                    <div className="p-5 flex-1 flex flex-col bg-white">
+                                        <h3 className="text-xl font-bold text-gray-900 mb-1 leading-tight">{hospital.name}</h3>
+                                        <div className="flex items-start gap-1 text-gray-500 text-sm mb-4">
+                                            <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
+                                            <span>{hospital.address}, {hospital.city}</span>
                                         </div>
                                         <div className="mt-auto space-y-2">
                                             <div className="flex items-center justify-between text-sm border-t pt-3">
