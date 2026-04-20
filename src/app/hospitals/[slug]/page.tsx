@@ -319,6 +319,78 @@ export default function HospitalDetailPage() {
                             />
                         </div>
 
+                        {/* Contact Card */}
+                        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                            <h3 className="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <span className="p-2 bg-blue-50 text-blue-600 rounded-lg"><Phone className="w-4 h-4" /></span>
+                                Contact Details
+                            </h3>
+                            {phones.length > 0 ? (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {phones.map((ph, i) => (
+                                        <a href={`tel:${ph}`} key={i}
+                                            className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors group">
+                                            <div className="flex items-center gap-2.5">
+                                                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-600 transition-colors shrink-0">
+                                                    <Phone className="w-4 h-4 text-blue-600 group-hover:text-white transition-colors" />
+                                                </div>
+                                                <span className="font-semibold text-gray-800 group-hover:text-blue-700 text-sm">{ph}</span>
+                                            </div>
+                                            {i === 0 && <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full uppercase">Primary</span>}
+                                        </a>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-gray-400 text-sm">No contact numbers listed.</p>
+                            )}
+                        </div>
+
+                        {/* Doctors */}
+                        {hospital.doctors && hospital.doctors.length > 0 && (
+                            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                                        <span className="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><User className="w-4 h-4 sm:w-5 sm:h-5" /></span>
+                                        Available Doctors
+                                    </h3>
+                                    <span className="bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full text-xs sm:text-sm font-bold">
+                                        {hospital.doctors.length} Doctor{hospital.doctors.length > 1 ? 's' : ''}
+                                    </span>
+                                </div>
+                                <div className="space-y-3">
+                                    {hospital.doctors.map((doc, i) => (
+                                        <div key={i} className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-4 sm:p-5">
+                                            <div className="flex items-center gap-3 mb-3">
+                                                <div className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
+                                                    <User className="w-4 h-4 text-indigo-600" />
+                                                </div>
+                                                <div>
+                                                    <p className="font-bold text-gray-900 text-sm sm:text-base">{doc.name}</p>
+                                                    {doc.specialization && (
+                                                        <span className="text-xs font-semibold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full inline-block mt-0.5">
+                                                            {doc.specialization}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-wrap gap-3 text-xs text-gray-600">
+                                                {doc.timing && (
+                                                    <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-gray-200">
+                                                        <Clock className="w-3.5 h-3.5 text-blue-500" /> {doc.timing}
+                                                    </span>
+                                                )}
+                                                {doc.daysAvailable && doc.daysAvailable.length > 0 && doc.daysAvailable.map(d => (
+                                                    <span key={d} className="bg-green-100 text-green-800 border border-green-200 px-2 py-0.5 rounded-md font-medium">
+                                                        {d.slice(0, 3)}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Description */}
                         {processedDesc && (
                             <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100">
@@ -366,82 +438,10 @@ export default function HospitalDetailPage() {
                                 />
                             </div>
                         )}
-
-                        {/* Doctors */}
-                        {hospital.doctors && hospital.doctors.length > 0 && (
-                            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
-                                        <span className="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><User className="w-4 h-4 sm:w-5 sm:h-5" /></span>
-                                        Available Doctors
-                                    </h3>
-                                    <span className="bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full text-xs sm:text-sm font-bold">
-                                        {hospital.doctors.length} Doctor{hospital.doctors.length > 1 ? 's' : ''}
-                                    </span>
-                                </div>
-                                <div className="space-y-3">
-                                    {hospital.doctors.map((doc, i) => (
-                                        <div key={i} className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-4 sm:p-5">
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <div className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
-                                                    <User className="w-4 h-4 text-indigo-600" />
-                                                </div>
-                                                <div>
-                                                    <p className="font-bold text-gray-900 text-sm sm:text-base">{doc.name}</p>
-                                                    {doc.specialization && (
-                                                        <span className="text-xs font-semibold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full inline-block mt-0.5">
-                                                            {doc.specialization}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-wrap gap-3 text-xs text-gray-600">
-                                                {doc.timing && (
-                                                    <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-gray-200">
-                                                        <Clock className="w-3.5 h-3.5 text-blue-500" /> {doc.timing}
-                                                    </span>
-                                                )}
-                                                {doc.daysAvailable && doc.daysAvailable.length > 0 && doc.daysAvailable.map(d => (
-                                                    <span key={d} className="bg-green-100 text-green-800 border border-green-200 px-2 py-0.5 rounded-md font-medium">
-                                                        {d.slice(0, 3)}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
                     </div>
 
                     {/* ──── Right: Sidebar ──── */}
                     <div className="space-y-4 lg:sticky lg:top-24 self-start">
-
-                        {/* Contact Card */}
-                        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-                            <h3 className="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <span className="p-2 bg-blue-50 text-blue-600 rounded-lg"><Phone className="w-4 h-4" /></span>
-                                Contact Details
-                            </h3>
-                            {phones.length > 0 ? (
-                                <div className="space-y-2">
-                                    {phones.map((ph, i) => (
-                                        <a href={`tel:${ph}`} key={i}
-                                            className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors group">
-                                            <div className="flex items-center gap-2.5">
-                                                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-600 transition-colors shrink-0">
-                                                    <Phone className="w-4 h-4 text-blue-600 group-hover:text-white transition-colors" />
-                                                </div>
-                                                <span className="font-semibold text-gray-800 group-hover:text-blue-700 text-sm">{ph}</span>
-                                            </div>
-                                            {i === 0 && <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full uppercase">Primary</span>}
-                                        </a>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className="text-gray-400 text-sm">No contact numbers listed.</p>
-                            )}
-                        </div>
 
                         {/* Clickable Map Link */}
                         <a
