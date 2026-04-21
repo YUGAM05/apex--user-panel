@@ -11,58 +11,21 @@ export default function RegisterPage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState("customer");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [aadhaarCardUrl, setAadhaarCardUrl] = useState<string | null>(null);
-    const [aadhaarFileName, setAadhaarFileName] = useState("");
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            setAadhaarFileName(file.name);
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setAadhaarCardUrl(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError("");
 
-        if (role === 'seller' && !aadhaarCardUrl) {
-            setError("Please upload your Aadhaar Card for verification.");
-            setLoading(false);
-            return;
-        }
-
-        const formData = new FormData(e.target as HTMLFormElement);
-        const bankDetails = role === 'seller' ? {
-            accountNumber: formData.get('accountNumber'),
-            ifsc: formData.get('ifsc')
-        } : undefined;
-        const pharmacyCertificate = role === 'seller' ? formData.get('pharmacyCertificate') : undefined;
-
         try {
             const res = await api.post("/auth/register", {
                 name,
                 email,
                 password,
-                role,
-                bankDetails,
-                pharmacyCertificate,
-                aadhaarCardUrl: role === 'seller' ? aadhaarCardUrl : undefined
+                role: "customer"
             });
-
-            if (res.data.status === 'pending') {
-                setError("Account created! Waiting for Admin Approval.");
-                setLoading(false);
-                return;
-            }
 
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data));
@@ -150,89 +113,6 @@ export default function RegisterPage() {
                             />
                         </div>
                     </div>
-
-                    <div className="space-y-2">
-                        <label className="text-sm font-semibold text-gray-700 ml-1">Account Type</label>
-                        <select
-                            value={role}
-                            onChange={(e) => setRole(e.target.value)}
-                            className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all appearance-none cursor-pointer"
-                        >
-                            <option value="customer">Customer / Patient</option>
-                            <option value="seller">Seller (Pharmacy Owner)</option>
-                            <option value="delivery">Delivery Partner</option>
-                        </select>
-                    </div>
-
-                    {role === 'seller' && (
-                        <motion.div 
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            className="space-y-4 pt-4 border-t border-gray-100"
-                        >
-                            <h3 className="text-sm font-bold text-primary uppercase tracking-wider">Merchant Details</h3>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500 ml-1">Bank A/C No.</label>
-                                    <input
-                                        type="text"
-                                        name="accountNumber"
-                                        required
-                                        className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                                        placeholder="0000000000"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500 ml-1">IFSC Code</label>
-                                    <input
-                                        type="text"
-                                        name="ifsc"
-                                        required
-                                        className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                                        placeholder="SBIN000XXXX"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-gray-500 ml-1">Pharmacy Certificate No.</label>
-                                <input
-                                    type="text"
-                                    name="pharmacyCertificate"
-                                    required
-                                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                                    placeholder="Enter License Number"
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-gray-500 ml-1">Identity Verification (Aadhaar)</label>
-                                <div className="flex items-center gap-3">
-                                    <input
-                                        type="file"
-                                        id="aadhaarUpload"
-                                        className="hidden"
-                                        accept="image/*,.pdf"
-                                        onChange={handleFileChange}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => document.getElementById('aadhaarUpload')?.click()}
-                                        className="bg-primary/5 hover:bg-primary/10 border border-primary/20 text-primary px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2"
-                                    >
-                                        <FileText className="w-4 h-4" />
-                                        {aadhaarFileName ? 'Change File' : 'Upload Aadhaar'}
-                                    </button>
-                                    {aadhaarFileName && (
-                                        <span className="text-xs text-gray-500 truncate max-w-[150px]">
-                                            {aadhaarFileName}
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
 
                     <button
                         disabled={loading}
