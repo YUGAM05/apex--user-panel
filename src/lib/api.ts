@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // IMPORTANT: In production (Vercel), NEXT_PUBLIC_API_URL must be set in Vercel Dashboard.
-// If not set, fallback to the production backend URL.
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://apex-backend-theta.vercel.app/api';
+// If not set, fallback to the localhost backend URL.
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
