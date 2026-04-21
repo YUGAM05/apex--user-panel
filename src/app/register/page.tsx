@@ -75,45 +75,45 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-white overflow-hidden relative">
-            <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[128px]" />
-            <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-rose-500/20 rounded-full blur-[128px]" />
-
+        <div className="flex min-h-screen items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
+            {/* Decorative background element matching home page feel */}
+            <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-blue-50/50 to-transparent -z-10" />
+            
             <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-full max-w-md bg-slate-900/50 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl relative z-10"
+                className="w-full max-w-md bg-white border border-gray-100 p-8 rounded-3xl shadow-xl relative z-10"
             >
                 <div className="text-center mb-8">
                     <div className="flex justify-center mb-6">
                         <img src="/pillora-logo-new.png" alt="Pillora" className="w-20 h-20 object-contain" />
                     </div>
-                    <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-rose-500">
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                         Create Account
                     </h2>
-                    <p className="text-slate-400 mt-2">Join the future of healthcare</p>
+                    <p className="text-gray-500 mt-2 text-sm">Join Pillora Health Network</p>
                 </div>
 
                 {error && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm text-center"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="mb-6 p-4 bg-red-50 text-red-600 rounded-xl text-xs text-center border border-red-100"
                     >
                         {error}
                     </motion.div>
                 )}
 
-                <form onSubmit={handleRegister} className="space-y-4">
+                <form onSubmit={handleRegister} className="space-y-5">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-300 ml-1">Full Name</label>
+                        <label className="text-sm font-semibold text-gray-700 ml-1">Full Name</label>
                         <div className="relative group">
-                            <User className="absolute left-4 top-3.5 w-5 h-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                            <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="text"
                                 required
-                                className="w-full bg-black/20 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all hover:bg-black/30"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 pl-12 pr-4 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                                 placeholder="John Doe"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -122,13 +122,13 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-300 ml-1">Email</label>
+                        <label className="text-sm font-semibold text-gray-700 ml-1">Email Address</label>
                         <div className="relative group">
-                            <Mail className="absolute left-4 top-3.5 w-5 h-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                            <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="email"
                                 required
-                                className="w-full bg-black/20 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all hover:bg-black/30"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 pl-12 pr-4 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                                 placeholder="you@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -137,13 +137,13 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-300 ml-1">Password</label>
+                        <label className="text-sm font-semibold text-gray-700 ml-1">Password</label>
                         <div className="relative group">
-                            <Lock className="absolute left-4 top-3.5 w-5 h-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                            <Lock className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="password"
                                 required
-                                className="w-full bg-black/20 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all hover:bg-black/30"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 pl-12 pr-4 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                                 placeholder="••••••••"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -152,58 +152,62 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-300 ml-1">I am a...</label>
+                        <label className="text-sm font-semibold text-gray-700 ml-1">Account Type</label>
                         <select
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
-                            className="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all hover:bg-black/30 appearance-none"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all appearance-none cursor-pointer"
                         >
-                            <option value="customer" className="bg-slate-900">Customer</option>
-                            <option value="seller" className="bg-slate-900">Seller (Pharmacy Owner)</option>
-                            <option value="delivery" className="bg-slate-900">Delivery Partner</option>
+                            <option value="customer">Customer / Patient</option>
+                            <option value="seller">Seller (Pharmacy Owner)</option>
+                            <option value="delivery">Delivery Partner</option>
                         </select>
                     </div>
 
                     {role === 'seller' && (
-                        <div className="space-y-4 pt-4 border-t border-white/10">
-                            <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider">Seller Details</h3>
+                        <motion.div 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="space-y-4 pt-4 border-t border-gray-100"
+                        >
+                            <h3 className="text-sm font-bold text-primary uppercase tracking-wider">Merchant Details</h3>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs text-slate-400">Bank Account No.</label>
+                                    <label className="text-xs font-bold text-gray-500 ml-1">Bank A/C No.</label>
                                     <input
                                         type="text"
                                         name="accountNumber"
                                         required
-                                        className="w-full bg-black/20 border border-white/10 rounded-lg py-2 px-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                        className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                                         placeholder="0000000000"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs text-slate-400">IFSC Code</label>
+                                    <label className="text-xs font-bold text-gray-500 ml-1">IFSC Code</label>
                                     <input
                                         type="text"
                                         name="ifsc"
                                         required
-                                        className="w-full bg-black/20 border border-white/10 rounded-lg py-2 px-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                        className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                                         placeholder="SBIN000XXXX"
                                     />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs text-slate-400 font-bold uppercase tracking-wider">Pharmacy Certificate No. / Link</label>
+                                <label className="text-xs font-bold text-gray-500 ml-1">Pharmacy Certificate No.</label>
                                 <input
                                     type="text"
                                     name="pharmacyCertificate"
                                     required
-                                    className="w-full bg-black/20 border border-white/10 rounded-lg py-2 px-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                                    placeholder="License Number or URL to Document"
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                                    placeholder="Enter License Number"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs text-slate-400 font-bold uppercase tracking-wider">Aadhaar Card (Image or PDF)</label>
+                                <label className="text-xs font-bold text-gray-500 ml-1">Identity Verification (Aadhaar)</label>
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="file"
@@ -215,27 +219,25 @@ export default function RegisterPage() {
                                     <button
                                         type="button"
                                         onClick={() => document.getElementById('aadhaarUpload')?.click()}
-                                        className="bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2"
+                                        className="bg-primary/5 hover:bg-primary/10 border border-primary/20 text-primary px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2"
                                     >
                                         <FileText className="w-4 h-4" />
-                                        {aadhaarFileName ? 'Change Aadhaar' : 'Upload Aadhaar'}
+                                        {aadhaarFileName ? 'Change File' : 'Upload Aadhaar'}
                                     </button>
                                     {aadhaarFileName && (
-                                        <span className="text-xs text-slate-400 truncate max-w-[150px]">
+                                        <span className="text-xs text-gray-500 truncate max-w-[150px]">
                                             {aadhaarFileName}
                                         </span>
                                     )}
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
 
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                    <button
                         disabled={loading}
                         type="submit"
-                        className="w-full mt-4 bg-gradient-to-r from-purple-500 to-rose-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-purple-500/30 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full mt-4 bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                         {loading ? (
                             <Loader2 className="w-5 h-5 animate-spin" />
@@ -244,13 +246,13 @@ export default function RegisterPage() {
                                 Create Account <ArrowRight className="w-5 h-5" />
                             </>
                         )}
-                    </motion.button>
+                    </button>
                 </form>
 
-                <div className="mt-8 text-center">
-                    <p className="text-slate-500 text-sm">
+                <div className="mt-8 text-center border-t border-gray-100 pt-6">
+                    <p className="text-gray-500 text-sm">
                         Already have an account?{" "}
-                        <Link href="/login" className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                        <Link href="/login" className="text-primary font-bold hover:underline transition-all">
                             Sign in instead
                         </Link>
                     </p>
