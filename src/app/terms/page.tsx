@@ -54,7 +54,7 @@ export default function TermsPage() {
                         <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl mb-6">
                             <FileText className="w-8 h-8 text-primary" />
                         </div>
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms & Conditions</h1>
+                        <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms &amp; Conditions</h1>
                         <p className="text-gray-500">Effective Date: January 26, 2026</p>
                     </motion.div>
                 </div>
@@ -70,7 +70,7 @@ export default function TermsPage() {
                 >
                     <div className="prose prose-blue max-w-none">
                         <p className="text-lg text-gray-600 mb-12">
-                            By creating an account or logging in, you agree to the following Terms & Conditions. 
+                            By creating an account or logging in, you agree to the following Terms &amp; Conditions. 
                             These terms govern your use of the Pillora platform and services.
                         </p>
 
@@ -91,7 +91,7 @@ export default function TermsPage() {
                         <div className="mt-16 pt-8 border-t border-gray-100">
                             <p className="text-sm text-gray-500 text-center">
                                 By using Pillora, you confirm that you have read, understood, and agreed to these 
-                                Terms & Conditions and our <a href="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</a>.
+                                Terms &amp; Conditions and our <a href="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</a>.
                             </p>
                         </div>
                     </div>
