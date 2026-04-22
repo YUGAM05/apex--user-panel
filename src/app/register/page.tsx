@@ -128,7 +128,7 @@ export default function RegisterPage() {
                         )}
                     </button>
                     <p className="text-[11px] text-gray-400 text-center mt-4 px-2 italic">
-                        By tapping "Agree & Continue", you confirm that you have read, understood, and agreed to these 
+                        By tapping &quot;Agree &amp; Continue&quot;, you confirm that you have read, understood, and agreed to these 
                         <Link href="/terms" className="text-primary hover:underline whitespace-nowrap"> Terms & Conditions</Link> and our 
                         <Link href="/privacy" className="text-primary hover:underline whitespace-nowrap"> Privacy Policy</Link>.
                     </p>
