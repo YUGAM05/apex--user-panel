@@ -1,8 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { FileText, Shield, UserCheck, AlertCircle, Scale, HeartHandshake } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function TermsPage() {
     const sections = [
@@ -41,7 +39,7 @@ export default function TermsPage() {
 
     return (
         <main className="min-h-screen bg-gray-50">
-            <Navbar />
+            
             
             {/* Header Section */}
             <div className="bg-white border-b border-gray-100 pt-32 pb-16">
@@ -98,7 +96,7 @@ export default function TermsPage() {
                 </motion.div>
             </div>
 
-            <Footer />
+            <div className="pb-16" />
         </main>
     );
 }
