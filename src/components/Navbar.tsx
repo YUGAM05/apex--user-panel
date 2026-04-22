@@ -67,7 +67,7 @@ export default function Navbar() {
                     {/* 1. Logo */}
                     <Link href="/" className="flex-shrink-0 flex items-center gap-2 group">
                         <Image
-                            src="/pillora-logo-new.png"
+                            src="/pillora-logo-v2.svg"
                             alt="Pillora"
                             width={72}
                             height={72}

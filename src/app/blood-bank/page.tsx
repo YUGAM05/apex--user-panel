@@ -423,7 +423,7 @@ function CertificateView({
                         <div style={{ position: 'absolute', top: '20px', left: '30px', zIndex: 10 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/pillora-logo-new.png" alt="Pillora Logo" style={{ width: '75px', height: '75px', objectFit: 'contain' }} crossOrigin="anonymous" />
+                                <img src="/pillora-logo-v2.svg" alt="Pillora Logo" style={{ width: '75px', height: '75px', objectFit: 'contain' }} crossOrigin="anonymous" />
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/pillora-text.png" alt="Pillora" style={{ height: '50px', width: 'auto' }} crossOrigin="anonymous" />
                             </div>

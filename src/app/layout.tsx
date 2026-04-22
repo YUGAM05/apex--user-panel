@@ -13,11 +13,8 @@ export const metadata: Metadata = {
     title: "Pillora — Blood Connect & Hospital Information | India's HealthTech Platform",
     description: "Pillora connects voluntary blood donors with verified recipients through Blood Connect and helps patients find hospitals, doctors, pricing, and government schemes across India.",
     icons: {
-        icon: [
-            { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-            { url: "/favicon.svg", type: "image/svg+xml" },
-        ],
-        shortcut: "/favicon.ico",
+        icon: "/favicon.svg",
+        shortcut: "/favicon.svg",
         apple: "/apple-touch-icon.png",
     },
     manifest: "/site.webmanifest",
