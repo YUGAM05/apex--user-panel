@@ -123,10 +123,15 @@ export default function RegisterPage() {
                             <Loader2 className="w-5 h-5 animate-spin" />
                         ) : (
                             <>
-                                Create Account <ArrowRight className="w-5 h-5" />
+                                Agree & Continue <ArrowRight className="w-5 h-5" />
                             </>
                         )}
                     </button>
+                    <p className="text-[11px] text-gray-400 text-center mt-4 px-2 italic">
+                        By tapping "Agree & Continue", you confirm that you have read, understood, and agreed to these 
+                        <Link href="/terms" className="text-primary hover:underline whitespace-nowrap"> Terms & Conditions</Link> and our 
+                        <Link href="/privacy" className="text-primary hover:underline whitespace-nowrap"> Privacy Policy</Link>.
+                    </p>
                 </form>
 
                 <div className="mt-8 text-center border-t border-gray-100 pt-6">

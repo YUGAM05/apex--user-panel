@@ -137,6 +137,11 @@ export default function LoginPage() {
                                 </>
                             )}
                         </button>
+                        <p className="text-[11px] text-gray-400 text-center mt-4 px-2 italic">
+                            By continuing, you confirm that you have read and agreed to our 
+                            <Link href="/terms" className="text-primary hover:underline whitespace-nowrap"> Terms & Conditions</Link> and 
+                            <Link href="/privacy" className="text-primary hover:underline whitespace-nowrap"> Privacy Policy</Link>.
+                        </p>
                     </form>
                 ) : (
                     <form onSubmit={handleVerifyOtp} className="space-y-6">
@@ -180,6 +185,11 @@ export default function LoginPage() {
                                 )}
                             </button>
                         </div>
+                        <p className="text-[11px] text-gray-400 text-center mt-4 px-2 italic">
+                            By signing in, you confirm that you have read and agreed to our 
+                            <Link href="/terms" className="text-primary hover:underline whitespace-nowrap"> Terms & Conditions</Link> and 
+                            <Link href="/privacy" className="text-primary hover:underline whitespace-nowrap"> Privacy Policy</Link>.
+                        </p>
                     </form>
                 )}
 
