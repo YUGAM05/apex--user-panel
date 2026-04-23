@@ -19,16 +19,15 @@ export async function POST(request: Request) {
 
     // Verify the ID token
     const decodedToken = await getAuth(adminApp).verifyIdToken(idToken);
-    const { uid, phone_number } = decodedToken;
+    const { uid, phone_number, email, name, picture } = decodedToken;
 
-    // In a real app, you might want to create a session cookie here using Firebase Auth
-    // or just set your own secure cookie. The user asked for a secure HTTP-only cookie.
-    // For simplicity and security, we'll set a cookie with the UID or a custom session.
-    
     const response = NextResponse.json({
       success: true,
       uid,
-      phoneNumber: phone_number,
+      phoneNumber: phone_number || null,
+      email: email || null,
+      name: name || null,
+      picture: picture || null,
     });
 
     // Set a secure HTTP-only cookie

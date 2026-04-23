@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { auth } from "@/lib/firebase";
-import { 
   RecaptchaVerifier, 
   signInWithPhoneNumber, 
-  ConfirmationResult 
+  ConfirmationResult,
+  signInWithPopup
 } from "firebase/auth";
+import { auth, googleProvider } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Lock, Loader2, ArrowRight, CheckCircle2 } from "lucide-react";
 import axios from "axios";
@@ -121,6 +121,46 @@ export default function LoginPage() {
         } catch (err: any) {
             console.error("Error verifying OTP:", err);
             setError("Invalid OTP. Please check and try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        setLoading(true);
+        setError("");
+
+        try {
+            if (!auth || !googleProvider) {
+                throw new Error("Auth not initialized");
+            }
+
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+            const idToken = await user.getIdToken();
+
+            // Send ID token to backend for verification and session setup
+            const response = await axios.post("/api/auth/verify-token", { idToken });
+
+            if (response.data.success) {
+                const userData = {
+                    uid: response.data.uid,
+                    phoneNumber: response.data.phoneNumber,
+                    name: response.data.name || user.displayName || "User",
+                    email: response.data.email || user.email || "",
+                    picture: response.data.picture || user.photoURL || "",
+                    role: "user"
+                };
+                localStorage.setItem("user", JSON.stringify(userData));
+                localStorage.setItem("token", idToken);
+                window.dispatchEvent(new Event('storage'));
+                router.push("/dashboard");
+            } else {
+                throw new Error("Verification failed on server");
+            }
+        } catch (err: any) {
+            console.error("Error with Google Login:", err);
+            setError(err.message || "Google Sign-In failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -252,6 +292,30 @@ export default function LoginPage() {
                         </motion.form>
                     )}
                 </AnimatePresence>
+
+                <div className="relative my-8">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-100"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                        <span className="px-4 bg-white text-gray-400 font-medium">OR</span>
+                    </div>
+                </div>
+
+                <button
+                    onClick={handleGoogleLogin}
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 py-3.5 rounded-xl font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                    {loading ? (
+                        <Loader2 className="w-5 h-5 animate-spin text-primary" />
+                    ) : (
+                        <>
+                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
+                            Continue with Google
+                        </>
+                    )}
+                </button>
                 
                 <p className="text-[11px] text-gray-400 text-center mt-6 px-2 italic">
                     By continuing, you confirm that you have read and agreed to our 
