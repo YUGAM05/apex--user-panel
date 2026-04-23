@@ -64,8 +64,8 @@ export default function LoginPage() {
             console.error("Error sending OTP:", err);
             setError(err.message || "Failed to send OTP. Please try again.");
             // Reset reCAPTCHA if error occurs
-            if (window.grecaptcha && recaptchaVerifierRef.current) {
-                window.grecaptcha.reset();
+            if ((window as any).grecaptcha && recaptchaVerifierRef.current) {
+                (window as any).grecaptcha.reset();
             }
         } finally {
             setLoading(false);
