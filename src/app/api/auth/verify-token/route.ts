@@ -1,4 +1,4 @@
-import { auth } from "firebase-admin";
+import { getAuth } from "firebase-admin/auth";
 import { adminApp } from "@/lib/firebase-admin";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     }
 
     // Verify the ID token
-    const decodedToken = await auth(adminApp).verifyIdToken(idToken);
+    const decodedToken = await getAuth(adminApp).verifyIdToken(idToken);
     const { uid, phone_number } = decodedToken;
 
     // In a real app, you might want to create a session cookie here using Firebase Auth

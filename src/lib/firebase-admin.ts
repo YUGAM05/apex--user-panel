@@ -7,8 +7,8 @@ const adminConfig = {
 };
 
 export const adminApp = 
-  admin.apps.length === 0 
+  (admin.apps.length === 0 
     ? admin.initializeApp({
         credential: admin.credential.cert(adminConfig),
       })
-    : admin.apps[0];
+    : admin.apps[0]) as admin.app.App;
