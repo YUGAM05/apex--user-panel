@@ -3,8 +3,14 @@ import { adminApp } from "@/lib/firebase-admin";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
+    if (!adminApp) {
+      console.error("Firebase Admin could not be initialized. Check environment variables.");
+      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+    }
     const { idToken } = await request.json();
 
     if (!idToken) {
