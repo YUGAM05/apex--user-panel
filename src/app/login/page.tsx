@@ -25,7 +25,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         // Initialize reCAPTCHA
-        if (!recaptchaVerifierRef.current) {
+        if (!recaptchaVerifierRef.current && auth) {
             recaptchaVerifierRef.current = new RecaptchaVerifier(auth, 'recaptcha-container', {
                 size: 'invisible',
                 callback: (response: any) => {
@@ -55,6 +55,10 @@ export default function LoginPage() {
             
             if (!verifier) {
                 throw new Error("Recaptcha verifier not initialized");
+            }
+
+            if (!auth) {
+                throw new Error("Auth not initialized. Check your network or configuration.");
             }
 
             const result = await signInWithPhoneNumber(auth, fullPhoneNumber, verifier);
