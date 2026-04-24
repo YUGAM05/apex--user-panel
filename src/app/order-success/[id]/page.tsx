@@ -104,7 +104,7 @@ export default function OrderSuccessPage() {
                     <div className="flex justify-between items-start border-b border-gray-100 pb-8 mb-8">
                         <div>
                             <div className="flex items-center gap-2 mb-2">
-                                <img src="/pillora-logo-v2.svg" alt="Pillora" className="w-12 h-12 object-contain" />
+                                <img src="/logo.png" alt="Pillora" className="w-12 h-12 object-contain" />
                                 <img src="/pillora-text.png" alt="Pillora" className="h-10 w-auto object-contain" />
                             </div>
                             <p className="text-gray-500 text-sm">Shri Mahavir Jain Vidhvalay, Paldi Cross Road</p>
@@ -229,10 +229,10 @@ export default function OrderSuccessPage() {
                         </button>
                     </Link>
 
-                    <Link href="/medicines" className="block">
+                    <Link href="/" className="block">
                         <button className="w-full py-4 bg-white border-2 border-gray-200 text-gray-900 rounded-xl font-bold hover:bg-gray-50 transition flex items-center justify-center gap-2">
                             <Home className="w-5 h-5" />
-                            Shop More
+                            Back to Home
                         </button>
                     </Link>
                 </div>

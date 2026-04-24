@@ -56,9 +56,9 @@ export default function MyOrdersPage() {
                         </div>
                         <h2 className="text-xl font-bold text-gray-900 mb-2">No orders yet</h2>
                         <p className="text-gray-500 mb-8">Looks like you haven&apos;t placed any orders yet.</p>
-                        <Link href="/medicines">
+                        <Link href="/">
                             <button className="px-8 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition">
-                                Start Shopping
+                                Back to Home
                             </button>
                         </Link>
                     </div>

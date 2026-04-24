@@ -29,11 +29,11 @@ export default function CartPage() {
                 <h2 className="text-3xl font-bold text-gray-800 mb-3">Your cart is empty</h2>
                 <p className="text-gray-500 mb-8 text-lg">Start shopping to add items to your cart!</p>
                 <Link
-                    href="/medicines"
+                    href="/"
                     className="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition flex items-center gap-2"
                 >
                     <ArrowLeft className="w-5 h-5" />
-                    Browse Products
+                    Back to Home
                 </Link>
             </div>
         );
@@ -44,7 +44,7 @@ export default function CartPage() {
             <div className="max-w-6xl mx-auto px-4 py-8">
                 {/* Header */}
                 <div className="flex items-center gap-4 mb-8">
-                    <Link href="/medicines" className="p-2 hover:bg-gray-100 rounded-lg transition">
+                    <Link href="/" className="p-2 hover:bg-gray-100 rounded-lg transition">
                         <ArrowLeft className="w-6 h-6" />
                     </Link>
                     <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
@@ -86,11 +86,11 @@ export default function CartPage() {
                                 </button>
                             </Link>
 
-                            <Link
-                                href="/medicines"
+                             <Link
+                                href="/"
                                 className="block text-center text-blue-600 font-medium hover:underline"
                             >
-                                Continue Shopping
+                                Back to Home
                             </Link>
                         </div>
                     </div>

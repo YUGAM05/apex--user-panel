@@ -211,10 +211,10 @@ export default function MyPrescriptionsPage() {
                                                 </Link>
                                             ) : p.status === 'approved' ? (
                                                 <Link
-                                                    href="/medicines"
-                                                    className="flex items-center gap-2 bg-green-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-green-700 transition-colors shadow-sm shadow-green-200"
+                                                    href="/"
+                                                    className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors shadow-sm shadow-blue-200"
                                                 >
-                                                    Browse Medicines <ArrowRight className="w-4 h-4" />
+                                                    Back to Home <ArrowRight className="w-4 h-4" />
                                                 </Link>
                                             ) : (
                                                 <span className="text-sm text-gray-400 italic flex items-center gap-1.5">
