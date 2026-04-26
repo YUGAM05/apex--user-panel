@@ -97,7 +97,7 @@ export default function PartnersPage() {
             
             data.type = activeForm;
 
-            const response = await api.post('/partners/submit', data);
+            const response = await api.post('partners/submit', data);
             
             if (response.data.success) {
                 setFormSubmitted(true);
