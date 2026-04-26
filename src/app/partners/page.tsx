@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import api from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Users,
@@ -33,6 +34,41 @@ export default function PartnersPage() {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState("");
+
+    const fadeIn = {
+        initial: { opacity: 0, y: 20 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.6 }
+    };
+
+    const hospitalList = [
+        "Doctor profiles — names, specializations, qualifications, and experience",
+        "Doctor availability schedules — date and time slots for consultations",
+        "Transparent pricing — consultation fees, surgery charges, and treatment costs",
+        "Government scheme coverage — Ayushman Bharat and state schemes",
+        "Facilities & departments — ICU, OT, emergency services, and specialized units"
+    ];
+
+    const hospitalBenefits = [
+        { title: "Visibility", description: "Appear in patient searches filtered by specialty, city, and area." },
+        { title: "Trust", description: "A verified listing signals credibility to patients and families." },
+        { title: "Control", description: "Your profile, your data — updated whenever your information changes." },
+        { title: "Reach", description: "Connect with patients actively searching for your facility's services." }
+    ];
+
+    const ngoSteps = [
+        "Share your existing voluntary donor database with Pillora",
+        "Consent-based opt-in invitation sent via SMS to each donor",
+        "Confirmed donors added to Blood Connect with full details",
+        "Automatic matching and connection whenever a KYC-verified recipient needs blood"
+    ];
+
+    const ngoBenefits = [
+        { title: "Greater Impact", description: "Turn a static list into an active, life-saving network." },
+        { title: "Zero Manual Effort", description: "Matching and communication are handled by the platform." },
+        { title: "Privacy & Safety", description: "Details shared only after Aadhaar-based KYC verification." },
+        { title: "Compliance", description: "Strict adherence to non-commercial, voluntary donation principles." }
+    ];
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
