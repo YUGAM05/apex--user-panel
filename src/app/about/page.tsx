@@ -108,7 +108,7 @@ export default function AboutPage() {
                                 <div className="absolute -inset-4 bg-gradient-to-tr from-rose-500 to-rose-700 rounded-[3rem] opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
                                 <div className="relative h-full w-full bg-white rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl">
                                     <Image
-                                        src="/yugam-shah-founder.png"
+                                        src="/Yugam-shah-founder.jpeg"
                                         alt="Yugam Shah - Founder of Pillora"
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
