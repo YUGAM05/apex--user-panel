@@ -31,54 +31,57 @@ type FormType = 'hospital' | 'ngo' | null;
 export default function PartnersPage() {
     const [activeForm, setActiveForm] = useState<FormType>(null);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState("");
 
-    const fadeIn = {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6 }
-    };
-
-    const hospitalList = [
-        "Doctor profiles — names, specializations, qualifications, and experience",
-        "Doctor availability schedules — date and time slots for consultations",
-        "Transparent pricing — consultation fees, surgery charges, and treatment costs",
-        "Government scheme coverage — Ayushman Bharat and state schemes",
-        "Facilities & departments — ICU, OT, emergency services, and specialized units"
-    ];
-
-    const hospitalBenefits = [
-        { title: "Visibility", description: "Appear in patient searches filtered by specialty, city, and area." },
-        { title: "Trust", description: "A verified listing signals credibility to patients and families." },
-        { title: "Control", description: "Your profile, your data — updated whenever your information changes." },
-        { title: "Reach", description: "Connect with patients actively searching for your facility's services." }
-    ];
-
-    const ngoSteps = [
-        "Share your existing voluntary donor database with Pillora",
-        "Consent-based opt-in invitation sent via SMS to each donor",
-        "Confirmed donors added to Blood Connect with full details",
-        "Automatic matching and connection whenever a KYC-verified recipient needs blood"
-    ];
-
-    const ngoBenefits = [
-        { title: "Greater Impact", description: "Turn a static list into an active, life-saving network." },
-        { title: "Zero Manual Effort", description: "Matching and communication are handled by the platform." },
-        { title: "Privacy & Safety", description: "Details shared only after Aadhaar-based KYC verification." },
-        { title: "Compliance", description: "Strict adherence to non-commercial, voluntary donation principles." }
-    ];
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setFormSubmitted(true);
-        setTimeout(() => {
-            setActiveForm(null);
-            setFormSubmitted(false);
-        }, 5000);
+        setSubmitting(true);
+        setError("");
+        
+        try {
+            const formData = new FormData(e.currentTarget);
+            const data: any = Object.fromEntries(formData.entries());
+            
+            // Handle checkboxes for specializations
+            const specializations = formData.getAll('specializations');
+            if (specializations.length > 0) data.specializations = specializations;
+            
+            // Handle checkboxes for facilities
+            const facilities = formData.getAll('facilities');
+            if (facilities.length > 0) data.facilities = facilities;
+            
+            // Handle checkboxes for governmentSchemes
+            const governmentSchemes = formData.getAll('governmentSchemes');
+            if (governmentSchemes.length > 0) data.governmentSchemes = governmentSchemes;
+            
+            // Handle checkboxes for bloodGroups
+            const bloodGroups = formData.getAll('bloodGroups');
+            if (bloodGroups.length > 0) data.bloodGroups = bloodGroups;
+            
+            data.type = activeForm;
+
+            const response = await api.post('/partners/submit', data);
+            
+            if (response.data.success) {
+                setFormSubmitted(true);
+                setTimeout(() => {
+                    setActiveForm(null);
+                    setFormSubmitted(false);
+                }, 5000);
+            }
+        } catch (err: any) {
+            console.error('Submission error:', err);
+            setError(err.response?.data?.message || "Failed to submit application. Please try again.");
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const openForm = (type: FormType) => {
         setActiveForm(type);
         setFormSubmitted(false);
+        setError("");
     };
 
     return (
@@ -300,6 +303,11 @@ export default function PartnersPage() {
                                     </motion.div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="space-y-12">
+                                        {error && (
+                                            <div className="p-4 bg-red-50 text-red-600 rounded-2xl text-center text-sm font-bold border border-red-100">
+                                                {error}
+                                            </div>
+                                        )}
                                         {activeForm === 'hospital' ? (
                                             <>
                                                 {/* Facility Information */}
@@ -311,11 +319,11 @@ export default function PartnersPage() {
                                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Hospital / Clinic Name</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Apollo Hospital" />
+                                                            <input required name="organizationName" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Apollo Hospital" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Type of Facility</label>
-                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                            <select required name="facilityType" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium cursor-pointer">
                                                                 <option value="">Select Type</option>
                                                                 <option>Multi-specialty Hospital</option>
                                                                 <option>Single Specialty Hospital</option>
@@ -325,19 +333,19 @@ export default function PartnersPage() {
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Registration Number (Govt.)</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Registration No." />
+                                                            <input required name="registrationNumber" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Registration No." />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">City</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
+                                                            <input required name="city" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Area / Locality</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Satellite" />
+                                                            <input required name="area" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Satellite" />
                                                         </div>
                                                         <div className="md:col-span-2 space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Address</label>
-                                                            <textarea required rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
+                                                            <textarea required name="address" rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -351,11 +359,11 @@ export default function PartnersPage() {
                                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Name</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
+                                                            <input required name="contactPersonName" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Designation</label>
-                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                            <select required name="designation" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium cursor-pointer">
                                                                 <option value="">Select Designation</option>
                                                                 <option>Owner</option>
                                                                 <option>Administrator</option>
@@ -364,11 +372,11 @@ export default function PartnersPage() {
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Phone Number</label>
-                                                            <input required type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
+                                                            <input required name="phoneNumber" type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Official Email Address</label>
-                                                            <input required type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="email@hospital.com" />
+                                                            <input required name="email" type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="email@hospital.com" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -385,7 +393,7 @@ export default function PartnersPage() {
                                                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                                                 {['General', 'Cardiology', 'Orthopedics', 'Gynecology', 'Neurology', 'Pediatrics', 'Oncology', 'Dermatology'].map(spec => (
                                                                     <label key={spec} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
-                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
+                                                                        <input name="specializations" value={spec} type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
                                                                         <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{spec}</span>
                                                                     </label>
                                                                 ))}
@@ -394,7 +402,7 @@ export default function PartnersPage() {
 
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Number of Doctors</label>
-                                                            <input required type="number" className="w-full md:w-1/3 px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Total doctors count" />
+                                                            <input required name="doctorCount" type="number" className="w-full md:w-1/3 px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:bg-white transition-all font-medium" placeholder="Total doctors count" />
                                                         </div>
 
                                                         <div className="space-y-4">
@@ -402,7 +410,7 @@ export default function PartnersPage() {
                                                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                                                                 {['ICU', 'OT', 'Emergency', 'Pharmacy', 'Lab'].map(fac => (
                                                                     <label key={fac} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
-                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
+                                                                        <input name="facilities" value={fac} type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
                                                                         <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{fac}</span>
                                                                     </label>
                                                                 ))}
@@ -414,7 +422,7 @@ export default function PartnersPage() {
                                                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                                                 {['Ayushman Bharat', 'State Health Schemes', 'ESIC', 'CGHS'].map(scheme => (
                                                                     <label key={scheme} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-blue-50 transition-colors group">
-                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
+                                                                        <input name="governmentSchemes" value={scheme} type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0" />
                                                                         <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{scheme}</span>
                                                                     </label>
                                                                 ))}
@@ -434,11 +442,11 @@ export default function PartnersPage() {
                                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Organization / NGO Name</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Red Cross Society" />
+                                                            <input required name="organizationName" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Red Cross Society" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Type of Organization</label>
-                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                            <select required name="ngoType" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
                                                                 <option value="">Select Type</option>
                                                                 <option>NGO</option>
                                                                 <option>Voluntary Blood Donor Group</option>
@@ -448,19 +456,19 @@ export default function PartnersPage() {
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Registration Number (Optional)</label>
-                                                            <input type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Govt. / NGO registration" />
+                                                            <input name="registrationNumber" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Govt. / NGO registration" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">City</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
+                                                            <input required name="city" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Area / Locality</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Paldi" />
+                                                            <input required name="area" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Paldi" />
                                                         </div>
                                                         <div className="md:col-span-2 space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Address</label>
-                                                            <textarea required rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
+                                                            <textarea required name="address" rows={3} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium resize-none" placeholder="Enter complete address"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -474,11 +482,11 @@ export default function PartnersPage() {
                                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Full Name</label>
-                                                            <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
+                                                            <input required name="contactPersonName" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Contact person name" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Designation</label>
-                                                            <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                            <select required name="designation" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
                                                                 <option value="">Select Designation</option>
                                                                 <option>Founder</option>
                                                                 <option>Director</option>
@@ -488,11 +496,11 @@ export default function PartnersPage() {
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Phone Number</label>
-                                                            <input required type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
+                                                            <input required name="phoneNumber" type="tel" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="10-digit mobile number" />
                                                         </div>
                                                         <div className="space-y-2">
                                                             <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Official Email Address</label>
-                                                            <input required type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="email@organization.org" />
+                                                            <input required name="email" type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="email@organization.org" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -507,11 +515,11 @@ export default function PartnersPage() {
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                             <div className="space-y-2">
                                                                 <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Approx. Number of Donors</label>
-                                                                <input required type="number" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Total donors count" />
+                                                                <input required name="donorCount" type="number" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="Total donors count" />
                                                             </div>
                                                             <div className="space-y-2">
                                                                 <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Is donor data digitized?</label>
-                                                                <select required className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
+                                                                <select required name="isDigitized" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium cursor-pointer">
                                                                     <option value="">Select Option</option>
                                                                     <option>Yes</option>
                                                                     <option>No</option>
@@ -520,7 +528,7 @@ export default function PartnersPage() {
                                                             </div>
                                                             <div className="md:col-span-2 space-y-2">
                                                                 <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Cities / Areas covered</label>
-                                                                <input required type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad, Gandhinagar, Surat" />
+                                                                <input required name="areasCovered" type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:bg-white transition-all font-medium" placeholder="E.g. Ahmedabad, Gandhinagar, Surat" />
                                                             </div>
                                                         </div>
 
@@ -529,7 +537,7 @@ export default function PartnersPage() {
                                                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                                                 {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(group => (
                                                                     <label key={group} className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl cursor-pointer hover:bg-red-50 transition-colors group">
-                                                                        <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-red-600 focus:ring-red-500 focus:ring-offset-0" />
+                                                                        <input name="bloodGroups" value={group} type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-red-600 focus:ring-red-500 focus:ring-offset-0" />
                                                                         <span className="text-sm font-semibold text-slate-700 group-hover:text-red-700">{group}</span>
                                                                     </label>
                                                                 ))}
@@ -544,14 +552,19 @@ export default function PartnersPage() {
                                         <div className="space-y-6">
                                             <div className="space-y-2">
                                                 <label className="text-xs font-black text-slate-500 uppercase tracking-widest block ml-1">Additional Message (Optional)</label>
-                                                <textarea rows={4} className={`w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 transition-all font-medium resize-none ${activeForm === 'hospital' ? 'focus:ring-blue-600/20' : 'focus:ring-red-600/20'} focus:bg-white`} placeholder="Any additional information you&apos;d like to share..."></textarea>
+                                                <textarea name="message" rows={4} className={`w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 transition-all font-medium resize-none ${activeForm === 'hospital' ? 'focus:ring-blue-600/20' : 'focus:ring-red-600/20'} focus:bg-white`} placeholder="Any additional information you&apos;d like to share..."></textarea>
                                             </div>
 
                                             <button 
                                                 type="submit"
-                                                className={`w-full py-6 text-white font-black rounded-3xl transition-all shadow-2xl uppercase tracking-[0.2em] text-sm ${activeForm === 'hospital' ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-200' : 'bg-red-600 hover:bg-red-700 shadow-red-200'}`}
+                                                disabled={submitting}
+                                                className={`w-full py-6 text-white font-black rounded-3xl transition-all shadow-2xl uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-3 ${activeForm === 'hospital' ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-200' : 'bg-red-600 hover:bg-red-700 shadow-red-200'} disabled:opacity-70`}
                                             >
-                                                Submit Application
+                                                {submitting ? (
+                                                    <>Submitting... <Zap className="w-4 h-4 animate-pulse" /></>
+                                                ) : (
+                                                    'Submit Application'
+                                                )}
                                             </button>
                                         </div>
                                     </form>
