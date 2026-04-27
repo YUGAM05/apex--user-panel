@@ -108,12 +108,12 @@ export default function DashboardPage() {
                         </h2>
                         <div className="space-y-6">
                             <div>
-                                <label className="text-xs font-bold text-gray-400 uppercase">User UID</label>
-                                <p className="font-medium text-gray-800 break-all">{user.uid}</p>
+                                <label className="text-xs font-bold text-gray-400 uppercase">Full Name</label>
+                                <p className="font-medium text-gray-800">{user.name || "—"}</p>
                             </div>
                             <div>
-                                <label className="text-xs font-bold text-gray-400 uppercase">Current Session</label>
-                                <p className="font-medium text-gray-800">Active (Secure Cookie Set)</p>
+                                <label className="text-xs font-bold text-gray-400 uppercase">Email Address</label>
+                                <p className="font-medium text-gray-800">{user.email || "—"}</p>
                             </div>
                             <button 
                                 onClick={handleLogout}
