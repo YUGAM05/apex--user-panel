@@ -194,11 +194,11 @@ export default function CareersPage() {
                     <div className="group relative inline-block">
                         <div className="absolute -inset-1 bg-gradient-to-r from-rose-600 to-rose-700 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
                         <a
-                            href="mailto:shahyugam037@gmail.com"
+                            href="mailto:career@pillora.in"
                             className="relative flex items-center gap-4 px-10 py-6 bg-white text-slate-900 rounded-2xl font-black text-xl shadow-2xl transition-transform hover:scale-105"
                         >
                             <Mail className="w-7 h-7 text-rose-600" />
-                            Drop us a note at shahyugam037@gmail.com
+                            Drop us a note at career@pillora.in
                         </a>
                     </div>
                     

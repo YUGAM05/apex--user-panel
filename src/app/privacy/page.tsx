@@ -182,7 +182,7 @@ export default function PrivacyPolicyPage() {
                         </div>
                         <div className="flex items-start gap-4 p-6 bg-red-600 text-white rounded-[2rem] shadow-xl shadow-red-200 font-bold italic">
                             <AlertCircle className="w-6 h-6 flex-shrink-0" />
-                            <p>Under no circumstances is donor information shared without all three conditions being met. Donors may request removal at any time by contacting shahyugam037@gmail.com</p>
+                            <p>Under no circumstances is donor information shared without all three conditions being met. Donors may request removal at any time by contacting help@pillora.in</p>
                         </div>
                     </motion.section>
 
@@ -252,7 +252,7 @@ export default function PrivacyPolicyPage() {
                         <div className="inline-flex flex-col md:flex-row items-center gap-6 justify-center">
                             <div className="flex items-center gap-3 font-black text-xl">
                                 <Mail className="w-6 h-6 border-b-2 border-white pb-1" />
-                                shahyugam037@gmail.com
+                                help@pillora.in
                             </div>
                             <div className="px-6 py-2 bg-white/10 rounded-full font-bold uppercase tracking-widest text-[10px] backdrop-blur-md">
                                 Response within 24 hours

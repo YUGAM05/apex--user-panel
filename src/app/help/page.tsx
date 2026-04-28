@@ -99,7 +99,7 @@ export default function HelpCenterPage() {
         },
         {
             question: "Can I remove myself from the donor network?",
-            answer: "Yes. Contact us at shahyugam037@gmail.com and we will remove your profile from the network promptly."
+            answer: "Yes. Contact us at help@pillora.in and we will remove your profile from the network promptly."
         },
         {
             question: "Is there any cost to register as a donor?",
@@ -268,10 +268,10 @@ export default function HelpCenterPage() {
 
                         <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                             <a 
-                                href="mailto:shahyugam037@gmail.com"
+                                href="mailto:help@pillora.in"
                                 className="w-full md:w-auto px-10 py-6 bg-white text-blue-600 font-black rounded-3xl hover:bg-slate-100 transition-all shadow-xl uppercase tracking-widest text-sm flex items-center justify-center gap-3"
                             >
-                                shahyugam037@gmail.com <ArrowRight className="w-4 h-4" />
+                                help@pillora.in <ArrowRight className="w-4 h-4" />
                             </a>
                             <div className="px-10 py-6 bg-blue-700/50 border border-white/20 rounded-3xl font-bold uppercase tracking-widest text-xs flex items-center gap-2">
                                 Response Time: Within 24 hours <Zap className="w-3 h-3 fill-current" />
