@@ -10,8 +10,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Pillora — Blood Connect & Hospital Information | India's HealthTech Platform",
-    description: "Pillora connects voluntary blood donors with verified recipients through Blood Connect and helps patients find hospitals, doctors, pricing, and government schemes across India.",
+    title: "Blood Connect & Hospital Info Ahmedabad | Pillora",
+    description: "Pillora is Ahmedabad's trusted platform for fast Blood Connect services and comprehensive Hospital Info. Find verified blood donors and hospital details easily.",
     icons: {
         icon: [
             { url: "/favicon.ico" },
@@ -35,8 +35,28 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "MedicalOrganization",
+        "name": "Pillora",
+        "description": "Blood Connect and Hospital Info provider in Ahmedabad.",
+        "url": "https://www.pillora.in",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "addressCountry": "IN"
+        }
+    };
+
     return (
         <html lang="en" suppressHydrationWarning>
+            <head>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+            </head>
             <body className={inter.className}>
                 <ThemeProvider
                     attribute="class"
@@ -56,3 +76,4 @@ export default function RootLayout({
         </html>
     );
 }
+
