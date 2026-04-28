@@ -134,15 +134,9 @@ export default function UploadPrescriptionPage() {
                             </div>
 
                             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                                <Link
-                                    href="/my-prescriptions"
-                                    className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
-                                >
-                                    View My Prescriptions <ArrowRight className="w-4 h-4" />
-                                </Link>
                                 <button
                                     onClick={handleReset}
-                                    className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-200 transition-all"
+                                    className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
                                 >
                                     Upload Another
                                 </button>
