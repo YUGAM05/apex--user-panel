@@ -10,8 +10,27 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Blood Connect & Hospital Info Ahmedabad | Pillora",
-    description: "Pillora is Ahmedabad's trusted platform for fast Blood Connect services and comprehensive Hospital Info. Find verified blood donors and hospital details easily.",
+    title: {
+        default: "Pillora | Blood Donors & Hospital Information India",
+        template: "%s | Pillora"
+    },
+    description: "Find verified blood donors in India, check hospital charges, and explore government health schemes. Pillora is your complete health-tech platform.",
+    keywords: ["blood donor", "hospital information", "find blood donor India", "hospital charges", "government health schemes India"],
+    alternates: {
+        canonical: "https://www.pillora.in"
+    },
+    openGraph: {
+        title: "Pillora | Blood Donors & Hospital Information India",
+        description: "Find verified blood donors in India, check hospital charges, and explore government health schemes. Pillora is your complete health-tech platform.",
+        url: "https://www.pillora.in",
+        siteName: "Pillora",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Pillora | Blood Donors & Hospital Information India",
+        description: "Find verified blood donors in India, check hospital charges, and explore government health schemes.",
+    },
     icons: {
         icon: [
             { url: "/favicon.ico" },
