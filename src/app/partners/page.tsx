@@ -31,6 +31,7 @@ type FormType = 'hospital' | 'ngo' | null;
 
 export default function PartnersPage() {
     const [activeForm, setActiveForm] = useState<FormType>(null);
+    const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState("");
@@ -96,6 +97,9 @@ export default function PartnersPage() {
             if (bloodGroups.length > 0) data.bloodGroups = bloodGroups;
             
             data.type = activeForm;
+            if (selectedPlan) {
+                data.interestedPlan = selectedPlan;
+            }
 
             const response = await api.post('partners/submit', data);
             
@@ -114,8 +118,9 @@ export default function PartnersPage() {
         }
     };
 
-    const openForm = (type: FormType) => {
+    const openForm = (type: FormType, plan: string | null = null) => {
         setActiveForm(type);
+        setSelectedPlan(plan);
         setFormSubmitted(false);
         setError("");
     };
@@ -208,6 +213,150 @@ export default function PartnersPage() {
                                 </motion.div>
                             ))}
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Hospital Pricing Section */}
+            <section className="py-24 px-6 bg-white border-t border-slate-100">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="inline-block px-4 py-1.5 mb-6 text-[11px] font-black uppercase tracking-[0.3em] text-blue-600 border border-blue-600/20 rounded-full bg-blue-50/50"
+                        >
+                            Hospital & Clinic Pricing
+                        </motion.span>
+                        <motion.h2 
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight"
+                        >
+                            Choose Your Partner Plan
+                        </motion.h2>
+                        <motion.p 
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="text-slate-500 font-medium text-lg max-w-2xl mx-auto italic"
+                        >
+                            Transparent pricing designed to fit clinics, mid-sized hospitals, and corporate chains.
+                        </motion.p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Standard Listing */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-slate-50 rounded-[32px] p-8 border border-slate-200 hover:border-blue-200 hover:shadow-2xl hover:bg-white transition-all duration-500 relative flex flex-col"
+                        >
+                            <h3 className="text-2xl font-black text-slate-900 mb-2">Standard Listing</h3>
+                            <p className="text-sm font-medium text-slate-500 mb-6 italic min-h-[40px]">For Small Clinics, Small Doctors</p>
+                            <div className="mb-8">
+                                <span className="text-4xl font-black text-slate-900">₹2,000</span>
+                                <span className="text-slate-500 font-medium"> / month</span>
+                            </div>
+                            <div className="space-y-4 flex-grow mb-8">
+                                {[
+                                    "Verified badge on listing",
+                                    "Doctor names + specialization"
+                                ].map((feature, idx) => (
+                                    <div key={idx} className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                                        <span className="text-slate-600 font-medium text-sm">{feature}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <button 
+                                onClick={() => openForm('hospital', 'Standard Listing')}
+                                className="w-full py-4 bg-white border-2 border-slate-200 text-slate-900 font-black rounded-2xl hover:border-blue-600 hover:text-blue-600 transition-colors uppercase tracking-widest text-xs mt-auto"
+                            >
+                                Get Started
+                            </button>
+                        </motion.div>
+
+                        {/* Premium Feature */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="bg-slate-900 rounded-[32px] p-8 border border-slate-800 shadow-2xl shadow-blue-900/20 relative flex flex-col transform md:-translate-y-4"
+                        >
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-3 w-full text-center">
+                                <span className="inline-block px-4 py-1 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-full shadow-lg">
+                                    Most Popular
+                                </span>
+                            </div>
+                            <h3 className="text-2xl font-black text-white mb-2 mt-2">Premium Feature</h3>
+                            <p className="text-sm font-medium text-slate-400 mb-6 italic min-h-[40px]">For Mid-Size Hospital, Multi-specialist</p>
+                            <div className="mb-8">
+                                <span className="text-4xl font-black text-white">₹5,000</span>
+                                <span className="text-slate-400 font-medium"> / month</span>
+                            </div>
+                            <div className="space-y-4 flex-grow mb-8">
+                                {[
+                                    "Everything in Standard",
+                                    "Top of search results",
+                                    "Government Schemes Tag",
+                                    "Health hub article & blog mention (1/mo)"
+                                ].map((feature, idx) => (
+                                    <div key={idx} className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                        <span className="text-slate-300 font-medium text-sm">{feature}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <button 
+                                onClick={() => openForm('hospital', 'Premium Feature')}
+                                className="w-full py-4 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20 uppercase tracking-widest text-xs mt-auto"
+                            >
+                                Upgrade to Premium
+                            </button>
+                        </motion.div>
+
+                        {/* Enterprise Feature */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="bg-slate-50 rounded-[32px] p-8 border border-slate-200 hover:border-blue-200 hover:shadow-2xl hover:bg-white transition-all duration-500 relative flex flex-col"
+                        >
+                            <h3 className="text-2xl font-black text-slate-900 mb-2">Enterprise Feature</h3>
+                            <p className="text-sm font-medium text-slate-500 mb-6 italic min-h-[40px]">For Large Hospital Chains, Corporate</p>
+                            <div className="mb-8">
+                                <span className="text-4xl font-black text-slate-900">₹10,000</span>
+                                <span className="text-slate-500 font-medium"> / month</span>
+                            </div>
+                            <div className="space-y-4 flex-grow mb-8">
+                                {[
+                                    "Includes everything",
+                                    "Homepage banner & spotlight placement",
+                                    "Custom landing page on Pillora",
+                                    "Co-branding on health tips & campaigns",
+                                    "Priority support + fast data update"
+                                ].map((feature, idx) => (
+                                    <div key={idx} className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                                        <span className="text-slate-600 font-medium text-sm">{feature}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <button 
+                                onClick={() => openForm('hospital', 'Enterprise Feature')}
+                                className="w-full py-4 bg-white border-2 border-slate-200 text-slate-900 font-black rounded-2xl hover:border-blue-600 hover:text-blue-600 transition-colors uppercase tracking-widest text-xs mt-auto"
+                            >
+                                Contact Sales
+                            </button>
+                        </motion.div>
                     </div>
                 </div>
             </section>
